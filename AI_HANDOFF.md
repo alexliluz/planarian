@@ -17,7 +17,7 @@ This file is the fixed handoff document for Planarian. Every AI agent working in
 - Project name: `Planarian`
 - Package name: `planarian`
 - Current phase: `Phase 1.5 stabilization in progress`
-- Repository status: git initialized locally; first commit is being prepared.
+- Repository status: git initialized locally; first commit created; remote push is blocked by GitHub network connectivity from this environment.
 - GitHub repository: `alexliluz/planarian`
 - Package manager: `pnpm@9.15.4`
 - Local note: plain `pnpm` may not be available on PATH in this environment; `corepack pnpm ...` works.
@@ -70,11 +70,10 @@ Notes:
 
 Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2.
 
-1. Decide whether generated `workspace/sessions/example-com-0f115db062` should be committed as a fixture or removed before the first commit.
-2. Create the first git commit after reviewing tracked files.
-3. Add CLI command output tests or command-level integration tests.
-4. Test init idempotency without launching Playwright by injecting analyzer behavior.
-5. Start Phase 2 only after the git checkpoint exists.
+1. Push local `main` to `origin` once GitHub connectivity is available.
+2. Add CLI command output tests or command-level integration tests.
+3. Test init idempotency without launching Playwright by injecting analyzer behavior.
+4. Start Phase 2 after the GitHub push succeeds.
 
 ## Work Log
 
@@ -239,3 +238,43 @@ Next:
 - Rename local branch to `main`.
 - Commit all current project files.
 - Push `main` to GitHub.
+
+### 2026-05-30 - Local First Commit Created
+
+Summary:
+
+- Renamed local branch to `main`.
+- Added remote `origin` as `https://github.com/alexliluz/planarian.git`.
+- Created local initial commit.
+- Added `G:/workspace/planarian` to Git global `safe.directory` after Git rejected push due dubious ownership.
+- Attempted to push `main` to GitHub twice.
+- Push did not complete because this environment could not connect to GitHub over HTTPS.
+
+Commit:
+
+```text
+2d64ed0 Initialize Planarian foundation
+```
+
+Validation:
+
+```bash
+corepack pnpm check
+git status --short
+git remote -v
+git log --oneline -1
+git push -u origin main
+```
+
+Results:
+
+- Local commit succeeded.
+- Working tree was clean before recording this push failure note.
+- Remote is configured correctly.
+- Push failed with:
+  - `Recv failure: Connection was reset`
+  - `Failed to connect to github.com port 443`
+
+Next:
+
+- Retry `git push -u origin main` from an environment with GitHub connectivity.
