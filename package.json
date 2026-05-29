@@ -1,0 +1,27 @@
+{
+  "name": "planarian",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "cli": "tsx apps/orchestrator/src/cli/index.ts",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run",
+    "test:smoke": "tsx scripts/smoke-test.ts",
+    "check": "corepack pnpm typecheck && corepack pnpm test && corepack pnpm check:changed",
+    "check:changed": "tsx scripts/check-changed-files.ts",
+    "clean": "tsx scripts/clean.ts",
+    "safe:status": "tsx scripts/safe-status.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "playwright": "^1.49.1"
+  }
+}

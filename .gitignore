@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# Logs and temp files
+*.log
+tmp/
+temp/
+
+# Environment files
+.env
+.env.*
+
+# Generated clone outputs
+workspace/sessions/*/open-lovable-version/
+workspace/sessions/*/formal-clone/
+workspace/sessions/*/comparison/
+workspace/sessions/*/references/
+workspace/sessions/*/mock-data/
+
+# Keep session metadata and research artifacts visible for early development.
+!workspace/sessions/*/clone-session.json
+!workspace/sessions/*/target-research/
+!workspace/sessions/*/agent-memory/
+

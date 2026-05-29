@@ -1,0 +1,41 @@
+{
+  "sessionId": "example-com-0f115db062",
+  "createdAt": "2026-05-29T16:02:25.326Z",
+  "updatedAt": "2026-05-29T16:02:25.326Z",
+  "target": {
+    "url": "https://example.com",
+    "normalizedUrl": "https://example.com/",
+    "hostname": "example.com",
+    "title": "Example Domain",
+    "classification": "unknown",
+    "cloneMode": "visual-plus-interactions",
+    "requiresAuth": false,
+    "hasApiRequests": false,
+    "hasHeavyClientRendering": false,
+    "detectedFrameworks": [],
+    "notes": [
+      "Signals were inconclusive; review raw HTML and network analysis."
+    ]
+  },
+  "screenshots": {
+    "desktop": "target-research/desktop.png"
+  },
+  "network": [
+    {
+      "url": "https://example.com/",
+      "method": "GET",
+      "resourceType": "document",
+      "status": 200,
+      "contentType": "text/html",
+      "isApiCandidate": false
+    }
+  ],
+  "versions": {
+    "openLovableVersion": "open-lovable-version",
+    "formalClone": "formal-clone",
+    "comparison": "comparison",
+    "references": "references",
+    "mockData": "mock-data"
+  },
+  "status": "analyzed"
+}

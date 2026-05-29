@@ -1,0 +1,10 @@
+[
+  {
+    "url": "https://example.com/",
+    "method": "GET",
+    "resourceType": "document",
+    "status": 200,
+    "contentType": "text/html",
+    "isApiCandidate": false
+  }
+]

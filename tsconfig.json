@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/shared" },
+    { "path": "./packages/crawler" },
+    { "path": "./packages/generator" },
+    { "path": "./packages/react-grab-bridge" },
+    { "path": "./apps/orchestrator" }
+  ]
+}
+
