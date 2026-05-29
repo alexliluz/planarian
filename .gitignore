@@ -26,4 +26,5 @@ workspace/sessions/*/mock-data/
 !workspace/sessions/*/clone-session.json
 !workspace/sessions/*/target-research/
 !workspace/sessions/*/agent-memory/
-
+!workspace/sessions/*/formal-clone/
+!workspace/sessions/*/formal-clone/TASK_BUNDLE.md

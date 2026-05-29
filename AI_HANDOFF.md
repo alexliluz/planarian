@@ -333,6 +333,7 @@ Summary:
 - Added CLI command test coverage for `formal-task`.
 - Generated the first real task bundle for session `example-com-0f115db062`.
 - Updated the session-level `agent-memory/CHANGELOG_AGENT.md`.
+- Fixed `.gitignore` so `formal-clone/TASK_BUNDLE.md` can be committed while generated formal clone code remains ignored by default.
 
 Files changed:
 
@@ -347,6 +348,7 @@ Files changed:
 - `apps/orchestrator/src/core/formalTask.test.ts`
 - `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`
 - `workspace/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+- `.gitignore`
 
 Validation:
 
