@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { runDoctor } from "../core/doctor.js";
+import { createFormalCloneTask } from "../core/formalTask.js";
 import { createSessionId } from "../core/createCloneSession.js";
 import { cloneSessionExists, listCloneSessions, readCloneSession } from "../core/sessionRepository.js";
 
@@ -69,6 +70,16 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       if (!report.ok) {
         process.exitCode = 1;
       }
+    });
+
+  program
+    .command("formal-task")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create a formal clone task bundle for a CloneSession")
+    .action(async (sessionId: string) => {
+      const result = await createFormalCloneTask(getProjectRoot(), sessionId);
+      console.log(`Created formal clone task bundle for ${result.sessionId}`);
+      console.log(`Path: ${result.taskBundlePath}`);
     });
 
   return program;

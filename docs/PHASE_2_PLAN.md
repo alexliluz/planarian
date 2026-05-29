@@ -36,4 +36,3 @@ Phase 2 should integrate the formal clone workflow without deeply forking upstre
 - The task bundle references all required research artifacts.
 - The task bundle includes safety constraints and mock-data requirements.
 - Existing Phase 1 commands still pass.
-

@@ -26,3 +26,5 @@
 - Added CLI command tests.
 - Added injectable analyzer support for `initCloneSession`.
 - Added init idempotency and refresh tests without launching Playwright.
+- Added `pnpm cli formal-task <session-id>`.
+- Generated the first formal clone task bundle for `example-com-0f115db062`.

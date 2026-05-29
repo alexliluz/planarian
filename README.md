@@ -23,6 +23,7 @@ pnpm cli init https://example.com
 pnpm cli list
 pnpm cli show example-com-0f115db062
 pnpm cli doctor
+pnpm cli formal-task example-com-0f115db062
 pnpm typecheck
 pnpm test
 pnpm test:smoke

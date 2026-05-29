@@ -46,6 +46,16 @@ describe("createProgram", () => {
     expect(output).toContain("OK package.json: found");
     expect(output).toContain("OK clone sessions: 0 session(s) found");
   });
+
+  it("creates a formal clone task bundle", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-task", "demo"]);
+
+    expect(output).toContain("Created formal clone task bundle for demo");
+    expect(output).toContain("TASK_BUNDLE.md");
+  });
 });
 
 async function runCommand(projectRoot: string, args: string[]): Promise<string> {
@@ -92,4 +102,3 @@ async function writeSession(projectRoot: string, sessionId: string): Promise<voi
   };
   await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
 }
-

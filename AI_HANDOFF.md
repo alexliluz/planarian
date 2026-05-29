@@ -61,7 +61,7 @@ corepack pnpm clean
 Notes:
 
 - `corepack pnpm check` passes.
-- Unit tests pass: 7 test files, 24 tests.
+- Unit tests pass: 8 test files, 27 tests.
 - `corepack pnpm safe:status` reports untracked files awaiting the first commit.
 - `https://example.com` created session `example-com-0f115db062`.
 - Re-running `corepack pnpm cli init https://example.com` reuses the existing session unless `--refresh` is provided.
@@ -71,9 +71,9 @@ Notes:
 Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2.
 
 1. Push local `main` to `origin` once GitHub connectivity is available.
-2. Add `pnpm cli formal-task <session-id>` as the first Phase 2 command.
-3. Define and test the formal clone task bundle format.
-4. Start upstream workflow integration only after the task bundle is stable.
+2. Review `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`.
+3. Add richer formal task bundle sections for asset inventory and acceptance criteria.
+4. Start upstream workflow integration only after the task bundle format is stable.
 
 ## Work Log
 
@@ -322,3 +322,48 @@ Next:
 - Run `corepack pnpm check`.
 - Commit this local development pass.
 - Retry push when network allows.
+
+### 2026-05-30 - Formal Task Bundle Command
+
+Summary:
+
+- Added `pnpm cli formal-task <session-id>`.
+- Added `createFormalCloneTask` and `renderFormalCloneTaskBundle`.
+- Added unit tests for formal task bundle generation.
+- Added CLI command test coverage for `formal-task`.
+- Generated the first real task bundle for session `example-com-0f115db062`.
+- Updated the session-level `agent-memory/CHANGELOG_AGENT.md`.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `ROOT_CHANGELOG.md`
+- `README.md`
+- `docs/PHASE_1_5_CHECKLIST.md`
+- `docs/PHASE_2_PLAN.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalTask.ts`
+- `apps/orchestrator/src/core/formalTask.test.ts`
+- `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`
+- `workspace/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm typecheck
+corepack pnpm test
+corepack pnpm cli formal-task example-com-0f115db062
+```
+
+Results:
+
+- Typecheck passed.
+- Unit tests passed: 8 files, 27 tests.
+- Formal clone task bundle was generated for `example-com-0f115db062`.
+
+Next:
+
+- Run full `corepack pnpm check`.
+- Commit this local development pass.
+- Retry GitHub push when network allows.

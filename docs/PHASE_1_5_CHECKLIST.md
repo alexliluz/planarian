@@ -38,6 +38,6 @@ Use this checklist before starting Phase 2 integrations.
 ## Phase 2 Readiness
 
 - [ ] Define formal clone task bundle format.
-- [ ] Add `pnpm cli formal-task <session-id>`.
-- [ ] Add tests for formal clone task bundle generation.
+- [x] Add `pnpm cli formal-task <session-id>`.
+- [x] Add tests for formal clone task bundle generation.
 - [ ] Keep Open Lovable and React Grab as later integration layers.
