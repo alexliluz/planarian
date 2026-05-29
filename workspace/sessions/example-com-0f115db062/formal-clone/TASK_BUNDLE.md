@@ -18,6 +18,25 @@ Rebuild the visible public UI of the target website as a clean, modern Next.js a
 - `../agent-memory/PROMPTS.md`
 - `../agent-memory/DECISIONS.md`
 
+## Target Summary
+
+- URL: https://example.com/
+- Hostname: example.com
+- Title: Example Domain
+- Classification: unknown
+- Requires auth: false
+- Has API requests: false
+- Heavy client rendering: false
+- Detected frameworks: none
+
+## Asset Inventory
+
+- Primary desktop screenshot: `../target-research/desktop.png`
+- Raw HTML snapshot: `../target-research/raw-html.html`
+- Network summary: `../target-research/network-analysis.json`
+- Mock data directory: `../mock-data/`
+- Reference directory: `../references/`
+
 ## Safety Constraints
 
 - Do not bypass authentication, paywalls, private APIs, private data, or backend systems.
@@ -32,6 +51,16 @@ Rebuild the visible public UI of the target website as a clean, modern Next.js a
 - Clear component boundaries.
 - Validation scripts documented in the generated app README.
 - Changes recorded in `../agent-memory/CHANGELOG_AGENT.md`.
+
+## Acceptance Criteria
+
+- The first viewport visually matches the desktop screenshot at a practical engineering level.
+- Major layout regions, typography scale, spacing, and color relationships are represented.
+- Static content visible in the captured page is present in the formal clone.
+- Dynamic/private sections use local mock data only.
+- No real login, payment, trading, account, database, or private backend calls are implemented.
+- The generated app has documented install, dev, build, and validation commands.
+- The final agent updates `../agent-memory/CHANGELOG_AGENT.md`.
 
 ## Agent Instructions
 

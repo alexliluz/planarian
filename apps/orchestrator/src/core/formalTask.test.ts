@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import type { CloneSession } from "@planarian/shared";
-import { createFormalCloneTask, renderFormalCloneTaskBundle } from "./formalTask.js";
+import { createFormalCloneTask, getFormalCloneStatus, renderFormalCloneTaskBundle } from "./formalTask.js";
 
 let tempRoot: string | undefined;
 
@@ -22,6 +22,8 @@ describe("renderFormalCloneTaskBundle", () => {
     expect(bundle).toContain("../target-research/raw-html.html");
     expect(bundle).toContain("../target-research/desktop.png");
     expect(bundle).toContain("Use mock data");
+    expect(bundle).toContain("## Asset Inventory");
+    expect(bundle).toContain("## Acceptance Criteria");
   });
 });
 
@@ -41,6 +43,45 @@ describe("createFormalCloneTask", () => {
     expect(content).toContain(`Target: ${session.target.normalizedUrl}`);
   });
 });
+
+describe("getFormalCloneStatus", () => {
+  it("reports ready when all required inputs and task bundle exist", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-formal-status-"));
+    const session = createSession();
+    await writeCompleteSession(tempRoot, session);
+    await createFormalCloneTask(tempRoot, session.sessionId);
+
+    const report = await getFormalCloneStatus(tempRoot, session.sessionId);
+
+    expect(report.ready).toBe(true);
+    expect(report.checks.every((check) => check.ok)).toBe(true);
+  });
+
+  it("reports missing required inputs", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-formal-status-"));
+    const session = createSession();
+    const sessionRoot = path.join(tempRoot, "workspace", "sessions", session.sessionId);
+    await mkdir(sessionRoot, { recursive: true });
+    await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
+
+    const report = await getFormalCloneStatus(tempRoot, session.sessionId);
+
+    expect(report.ready).toBe(false);
+    expect(report.checks.some((check) => check.name === "target-research/raw-html.html" && !check.ok)).toBe(true);
+  });
+});
+
+async function writeCompleteSession(projectRoot: string, session: CloneSession): Promise<void> {
+  const sessionRoot = path.join(projectRoot, "workspace", "sessions", session.sessionId);
+  await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+  await mkdir(path.join(sessionRoot, "agent-memory"), { recursive: true });
+  await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
+  await writeFile(path.join(sessionRoot, "target-research", "raw-html.html"), "<html></html>", "utf8");
+  await writeFile(path.join(sessionRoot, "target-research", "desktop.png"), "fake png", "utf8");
+  await writeFile(path.join(sessionRoot, "target-research", "network-analysis.json"), "[]", "utf8");
+  await writeFile(path.join(sessionRoot, "agent-memory", "PROMPTS.md"), "# Prompts", "utf8");
+  await writeFile(path.join(sessionRoot, "agent-memory", "DECISIONS.md"), "# Decisions", "utf8");
+}
 
 function createSession(): CloneSession {
   return {
@@ -69,4 +110,3 @@ function createSession(): CloneSession {
     status: "analyzed"
   };
 }
-

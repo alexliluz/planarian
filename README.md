@@ -24,6 +24,7 @@ pnpm cli list
 pnpm cli show example-com-0f115db062
 pnpm cli doctor
 pnpm cli formal-task example-com-0f115db062
+pnpm cli formal-status example-com-0f115db062
 pnpm typecheck
 pnpm test
 pnpm test:smoke

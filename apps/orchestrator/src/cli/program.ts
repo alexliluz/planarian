@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { runDoctor } from "../core/doctor.js";
-import { createFormalCloneTask } from "../core/formalTask.js";
+import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.js";
 import { createSessionId } from "../core/createCloneSession.js";
 import { cloneSessionExists, listCloneSessions, readCloneSession } from "../core/sessionRepository.js";
 
@@ -80,6 +80,22 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       const result = await createFormalCloneTask(getProjectRoot(), sessionId);
       console.log(`Created formal clone task bundle for ${result.sessionId}`);
       console.log(`Path: ${result.taskBundlePath}`);
+    });
+
+  program
+    .command("formal-status")
+    .argument("<session-id>", "CloneSession id")
+    .description("Check whether a CloneSession has the inputs needed for formal clone work")
+    .action(async (sessionId: string) => {
+      const report = await getFormalCloneStatus(getProjectRoot(), sessionId);
+      console.log(`Formal clone status for ${report.sessionId}: ${report.ready ? "ready" : "not ready"}`);
+      for (const check of report.checks) {
+        console.log(`${check.ok ? "OK" : "FAIL"} ${check.name}: ${check.detail}`);
+      }
+
+      if (!report.ready) {
+        process.exitCode = 1;
+      }
     });
 
   return program;

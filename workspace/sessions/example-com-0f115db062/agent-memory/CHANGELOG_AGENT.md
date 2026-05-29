@@ -22,3 +22,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/TASK_BUNDLE.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`
 - Notes: Generated formal clone code remains ignored by default; only `TASK_BUNDLE.md` is intended to be committed at this stage.
+
+## 2026-05-30 - Codex
+
+- Summary: Regenerated the formal clone task bundle with target summary, asset inventory, and acceptance criteria.
+- Files changed: `formal-clone/TASK_BUNDLE.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm cli formal-status example-com-0f115db062`
+- Notes: Formal clone status is ready for the captured example.com session inputs.

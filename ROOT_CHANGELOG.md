@@ -30,3 +30,5 @@
 - Generated the first formal clone task bundle for `example-com-0f115db062`.
 - Allowed session `formal-clone/TASK_BUNDLE.md` files to be committed while keeping generated formal clone outputs ignored by default.
 - Pushed merged local `main` to `alexliluz/planarian`.
+- Added `pnpm cli formal-status <session-id>`.
+- Expanded formal task bundles with target summary, asset inventory, and acceptance criteria.
