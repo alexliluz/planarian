@@ -17,7 +17,7 @@ This file is the fixed handoff document for Planarian. Every AI agent working in
 - Project name: `Planarian`
 - Package name: `planarian`
 - Current phase: `Phase 1.5 stabilization in progress`
-- Repository status: git initialized locally; first commit created; remote push is blocked by GitHub network connectivity from this environment.
+- Repository status: local `main` is pushed to GitHub and tracks `origin/main`.
 - GitHub repository: `alexliluz/planarian`
 - Package manager: `pnpm@9.15.4`
 - Local note: plain `pnpm` may not be available on PATH in this environment; `corepack pnpm ...` works.
@@ -70,9 +70,9 @@ Notes:
 
 Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2.
 
-1. Push local `main` to `origin` once GitHub connectivity is available.
-2. Review `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`.
-3. Add richer formal task bundle sections for asset inventory and acceptance criteria.
+1. Review `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`.
+2. Add richer formal task bundle sections for asset inventory and acceptance criteria.
+3. Add `pnpm cli formal-status <session-id>` or equivalent validation for formal clone readiness.
 4. Start upstream workflow integration only after the task bundle format is stable.
 
 ## Work Log
@@ -369,3 +369,43 @@ Next:
 - Run full `corepack pnpm check`.
 - Commit this local development pass.
 - Retry GitHub push when network allows.
+
+### 2026-05-30 - GitHub Main Push Completed
+
+Summary:
+
+- Pushed local work to GitHub branch `codex/planarian-foundation`.
+- Draft PR creation failed because the branch and remote `main` had no common history.
+- Fetched `origin/main` successfully after GitHub connectivity recovered.
+- Merged remote `main` with `--allow-unrelated-histories`.
+- Resolved the only conflict in `README.md` by keeping the full local project README.
+- Pushed merged local `main` to GitHub.
+
+Commits now on local `main`:
+
+```text
+5c407d0 Merge remote-tracking branch 'origin/main'
+4749852 Track formal clone task bundle
+b47e145 Add formal clone task bundle command
+1c7bf0b Add CLI tests and init injection
+717d01e Record GitHub push status
+2d64ed0 Initialize Planarian foundation
+```
+
+Validation:
+
+```bash
+corepack pnpm check
+git push -u origin main
+```
+
+Results:
+
+- Full check passed before merge commit.
+- `main` successfully pushed to `https://github.com/alexliluz/planarian.git`.
+- Local `main` now tracks `origin/main`.
+
+Next:
+
+- Commit and push this handoff update.
+- Continue improving formal task bundle content.
