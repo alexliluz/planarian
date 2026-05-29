@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { analyzeTarget } from "@planarian/crawler";
+import type { AnalyzeTargetResult } from "@planarian/crawler";
 import type { CloneSession } from "@planarian/shared";
 import { createCloneSession, createSessionId } from "./createCloneSession.js";
 import { initializeAgentMemory } from "./agentMemory.js";
@@ -10,7 +11,10 @@ export interface InitCloneSessionOptions {
   url: string;
   projectRoot: string;
   refresh?: boolean;
+  analyzer?: AnalyzeTargetFunction;
 }
+
+export type AnalyzeTargetFunction = (options: { url: string; outputDir: string }) => Promise<AnalyzeTargetResult>;
 
 const SESSION_DIRECTORIES = [
   "target-research",
@@ -34,7 +38,8 @@ export async function initCloneSession(options: InitCloneSessionOptions): Promis
     await mkdir(path.join(sessionRoot, directory), { recursive: true });
   }
 
-  const analysis = await analyzeTarget({
+  const analyzer = options.analyzer ?? analyzeTarget;
+  const analysis = await analyzer({
     url: options.url,
     outputDir: path.join(sessionRoot, "target-research")
   });

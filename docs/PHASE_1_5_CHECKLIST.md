@@ -16,7 +16,7 @@ Use this checklist before starting Phase 2 integrations.
 - [x] Add `cli doctor`.
 - [x] Make `cli init <url>` idempotent by default.
 - [x] Add `cli init <url> --refresh`.
-- [ ] Add CLI output snapshot tests or command-level integration tests.
+- [x] Add CLI output snapshot tests or command-level integration tests.
 
 ## Test Coverage
 
@@ -26,7 +26,7 @@ Use this checklist before starting Phase 2 integrations.
 - [x] Test session repository utilities.
 - [x] Test doctor checks.
 - [x] Test changed-file safety rules.
-- [ ] Test init idempotency without launching Playwright by injecting analyzer behavior.
+- [x] Test init idempotency without launching Playwright by injecting analyzer behavior.
 
 ## Maintenance
 

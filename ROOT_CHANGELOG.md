@@ -23,3 +23,6 @@
 - Added `docs/PHASE_1_5_CHECKLIST.md`.
 - Prepared first GitHub checkpoint for `alexliluz/planarian`.
 - Created local initial commit; GitHub push is pending due network connectivity failure.
+- Added CLI command tests.
+- Added injectable analyzer support for `initCloneSession`.
+- Added init idempotency and refresh tests without launching Playwright.

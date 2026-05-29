@@ -61,7 +61,7 @@ corepack pnpm clean
 Notes:
 
 - `corepack pnpm check` passes.
-- Unit tests pass: 5 test files, 19 tests.
+- Unit tests pass: 7 test files, 24 tests.
 - `corepack pnpm safe:status` reports untracked files awaiting the first commit.
 - `https://example.com` created session `example-com-0f115db062`.
 - Re-running `corepack pnpm cli init https://example.com` reuses the existing session unless `--refresh` is provided.
@@ -71,9 +71,9 @@ Notes:
 Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2.
 
 1. Push local `main` to `origin` once GitHub connectivity is available.
-2. Add CLI command output tests or command-level integration tests.
-3. Test init idempotency without launching Playwright by injecting analyzer behavior.
-4. Start Phase 2 after the GitHub push succeeds.
+2. Add `pnpm cli formal-task <session-id>` as the first Phase 2 command.
+3. Define and test the formal clone task bundle format.
+4. Start upstream workflow integration only after the task bundle is stable.
 
 ## Work Log
 
@@ -278,3 +278,47 @@ Results:
 Next:
 
 - Retry `git push -u origin main` from an environment with GitHub connectivity.
+
+### 2026-05-30 - CLI Tests And Init Injection
+
+Summary:
+
+- Retried `git push -u origin main`; GitHub remained unreachable from this environment.
+- Split CLI command construction into `apps/orchestrator/src/cli/program.ts`.
+- Kept `apps/orchestrator/src/cli/index.ts` as the executable entry point.
+- Added command-level tests for `list`, `show`, and `doctor`.
+- Added injectable analyzer support to `initCloneSession`.
+- Added tests proving existing sessions are reused without launching Playwright.
+- Added tests proving `refresh: true` invokes the injected analyzer.
+- Updated Phase 1.5 checklist.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `ROOT_CHANGELOG.md`
+- `docs/PHASE_1_5_CHECKLIST.md`
+- `apps/orchestrator/src/cli/index.ts`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/initCloneSession.ts`
+- `apps/orchestrator/src/core/initCloneSession.test.ts`
+
+Validation:
+
+```bash
+corepack pnpm typecheck
+corepack pnpm test
+git push -u origin main
+```
+
+Results:
+
+- Typecheck passed.
+- Unit tests passed: 7 files, 24 tests.
+- Push failed again with GitHub HTTPS connectivity failure.
+
+Next:
+
+- Run `corepack pnpm check`.
+- Commit this local development pass.
+- Retry push when network allows.
