@@ -66,6 +66,17 @@ describe("createProgram", () => {
     expect(output).toContain("Formal clone status for demo: not ready");
     expect(output).toContain("FAIL target-research/raw-html.html");
   });
+
+  it("creates a formal clone scaffold", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-scaffold", "demo"]);
+
+    expect(output).toContain("Created formal clone scaffold for demo");
+    expect(output).toContain("Written:");
+    expect(output).toContain("Skipped:");
+  });
 });
 
 async function runCommand(projectRoot: string, args: string[]): Promise<string> {

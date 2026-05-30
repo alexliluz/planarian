@@ -34,3 +34,4 @@
 - Expanded formal task bundles with target summary, asset inventory, and acceptance criteria.
 - Expanded README with upstream project roles, usage workflow, and deployment guidance.
 - Changed default CloneSession output location from `workspace/sessions/` to `outputs/sessions/`.
+- Added `pnpm cli formal-scaffold <session-id>` to generate a minimal runnable Next.js work area.

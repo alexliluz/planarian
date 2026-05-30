@@ -72,9 +72,10 @@ Notes:
 Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2.
 
 1. Review `outputs/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`.
-2. Add a formal clone scaffold/task writer that prepares a minimal Next.js work area without invoking upstream tools.
+2. Generate and inspect the example formal scaffold under `outputs/sessions/example-com-0f115db062/formal-clone/`.
 3. Add richer asset extraction from `network-analysis.json`.
-4. Start upstream workflow integration only after the task bundle format is stable.
+4. Add validation for generated formal clone package files.
+5. Start upstream workflow integration only after the scaffold contract is stable.
 
 ## Work Log
 
@@ -538,3 +539,46 @@ Results:
 Next:
 
 - Commit and push the output path migration.
+
+### 2026-05-30 - Formal Clone Scaffold Command
+
+Summary:
+
+- Added `pnpm cli formal-scaffold <session-id>`.
+- Added `--force` support for overwriting scaffold files.
+- Added `createFormalCloneScaffold` and `renderFormalCloneScaffold`.
+- Scaffold output is a minimal Next.js app work area under `formal-clone/`.
+- Generated scaffold app files are ignored by default; `formal-clone/TASK_BUNDLE.md` remains tracked.
+- Added tests for scaffold rendering, file writing, idempotent skipping, and forced overwrite.
+- Updated README with how to generate and run the formal clone scaffold.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalScaffold.ts`
+- `apps/orchestrator/src/core/formalScaffold.test.ts`
+- `.gitignore`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli formal-scaffold example-com-0f115db062
+corepack pnpm cli formal-status example-com-0f115db062
+```
+
+Results:
+
+- Full check passed.
+- Unit tests passed: 9 files, 36 tests.
+- Example scaffold generated locally with 9 files.
+- Formal status remains `ready`.
+
+Next:
+
+- Commit and push this development pass.

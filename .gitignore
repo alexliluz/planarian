@@ -18,6 +18,7 @@ temp/
 # Generated clone outputs
 outputs/sessions/*/open-lovable-version/
 outputs/sessions/*/formal-clone/
+outputs/sessions/*/formal-clone/**
 outputs/sessions/*/comparison/
 outputs/sessions/*/references/
 outputs/sessions/*/mock-data/

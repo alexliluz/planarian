@@ -36,3 +36,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `outputs/sessions/example-com-0f115db062/**`
 - Tests run: `corepack pnpm check`, `corepack pnpm test:smoke`, `corepack pnpm cli formal-status example-com-0f115db062`
 - Notes: `outputs/sessions/` is now the default CloneSession output root.
+
+## 2026-05-30 - Codex
+
+- Summary: Generated the first local formal clone scaffold for this session.
+- Files changed: `formal-clone/package.json`, `formal-clone/app/*`, `formal-clone/data/target-summary.json`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-scaffold example-com-0f115db062`, `corepack pnpm cli formal-status example-com-0f115db062`
+- Notes: Generated scaffold app files are intentionally git-ignored by default; `TASK_BUNDLE.md` remains tracked as the durable task contract.

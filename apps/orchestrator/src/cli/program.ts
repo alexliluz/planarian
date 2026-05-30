@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { runDoctor } from "../core/doctor.js";
 import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.js";
+import { createFormalCloneScaffold } from "../core/formalScaffold.js";
 import { createSessionId } from "../core/createCloneSession.js";
 import { cloneSessionExists, listCloneSessions, readCloneSession } from "../core/sessionRepository.js";
 
@@ -96,6 +97,21 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       if (!report.ready) {
         process.exitCode = 1;
       }
+    });
+
+  program
+    .command("formal-scaffold")
+    .argument("<session-id>", "CloneSession id")
+    .option("--force", "Overwrite existing scaffold files")
+    .description("Create a minimal runnable Next.js scaffold in formal-clone")
+    .action(async (sessionId: string, commandOptions: { force?: boolean }) => {
+      const result = await createFormalCloneScaffold(getProjectRoot(), sessionId, {
+        force: commandOptions.force
+      });
+      console.log(`Created formal clone scaffold for ${result.sessionId}`);
+      console.log(`Path: ${result.formalCloneRoot}`);
+      console.log(`Written: ${result.writtenFiles.length}`);
+      console.log(`Skipped: ${result.skippedFiles.length}`);
     });
 
   return program;

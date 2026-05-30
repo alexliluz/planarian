@@ -90,6 +90,12 @@ Check whether the session is ready for formal clone work:
 corepack pnpm cli formal-status example-com-0f115db062
 ```
 
+Create a minimal runnable formal clone scaffold:
+
+```bash
+corepack pnpm cli formal-scaffold example-com-0f115db062
+```
+
 Run project health checks:
 
 ```bash
@@ -151,6 +157,28 @@ The formal clone should be built inside:
 outputs/sessions/<session-id>/formal-clone/
 ```
 
+6. Generate a minimal runnable scaffold.
+
+```bash
+corepack pnpm cli formal-scaffold <session-id>
+```
+
+This creates a small Next.js work area inside `formal-clone/`.
+
+7. Run the generated formal clone app.
+
+```bash
+cd outputs/sessions/<session-id>/formal-clone
+pnpm install
+pnpm dev
+```
+
+Then open:
+
+```text
+http://localhost:3000
+```
+
 ## Session Layout
 
 Each target website gets a CloneSession:
@@ -165,6 +193,9 @@ outputs/sessions/<session-id>/
   open-lovable-version/
   formal-clone/
     TASK_BUNDLE.md
+    package.json
+    app/
+    data/
   comparison/
   references/
   mock-data/
@@ -191,6 +222,8 @@ corepack pnpm cli show <session-id>
 corepack pnpm cli doctor
 corepack pnpm cli formal-task <session-id>
 corepack pnpm cli formal-status <session-id>
+corepack pnpm cli formal-scaffold <session-id>
+corepack pnpm cli formal-scaffold <session-id> --force
 corepack pnpm typecheck
 corepack pnpm test
 corepack pnpm test:smoke
