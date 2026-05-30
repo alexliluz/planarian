@@ -40,3 +40,4 @@
 - Added `pnpm cli formal-research <session-id>` to generate formal clone research notes from captured target analysis.
 - Added `pnpm cli formal-compare <session-id>` to generate a comparison report and repair queue.
 - Added `pnpm cli react-grab-install-task <session-id>` to create a React Grab setup task for formal clone repair.
+- Added `pnpm cli formal-validate <session-id>` to validate formal clone structure and write `formal-clone/VALIDATION.md`.

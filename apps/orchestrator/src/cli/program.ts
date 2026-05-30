@@ -5,6 +5,7 @@ import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.
 import { createFormalComparison } from "../core/formalCompare.js";
 import { createFormalResearch } from "../core/formalResearch.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
+import { validateFormalClone } from "../core/formalValidate.js";
 import {
   createReactGrabInstallTaskFile,
   createReactGrabRepairTask,
@@ -130,6 +131,29 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       console.log(`Created formal clone research for ${result.sessionId}`);
       for (const file of result.files) {
         console.log(`- ${file}`);
+      }
+    });
+
+  program
+    .command("formal-validate")
+    .argument("<session-id>", "CloneSession id")
+    .option("--run-build", "Run the formal clone build command after static checks")
+    .description("Validate formal clone app structure and optionally run its build")
+    .action(async (sessionId: string, commandOptions: { runBuild?: boolean }) => {
+      const report = await validateFormalClone(getProjectRoot(), sessionId, {
+        runBuild: commandOptions.runBuild
+      });
+      console.log(`Formal clone validation for ${report.sessionId}: ${report.ready ? "ready" : "not ready"}`);
+      for (const check of report.checks) {
+        console.log(`${check.ok ? "OK" : "FAIL"} ${check.name}: ${check.detail}`);
+      }
+      for (const command of report.commands) {
+        console.log(`${command.ok ? "OK" : "FAIL"} ${command.command}`);
+      }
+      console.log(`Report: ${report.reportPath}`);
+
+      if (!report.ready) {
+        process.exitCode = 1;
       }
     });
 

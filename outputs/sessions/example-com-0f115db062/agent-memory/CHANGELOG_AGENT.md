@@ -71,3 +71,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `react-grab-repairs/INSTALL_REACT_GRAB.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli react-grab-install-task example-com-0f115db062`
 - Notes: This task defines how to prepare the formal clone app for component-level repair. It does not install packages by itself.
+
+## 2026-05-31 - Codex
+
+- Summary: Generated the formal clone validation report for this session.
+- Files changed: `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-validate example-com-0f115db062`
+- Notes: Static validation passed. No build command was run because dependency installation inside the generated formal clone was not performed in this step.

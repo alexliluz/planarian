@@ -775,3 +775,42 @@ Next:
 
 - Commit and push.
 - Start implementing a real formal clone app for the example session or add a runner command for formal clone validation.
+
+### 2026-05-31 - Formal Validation Adapter
+
+Summary:
+
+- Added `formal-validate <session-id>`.
+- The command performs static checks for the formal clone app and writes `formal-clone/VALIDATION.md`.
+- Added optional `--run-build` support for later build validation when formal clone dependencies are installed.
+- Added unit and CLI tests.
+- Updated README and `.gitignore`.
+- Generated validation for `example-com-0f115db062`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalValidate.ts`
+- `apps/orchestrator/src/core/formalValidate.test.ts`
+- `outputs/sessions/example-com-0f115db062/formal-clone/VALIDATION.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 15 files, 57 tests.
+  - `check:changed` passed.
+- `corepack pnpm cli formal-validate example-com-0f115db062`
+  - Static formal clone validation passed.
+  - Generated `formal-clone/VALIDATION.md`.
+
+Next:
+
+- Commit and push.
+- Start a first real formal clone implementation pass for `example-com-0f115db062`, then rerun `formal-validate`.

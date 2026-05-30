@@ -111,6 +111,18 @@ describe("createProgram", () => {
     expect(output).toContain("Skipped:");
   });
 
+  it("validates a formal clone scaffold", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    await writeFormalClone(tempRoot, "demo");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-validate", "demo"]);
+
+    expect(output).toContain("Formal clone validation for demo: ready");
+    expect(output).toContain("OK package.json: found");
+    expect(output).toContain("VALIDATION.md");
+  });
+
   it("creates upstream integration task files", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");
@@ -177,4 +189,27 @@ async function writeSession(projectRoot: string, sessionId: string): Promise<voi
     status: "analyzed"
   };
   await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
+}
+
+async function writeFormalClone(projectRoot: string, sessionId: string): Promise<void> {
+  const formalCloneRoot = path.join(projectRoot, "outputs", "sessions", sessionId, "formal-clone");
+  await mkdir(path.join(formalCloneRoot, "app"), { recursive: true });
+  await writeFile(
+    path.join(formalCloneRoot, "package.json"),
+    JSON.stringify({
+      scripts: {
+        dev: "next dev",
+        build: "next build"
+      },
+      dependencies: {
+        next: "^15.0.0",
+        react: "^19.0.0",
+        "react-dom": "^19.0.0"
+      }
+    }),
+    "utf8"
+  );
+  await writeFile(path.join(formalCloneRoot, "README.md"), "# Formal Clone", "utf8");
+  await writeFile(path.join(formalCloneRoot, "app", "page.tsx"), "export default function Page() { return null; }", "utf8");
+  await writeFile(path.join(formalCloneRoot, "app", "globals.css"), "body { margin: 0; }", "utf8");
 }
