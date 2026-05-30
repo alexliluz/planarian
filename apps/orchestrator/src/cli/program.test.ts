@@ -121,6 +121,17 @@ describe("createProgram", () => {
     expect(output).toContain("open-lovable-version/OPEN_LOVABLE_TASK.md");
     expect(output).toContain("formal-clone/FORMAL_CLONE_PIPELINE.md");
   });
+
+  it("creates a React Grab install task", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "react-grab-install-task", "demo"]);
+
+    expect(output).toContain("Created React Grab install task for demo");
+    expect(output).toContain("Install React Grab for demo");
+    expect(output).toContain("INSTALL_REACT_GRAB.md");
+  });
 });
 
 async function runCommand(projectRoot: string, args: string[]): Promise<string> {

@@ -3,7 +3,11 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import type { CloneSession } from "@planarian/shared";
-import { createReactGrabRepairTask, createUpstreamIntegrationTasks } from "./upstreamIntegrations.js";
+import {
+  createReactGrabInstallTaskFile,
+  createReactGrabRepairTask,
+  createUpstreamIntegrationTasks
+} from "./upstreamIntegrations.js";
 
 let tempRoot: string | undefined;
 
@@ -38,6 +42,18 @@ describe("upstream integrations", () => {
     expect(result.title).toBe("Repair Hero");
     expect(body).toContain("React Grab UI Repair Task");
   });
+
+  it("creates a React Grab install task for a session", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-upstreams-"));
+    await writeSession(tempRoot, createSession());
+
+    const result = await createReactGrabInstallTaskFile(tempRoot, "demo");
+    const body = await readFile(result.taskPath, "utf8");
+
+    expect(result.title).toBe("Install React Grab for demo");
+    expect(result.taskPath.replace(/\\/g, "/")).toContain("react-grab-repairs/INSTALL_REACT_GRAB.md");
+    expect(body).toContain("React Grab Install Task");
+  });
 });
 
 async function writeSession(projectRoot: string, session: CloneSession): Promise<void> {
@@ -70,4 +86,3 @@ function createSession(): CloneSession {
     status: "analyzed"
   };
 }
-

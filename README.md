@@ -96,6 +96,12 @@ Create a comparison report and repair queue:
 corepack pnpm cli formal-compare example-com-0f115db062
 ```
 
+Create a React Grab install task for precision repair:
+
+```bash
+corepack pnpm cli react-grab-install-task example-com-0f115db062
+```
+
 Check whether the session is ready for formal clone work:
 
 ```bash
@@ -192,7 +198,19 @@ outputs/sessions/<session-id>/comparison/FORMAL_COMPARISON.md
 outputs/sessions/<session-id>/comparison/REPAIR_QUEUE.md
 ```
 
-7. Let Codex or Cursor continue from `TASK_BUNDLE.md`, `docs/research/`, and `comparison/REPAIR_QUEUE.md`.
+7. Create the React Grab install task when the formal clone is ready for precision repair.
+
+```bash
+corepack pnpm cli react-grab-install-task <session-id>
+```
+
+This creates:
+
+```text
+outputs/sessions/<session-id>/react-grab-repairs/INSTALL_REACT_GRAB.md
+```
+
+8. Let Codex or Cursor continue from `TASK_BUNDLE.md`, `docs/research/`, `comparison/REPAIR_QUEUE.md`, and `react-grab-repairs/INSTALL_REACT_GRAB.md`.
 
 The formal clone should be built inside:
 
@@ -200,7 +218,7 @@ The formal clone should be built inside:
 outputs/sessions/<session-id>/formal-clone/
 ```
 
-8. Generate a minimal runnable scaffold.
+9. Generate a minimal runnable scaffold.
 
 ```bash
 corepack pnpm cli formal-scaffold <session-id>
@@ -270,6 +288,7 @@ corepack pnpm cli formal-status <session-id>
 corepack pnpm cli formal-scaffold <session-id>
 corepack pnpm cli formal-scaffold <session-id> --force
 corepack pnpm cli integrate-upstreams <session-id>
+corepack pnpm cli react-grab-install-task <session-id>
 corepack pnpm cli react-grab-task <session-id> --context ./grab-context.json
 corepack pnpm typecheck
 corepack pnpm test

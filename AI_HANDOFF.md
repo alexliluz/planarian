@@ -734,3 +734,44 @@ Next:
 
 - Commit and push.
 - Implement `react-grab-install-task <session-id>` as the next bridge toward component-level repair.
+
+### 2026-05-31 - React Grab Install Task Adapter
+
+Summary:
+
+- Added `createReactGrabInstallTask` to `@planarian/react-grab-bridge`.
+- Added `react-grab-install-task <session-id>` to the orchestrator CLI.
+- The command writes `react-grab-repairs/INSTALL_REACT_GRAB.md`.
+- Added bridge, orchestrator, and CLI tests.
+- Updated README and `.gitignore`.
+- Generated the install task for `example-com-0f115db062`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/upstreamIntegrations.ts`
+- `apps/orchestrator/src/core/upstreamIntegrations.test.ts`
+- `packages/react-grab-bridge/src/createInstallTask.ts`
+- `packages/react-grab-bridge/src/index.ts`
+- `packages/react-grab-bridge/src/reactGrabBridge.test.ts`
+- `outputs/sessions/example-com-0f115db062/react-grab-repairs/INSTALL_REACT_GRAB.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 14 files, 52 tests.
+  - `check:changed` passed.
+- `corepack pnpm cli react-grab-install-task example-com-0f115db062`
+  - Generated `react-grab-repairs/INSTALL_REACT_GRAB.md`.
+
+Next:
+
+- Commit and push.
+- Start implementing a real formal clone app for the example session or add a runner command for formal clone validation.

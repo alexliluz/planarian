@@ -5,7 +5,11 @@ import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.
 import { createFormalComparison } from "../core/formalCompare.js";
 import { createFormalResearch } from "../core/formalResearch.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
-import { createReactGrabRepairTask, createUpstreamIntegrationTasks } from "../core/upstreamIntegrations.js";
+import {
+  createReactGrabInstallTaskFile,
+  createReactGrabRepairTask,
+  createUpstreamIntegrationTasks
+} from "../core/upstreamIntegrations.js";
 import { createSessionId } from "../core/createCloneSession.js";
 import { cloneSessionExists, listCloneSessions, readCloneSession } from "../core/sessionRepository.js";
 
@@ -154,6 +158,17 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       for (const file of result.files) {
         console.log(`- ${file}`);
       }
+    });
+
+  program
+    .command("react-grab-install-task")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create a React Grab install task for the formal clone app")
+    .action(async (sessionId: string) => {
+      const result = await createReactGrabInstallTaskFile(getProjectRoot(), sessionId);
+      console.log(`Created React Grab install task for ${result.sessionId}`);
+      console.log(`Title: ${result.title}`);
+      console.log(`Path: ${result.taskPath}`);
     });
 
   program

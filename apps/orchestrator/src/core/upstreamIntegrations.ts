@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { compareVersions, runFormalClone, runOpenLovable } from "@planarian/generator";
-import { createPatchTask, parseGrabContext } from "@planarian/react-grab-bridge";
+import { createPatchTask, createReactGrabInstallTask, parseGrabContext } from "@planarian/react-grab-bridge";
 import { getSessionRoot, readCloneSession } from "./sessionRepository.js";
 
 export interface UpstreamIntegrationResult {
@@ -10,6 +10,12 @@ export interface UpstreamIntegrationResult {
 }
 
 export interface ReactGrabTaskResult {
+  sessionId: string;
+  taskPath: string;
+  title: string;
+}
+
+export interface ReactGrabInstallTaskResult {
   sessionId: string;
   taskPath: string;
   title: string;
@@ -50,6 +56,23 @@ export async function createReactGrabRepairTask(
   };
 }
 
+export async function createReactGrabInstallTaskFile(projectRoot: string, sessionId: string): Promise<ReactGrabInstallTaskResult> {
+  const session = await readCloneSession(projectRoot, sessionId);
+  const sessionRoot = getSessionRoot(projectRoot, sessionId);
+  const task = createReactGrabInstallTask({ session });
+  const repairsRoot = path.join(sessionRoot, "react-grab-repairs");
+  const taskPath = path.join(repairsRoot, "INSTALL_REACT_GRAB.md");
+
+  await mkdir(repairsRoot, { recursive: true });
+  await writeFile(taskPath, task.body, "utf8");
+
+  return {
+    sessionId,
+    taskPath,
+    title: task.title
+  };
+}
+
 function parseContextText(rawText: string): unknown {
   try {
     return JSON.parse(rawText);
@@ -61,4 +84,3 @@ function parseContextText(rawText: string): unknown {
 function slugify(input: string): string {
   return input.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80) || "repair-task";
 }
-
