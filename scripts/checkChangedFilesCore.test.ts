@@ -43,17 +43,32 @@ describe("checkChangedFiles", () => {
 
   it("fails when existing clone-session.json files are modified", () => {
     const result = checkChangedFiles({
-      changedFiles: [{ status: "M", file: "workspace/sessions/demo/clone-session.json" }],
+      changedFiles: [{ status: "M", file: "outputs/sessions/demo/clone-session.json" }],
       cwd: "G:/workspace/planarian",
       fileExists: () => false
     });
 
-    expect(result.failures).toEqual(["Existing clone-session.json was modified: workspace/sessions/demo/clone-session.json"]);
+    expect(result.failures).toEqual(["Existing clone-session.json was modified: outputs/sessions/demo/clone-session.json"]);
   });
 
   it("allows clone-session.json when it is newly created", () => {
     const result = checkChangedFiles({
-      changedFiles: [{ status: "??", file: "workspace/sessions/demo/clone-session.json" }],
+      changedFiles: [{ status: "??", file: "outputs/sessions/demo/clone-session.json" }],
+      cwd: "G:/workspace/planarian",
+      fileExists: () => false
+    });
+
+    expect(result.failures).toEqual([]);
+  });
+
+  it("allows clone-session.json when it is renamed during an output path migration", () => {
+    const result = checkChangedFiles({
+      changedFiles: [
+        {
+          status: "R",
+          file: "workspace/sessions/demo/clone-session.json -> outputs/sessions/demo/clone-session.json"
+        }
+      ],
       cwd: "G:/workspace/planarian",
       fileExists: () => false
     });
@@ -63,21 +78,21 @@ describe("checkChangedFiles", () => {
 
   it("warns when session files changed without updating the session changelog", () => {
     const result = checkChangedFiles({
-      changedFiles: [{ status: "M", file: "workspace/sessions/demo/target-research/raw-html.html" }],
+      changedFiles: [{ status: "M", file: "outputs/sessions/demo/target-research/raw-html.html" }],
       cwd: "G:/workspace/planarian",
-      fileExists: (filePath) => filePath.replace(/\\/g, "/").endsWith("workspace/sessions/demo/agent-memory/CHANGELOG_AGENT.md")
+      fileExists: (filePath) => filePath.replace(/\\/g, "/").endsWith("outputs/sessions/demo/agent-memory/CHANGELOG_AGENT.md")
     });
 
     expect(result.warnings).toEqual([
-      "workspace/sessions/demo/agent-memory/CHANGELOG_AGENT.md exists but was not updated while session files changed."
+      "outputs/sessions/demo/agent-memory/CHANGELOG_AGENT.md exists but was not updated while session files changed."
     ]);
   });
 
   it("does not warn when the session changelog was updated", () => {
     const result = checkChangedFiles({
       changedFiles: [
-        { status: "M", file: "workspace/sessions/demo/target-research/raw-html.html" },
-        { status: "M", file: "workspace/sessions/demo/agent-memory/CHANGELOG_AGENT.md" }
+        { status: "M", file: "outputs/sessions/demo/target-research/raw-html.html" },
+        { status: "M", file: "outputs/sessions/demo/agent-memory/CHANGELOG_AGENT.md" }
       ],
       cwd: "G:/workspace/planarian",
       fileExists: () => true

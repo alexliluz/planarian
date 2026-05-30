@@ -33,3 +33,4 @@
 - Added `pnpm cli formal-status <session-id>`.
 - Expanded formal task bundles with target summary, asset inventory, and acceptance criteria.
 - Expanded README with upstream project roles, usage workflow, and deployment guidance.
+- Changed default CloneSession output location from `workspace/sessions/` to `outputs/sessions/`.

@@ -16,7 +16,7 @@ try {
   });
 
   const sessionId = createSessionId(targetUrl);
-  const sessionRoot = path.join(tempRoot, "workspace", "sessions", sessionId);
+  const sessionRoot = path.join(tempRoot, "outputs", "sessions", sessionId);
   const requiredFiles = [
     "clone-session.json",
     "target-research/raw-html.html",

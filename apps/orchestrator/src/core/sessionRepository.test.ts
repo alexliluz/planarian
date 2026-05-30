@@ -45,7 +45,7 @@ describe("sessionRepository", () => {
 });
 
 async function writeSession(root: string, input: { sessionId: string; updatedAt: string }): Promise<void> {
-  const sessionRoot = path.join(root, "workspace", "sessions", input.sessionId);
+  const sessionRoot = path.join(root, "outputs", "sessions", input.sessionId);
   await mkdir(sessionRoot, { recursive: true });
   const session: CloneSession = {
     sessionId: input.sessionId,
@@ -70,4 +70,3 @@ async function writeSession(root: string, input: { sessionId: string; updatedAt:
   };
   await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
 }
-

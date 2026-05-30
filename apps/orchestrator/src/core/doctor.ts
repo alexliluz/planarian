@@ -19,7 +19,7 @@ export async function runDoctor(projectRoot: string): Promise<DoctorReport> {
 
   checks.push(await pathExistsCheck("package.json", path.join(projectRoot, "package.json")));
   checks.push(await pathExistsCheck("pnpm-workspace.yaml", path.join(projectRoot, "pnpm-workspace.yaml")));
-  checks.push(await pathExistsCheck("workspace/sessions", getSessionsRoot(projectRoot)));
+  checks.push(await pathExistsCheck("outputs/sessions", getSessionsRoot(projectRoot)));
 
   const sessions = await listCloneSessions(projectRoot);
   checks.push({
@@ -43,4 +43,3 @@ async function pathExistsCheck(name: string, targetPath: string): Promise<Doctor
     return { name, ok: false, detail: `missing at ${targetPath}` };
   }
 }
-

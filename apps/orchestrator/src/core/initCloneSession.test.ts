@@ -61,7 +61,7 @@ describe("initCloneSession", () => {
     expect(session.target.title).toBe("Updated");
     expect(session.target.classification).toBe("static");
     expect(analyzer).toHaveBeenCalledOnce();
-    await expect(stat(path.join(tempRoot, "workspace", "sessions", session.sessionId, "agent-memory", "TASKS.md"))).resolves.toBeTruthy();
+    await expect(stat(path.join(tempRoot, "outputs", "sessions", session.sessionId, "agent-memory", "TASKS.md"))).resolves.toBeTruthy();
   });
 });
 
@@ -78,9 +78,8 @@ async function writeExistingSession(projectRoot: string, url: string): Promise<C
     network: []
   });
   const sessionId = createSessionId(url);
-  const sessionRoot = path.join(projectRoot, "workspace", "sessions", sessionId);
+  const sessionRoot = path.join(projectRoot, "outputs", "sessions", sessionId);
   await mkdir(sessionRoot, { recursive: true });
   await writeFile(path.join(sessionRoot, "clone-session.json"), `${JSON.stringify(session, null, 2)}\n`, "utf8");
   return session;
 }
-

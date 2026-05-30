@@ -108,7 +108,7 @@ corepack pnpm cli init https://target-site.example
 This creates:
 
 ```text
-workspace/sessions/<session-id>/
+outputs/sessions/<session-id>/
 ```
 
 2. Review target research.
@@ -134,7 +134,7 @@ corepack pnpm cli formal-task <session-id>
 This creates:
 
 ```text
-workspace/sessions/<session-id>/formal-clone/TASK_BUNDLE.md
+outputs/sessions/<session-id>/formal-clone/TASK_BUNDLE.md
 ```
 
 4. Check readiness.
@@ -148,7 +148,7 @@ corepack pnpm cli formal-status <session-id>
 The formal clone should be built inside:
 
 ```text
-workspace/sessions/<session-id>/formal-clone/
+outputs/sessions/<session-id>/formal-clone/
 ```
 
 ## Session Layout
@@ -156,7 +156,7 @@ workspace/sessions/<session-id>/formal-clone/
 Each target website gets a CloneSession:
 
 ```text
-workspace/sessions/<session-id>/
+outputs/sessions/<session-id>/
   clone-session.json
   target-research/
     raw-html.html
@@ -268,6 +268,5 @@ Future AI agents should read and update `AI_HANDOFF.md` before ending a task. It
 For session-specific work, also update:
 
 ```text
-workspace/sessions/<session-id>/agent-memory/CHANGELOG_AGENT.md
+outputs/sessions/<session-id>/agent-memory/CHANGELOG_AGENT.md
 ```
-

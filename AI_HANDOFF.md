@@ -9,7 +9,7 @@ This file is the fixed handoff document for Planarian. Every AI agent working in
 - Update `Current State` when project status changes.
 - Update `Next Plan` when priorities change.
 - Use `ROOT_CHANGELOG.md` for concise root-level release/change notes.
-- Use `workspace/sessions/<session-id>/agent-memory/CHANGELOG_AGENT.md` for session-specific clone work.
+- Use `outputs/sessions/<session-id>/agent-memory/CHANGELOG_AGENT.md` for session-specific clone work.
 
 ## Current State
 
@@ -21,6 +21,7 @@ This file is the fixed handoff document for Planarian. Every AI agent working in
 - GitHub repository: `alexliluz/planarian`
 - Package manager: `pnpm@9.15.4`
 - Local note: plain `pnpm` may not be available on PATH in this environment; `corepack pnpm ...` works.
+- Default CloneSession output root: `outputs/sessions/`
 
 ## Architecture Snapshot
 
@@ -29,7 +30,7 @@ This file is the fixed handoff document for Planarian. Every AI agent working in
 - `packages/crawler`: Playwright target analysis and best-effort site classification.
 - `packages/generator`: placeholder integration points for Open Lovable and formal clone generation.
 - `packages/react-grab-bridge`: placeholder integration points for React Grab UI repair tasks.
-- `workspace/sessions`: generated CloneSession outputs.
+- `outputs/sessions`: generated CloneSession outputs.
 - `templates/formal-clone-template`: placeholder for future formal clone workflow.
 
 ## Safety Rules
@@ -70,7 +71,7 @@ Notes:
 
 Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2.
 
-1. Review `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`.
+1. Review `outputs/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`.
 2. Add a formal clone scaffold/task writer that prepares a minimal Next.js work area without invoking upstream tools.
 3. Add richer asset extraction from `network-analysis.json`.
 4. Start upstream workflow integration only after the task bundle format is stable.
@@ -204,14 +205,14 @@ Results:
 Known limitations:
 
 - No git commit has been created yet.
-- `workspace/sessions/example-com-0f115db062` still needs a commit/remove decision before the first commit.
+- `outputs/sessions/example-com-0f115db062` is the committed example fixture.
 - Phase 2 upstream tool integration has not started.
 
 ### 2026-05-30 - First GitHub Checkpoint Preparation
 
 Summary:
 
-- User confirmed that `workspace/sessions/example-com-0f115db062` should be included in the first commit.
+- User confirmed that the `example-com-0f115db062` session should be included in the first commit.
 - User provided GitHub repository target: `alexliluz/planarian`.
 - Verified the full project before preparing the first commit.
 - `gh` is not installed in this environment, so publishing should use `git remote` and `git push`.
@@ -346,8 +347,8 @@ Files changed:
 - `apps/orchestrator/src/cli/program.test.ts`
 - `apps/orchestrator/src/core/formalTask.ts`
 - `apps/orchestrator/src/core/formalTask.test.ts`
-- `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`
-- `workspace/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+- `outputs/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
 - `.gitignore`
 
 Validation:
@@ -434,8 +435,8 @@ Files changed:
 - `apps/orchestrator/src/cli/program.test.ts`
 - `apps/orchestrator/src/core/formalTask.ts`
 - `apps/orchestrator/src/core/formalTask.test.ts`
-- `workspace/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`
-- `workspace/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+- `outputs/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
 
 Validation:
 
@@ -490,3 +491,50 @@ Next:
 
 - Run `corepack pnpm check`.
 - Commit and push the README update.
+
+### 2026-05-30 - Output Directory Renamed
+
+Summary:
+
+- Changed the default CloneSession output location from `workspace/sessions/` to `outputs/sessions/`.
+- Moved the committed `example-com-0f115db062` fixture into `outputs/sessions/`.
+- Updated session repository path resolution.
+- Updated doctor checks, smoke test, unit tests, README, `.gitignore`, and safety checker rules.
+- Preserved the existing session fixture and task bundle.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/core/sessionRepository.ts`
+- `apps/orchestrator/src/core/doctor.ts`
+- `apps/orchestrator/src/**/*.test.ts`
+- `scripts/checkChangedFilesCore.ts`
+- `scripts/checkChangedFilesCore.test.ts`
+- `scripts/smoke-test.ts`
+- `outputs/sessions/example-com-0f115db062/**`
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli list
+corepack pnpm cli doctor
+corepack pnpm cli formal-status example-com-0f115db062
+corepack pnpm test:smoke
+```
+
+Results:
+
+- Full check passed.
+- Unit tests passed: 8 files, 31 tests.
+- `cli list` finds the committed example session under `outputs/sessions/`.
+- `cli doctor` checks `outputs/sessions`.
+- `formal-status` for `example-com-0f115db062` is `ready`.
+- Smoke test creates temporary sessions under `outputs/sessions/`.
+
+Next:
+
+- Commit and push the output path migration.

@@ -38,7 +38,7 @@ describe("createProgram", () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeFile(path.join(tempRoot, "package.json"), "{}", "utf8");
     await writeFile(path.join(tempRoot, "pnpm-workspace.yaml"), "packages: []\n", "utf8");
-    await mkdir(path.join(tempRoot, "workspace", "sessions"), { recursive: true });
+    await mkdir(path.join(tempRoot, "outputs", "sessions"), { recursive: true });
 
     const output = await runCommand(tempRoot, ["node", "planarian", "doctor"]);
 
@@ -87,7 +87,7 @@ async function runCommand(projectRoot: string, args: string[]): Promise<string> 
 }
 
 async function writeSession(projectRoot: string, sessionId: string): Promise<void> {
-  const sessionRoot = path.join(projectRoot, "workspace", "sessions", sessionId);
+  const sessionRoot = path.join(projectRoot, "outputs", "sessions", sessionId);
   await mkdir(sessionRoot, { recursive: true });
   const session: CloneSession = {
     sessionId,

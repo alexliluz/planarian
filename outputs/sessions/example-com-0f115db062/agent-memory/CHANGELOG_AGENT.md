@@ -29,3 +29,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/TASK_BUNDLE.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm cli formal-status example-com-0f115db062`
 - Notes: Formal clone status is ready for the captured example.com session inputs.
+
+## 2026-05-30 - Codex
+
+- Summary: Moved this committed example session from `workspace/sessions/` to `outputs/sessions/`.
+- Files changed: `outputs/sessions/example-com-0f115db062/**`
+- Tests run: `corepack pnpm check`, `corepack pnpm test:smoke`, `corepack pnpm cli formal-status example-com-0f115db062`
+- Notes: `outputs/sessions/` is now the default CloneSession output root.

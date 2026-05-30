@@ -31,7 +31,7 @@ describe("createFormalCloneTask", () => {
   it("writes TASK_BUNDLE.md into formal-clone", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-formal-task-"));
     const session = createSession();
-    const sessionRoot = path.join(tempRoot, "workspace", "sessions", session.sessionId);
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", session.sessionId);
     await mkdir(sessionRoot, { recursive: true });
     await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
 
@@ -60,7 +60,7 @@ describe("getFormalCloneStatus", () => {
   it("reports missing required inputs", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-formal-status-"));
     const session = createSession();
-    const sessionRoot = path.join(tempRoot, "workspace", "sessions", session.sessionId);
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", session.sessionId);
     await mkdir(sessionRoot, { recursive: true });
     await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
 
@@ -72,7 +72,7 @@ describe("getFormalCloneStatus", () => {
 });
 
 async function writeCompleteSession(projectRoot: string, session: CloneSession): Promise<void> {
-  const sessionRoot = path.join(projectRoot, "workspace", "sessions", session.sessionId);
+  const sessionRoot = path.join(projectRoot, "outputs", "sessions", session.sessionId);
   await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
   await mkdir(path.join(sessionRoot, "agent-memory"), { recursive: true });
   await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");

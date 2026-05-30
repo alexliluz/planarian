@@ -7,7 +7,7 @@ Use this checklist before starting Phase 2 integrations.
 - [x] Add `.gitignore`.
 - [x] Initialize git locally.
 - [ ] Create the first git commit.
-- [ ] Decide whether `workspace/sessions/example-com-0f115db062` should stay as a committed fixture.
+- [x] Decide whether `outputs/sessions/example-com-0f115db062` should stay as a committed fixture.
 
 ## CLI Foundation
 

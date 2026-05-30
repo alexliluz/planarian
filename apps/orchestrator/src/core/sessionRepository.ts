@@ -3,7 +3,7 @@ import path from "node:path";
 import type { CloneSession } from "@planarian/shared";
 
 export function getSessionsRoot(projectRoot: string): string {
-  return path.join(projectRoot, "workspace", "sessions");
+  return path.join(projectRoot, "outputs", "sessions");
 }
 
 export function getSessionRoot(projectRoot: string, sessionId: string): string {
@@ -49,4 +49,3 @@ export async function listCloneSessions(projectRoot: string): Promise<CloneSessi
 
   return sessions.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
-

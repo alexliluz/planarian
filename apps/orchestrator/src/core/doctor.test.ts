@@ -32,9 +32,9 @@ describe("runDoctor", () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-doctor-"));
     await writeFile(path.join(tempRoot, "package.json"), "{}", "utf8");
     await writeFile(path.join(tempRoot, "pnpm-workspace.yaml"), "packages: []\n", "utf8");
-    await mkdir(path.join(tempRoot, "workspace", "sessions", "demo"), { recursive: true });
+    await mkdir(path.join(tempRoot, "outputs", "sessions", "demo"), { recursive: true });
     await writeFile(
-      path.join(tempRoot, "workspace", "sessions", "demo", "clone-session.json"),
+      path.join(tempRoot, "outputs", "sessions", "demo", "clone-session.json"),
       JSON.stringify({
         sessionId: "demo",
         createdAt: "2026-01-01T00:00:00.000Z",
@@ -69,4 +69,3 @@ describe("runDoctor", () => {
     });
   });
 });
-

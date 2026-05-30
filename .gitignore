@@ -16,15 +16,15 @@ temp/
 .env.*
 
 # Generated clone outputs
-workspace/sessions/*/open-lovable-version/
-workspace/sessions/*/formal-clone/
-workspace/sessions/*/comparison/
-workspace/sessions/*/references/
-workspace/sessions/*/mock-data/
+outputs/sessions/*/open-lovable-version/
+outputs/sessions/*/formal-clone/
+outputs/sessions/*/comparison/
+outputs/sessions/*/references/
+outputs/sessions/*/mock-data/
 
 # Keep session metadata and research artifacts visible for early development.
-!workspace/sessions/*/clone-session.json
-!workspace/sessions/*/target-research/
-!workspace/sessions/*/agent-memory/
-!workspace/sessions/*/formal-clone/
-!workspace/sessions/*/formal-clone/TASK_BUNDLE.md
+!outputs/sessions/*/clone-session.json
+!outputs/sessions/*/target-research/
+!outputs/sessions/*/agent-memory/
+!outputs/sessions/*/formal-clone/
+!outputs/sessions/*/formal-clone/TASK_BUNDLE.md
