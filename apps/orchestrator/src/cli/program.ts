@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { runDoctor } from "../core/doctor.js";
 import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.js";
+import { createFormalResearch } from "../core/formalResearch.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
 import { createReactGrabRepairTask, createUpstreamIntegrationTasks } from "../core/upstreamIntegrations.js";
 import { createSessionId } from "../core/createCloneSession.js";
@@ -97,6 +98,18 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
 
       if (!report.ready) {
         process.exitCode = 1;
+      }
+    });
+
+  program
+    .command("formal-research")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create formal clone research notes from captured target analysis")
+    .action(async (sessionId: string) => {
+      const result = await createFormalResearch(getProjectRoot(), sessionId);
+      console.log(`Created formal clone research for ${result.sessionId}`);
+      for (const file of result.files) {
+        console.log(`- ${file}`);
       }
     });
 

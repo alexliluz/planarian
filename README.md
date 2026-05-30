@@ -84,6 +84,12 @@ Create the formal clone task bundle:
 corepack pnpm cli formal-task example-com-0f115db062
 ```
 
+Create formal clone research notes:
+
+```bash
+corepack pnpm cli formal-research example-com-0f115db062
+```
+
 Check whether the session is ready for formal clone work:
 
 ```bash
@@ -155,7 +161,19 @@ outputs/sessions/<session-id>/formal-clone/TASK_BUNDLE.md
 corepack pnpm cli formal-status <session-id>
 ```
 
-5. Let Codex or Cursor continue from `TASK_BUNDLE.md`.
+5. Generate formal clone research notes.
+
+```bash
+corepack pnpm cli formal-research <session-id>
+```
+
+This creates:
+
+```text
+outputs/sessions/<session-id>/formal-clone/docs/research/
+```
+
+6. Let Codex or Cursor continue from `TASK_BUNDLE.md` and `docs/research/`.
 
 The formal clone should be built inside:
 
@@ -163,7 +181,7 @@ The formal clone should be built inside:
 outputs/sessions/<session-id>/formal-clone/
 ```
 
-6. Generate a minimal runnable scaffold.
+7. Generate a minimal runnable scaffold.
 
 ```bash
 corepack pnpm cli formal-scaffold <session-id>
@@ -227,6 +245,7 @@ corepack pnpm cli list
 corepack pnpm cli show <session-id>
 corepack pnpm cli doctor
 corepack pnpm cli formal-task <session-id>
+corepack pnpm cli formal-research <session-id>
 corepack pnpm cli formal-status <session-id>
 corepack pnpm cli formal-scaffold <session-id>
 corepack pnpm cli formal-scaffold <session-id> --force

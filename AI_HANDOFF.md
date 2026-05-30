@@ -656,3 +656,40 @@ Next:
 
 - Commit and push the upstream source review.
 - Implement the next practical adapter, likely `formal-research <session-id>`, using the upstream workflow mapping.
+
+### 2026-05-31 - Formal Research Adapter
+
+Summary:
+
+- Added `formal-research <session-id>` to convert captured target analysis into formal clone research notes.
+- Generated research files under `formal-clone/docs/research/`.
+- Added unit and CLI tests for the new command.
+- Updated README command reference and tracked research-note ignore rules.
+- Generated research notes for `example-com-0f115db062`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalResearch.ts`
+- `apps/orchestrator/src/core/formalResearch.test.ts`
+- `outputs/sessions/example-com-0f115db062/formal-clone/docs/research/*.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 13 files, 46 tests.
+  - `check:changed` passed.
+- `corepack pnpm cli formal-research example-com-0f115db062`
+  - Generated 5 research files.
+
+Next:
+
+- Commit and push.
+- Implement a `react-grab-install-task <session-id>` or `formal-compare <session-id>` adapter as the next small integration step.

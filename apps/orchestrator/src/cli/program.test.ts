@@ -67,6 +67,20 @@ describe("createProgram", () => {
     expect(output).toContain("FAIL target-research/raw-html.html");
   });
 
+  it("creates formal clone research notes", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await writeFile(path.join(sessionRoot, "target-research", "raw-html.html"), "<h1>Example Domain</h1>", "utf8");
+    await writeFile(path.join(sessionRoot, "target-research", "network-analysis.json"), "[]", "utf8");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-research", "demo"]);
+
+    expect(output).toContain("Created formal clone research for demo");
+    expect(output).toContain("formal-clone/docs/research/00-target-overview.md");
+  });
+
   it("creates a formal clone scaffold", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

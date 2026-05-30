@@ -38,6 +38,9 @@ outputs/sessions/*/react-grab-repairs/**
 !outputs/sessions/*/formal-clone/TASK_BUNDLE.md
 !outputs/sessions/*/formal-clone/FORMAL_CLONE_PIPELINE.md
 !outputs/sessions/*/formal-clone/AGENTS.md
+!outputs/sessions/*/formal-clone/docs/
+!outputs/sessions/*/formal-clone/docs/research/
+!outputs/sessions/*/formal-clone/docs/research/*.md
 !outputs/sessions/*/comparison/
 !outputs/sessions/*/comparison/VERSION_COMPARISON_CHECKLIST.md
 !outputs/sessions/*/react-grab-repairs/

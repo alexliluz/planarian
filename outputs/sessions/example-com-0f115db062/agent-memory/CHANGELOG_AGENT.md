@@ -50,3 +50,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `open-lovable-version/OPEN_LOVABLE_TASK.md`, `open-lovable-version/.env.example`, `formal-clone/FORMAL_CLONE_PIPELINE.md`, `formal-clone/AGENTS.md`, `comparison/VERSION_COMPARISON_CHECKLIST.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli integrate-upstreams example-com-0f115db062`
 - Notes: These files are task contracts and integration guides. They do not vendor upstream repositories or store private API keys.
+
+## 2026-05-31 - Codex
+
+- Summary: Generated formal clone research notes from the captured target analysis.
+- Files changed: `formal-clone/docs/research/*.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-research example-com-0f115db062`
+- Notes: The research notes prepare formal clone implementation but do not call upstream tools or private target APIs.
