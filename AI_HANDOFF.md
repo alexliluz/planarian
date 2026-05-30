@@ -627,3 +627,32 @@ Results:
 Next:
 
 - Commit and push.
+
+### 2026-05-31 - Upstream Source Review
+
+Summary:
+
+- Reviewed source-level structure and workflow details for:
+  - `firecrawl/open-lovable`
+  - `JCodesMore/ai-website-cloner-template`
+  - `aidenybai/react-grab`
+- Added `docs/UPSTREAM_CODE_REVIEW.md`.
+- Documented Planarian's current integration boundaries and next adapters.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `ROOT_CHANGELOG.md`
+- `docs/UPSTREAM_CODE_REVIEW.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 12 files, 43 tests.
+  - `check:changed` passed.
+
+Next:
+
+- Commit and push the upstream source review.
+- Implement the next practical adapter, likely `formal-research <session-id>`, using the upstream workflow mapping.
