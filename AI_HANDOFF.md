@@ -457,3 +457,36 @@ Next:
 
 - Run full `corepack pnpm check`.
 - Commit and push this development pass.
+
+### 2026-05-30 - README Usage And Deployment Guide
+
+Summary:
+
+- Successfully pushed local `main` to GitHub before editing README.
+- Expanded `README.md` with:
+  - Planarian project role
+  - relationship to `firecrawl/open-lovable`
+  - relationship to `JCodesMore/ai-website-cloner-template`
+  - relationship to `aidenybai/react-grab`
+  - install instructions
+  - quick start
+  - CloneSession workflow
+  - command reference
+  - deployment guidance
+  - development commands
+- Updated `ROOT_CHANGELOG.md`.
+
+Files changed:
+
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `AI_HANDOFF.md`
+
+Validation:
+
+- Pending after this documentation update.
+
+Next:
+
+- Run `corepack pnpm check`.
+- Commit and push the README update.

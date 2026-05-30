@@ -32,3 +32,4 @@
 - Pushed merged local `main` to `alexliluz/planarian`.
 - Added `pnpm cli formal-status <session-id>`.
 - Expanded formal task bundles with target summary, asset inventory, and acceptance criteria.
+- Expanded README with upstream project roles, usage workflow, and deployment guidance.

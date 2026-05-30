@@ -1,48 +1,273 @@
 # Planarian
 
-Planarian is an agent-friendly workflow foundation for website UI cloning and reconstruction.
+Planarian is an agent-friendly workflow foundation for repeatable website UI cloning and reconstruction.
 
-Phase 1 provides:
+It is not meant to be a random one-shot website cloner. Planarian creates a file-based engineering workflow where GPT, Codex, Cursor, and other coding agents can cooperate through stable session artifacts, task bundles, validation commands, and handoff notes.
 
-- A pnpm TypeScript monorepo.
-- A `pnpm cli init <url>` command that creates a CloneSession.
-- Playwright target capture for raw HTML, desktop screenshot, and basic network summaries.
-- Best-effort website classification.
-- Agent-memory files for GPT, Codex, Cursor, and future repair workflows.
-- Minimal integration points for Open Lovable, ai-website-cloner-template, and React Grab.
+## Project Role
+
+Planarian is designed to coordinate three complementary open-source ideas without deeply forking them in the early phases:
+
+- `firecrawl/open-lovable`: fast visual draft generator.
+  In Planarian, this should create a quick visual reference under `open-lovable-version/`.
+
+- `JCodesMore/ai-website-cloner-template`: formal engineering clone workflow.
+  In Planarian, this is the main direction for the final clean codebase under `formal-clone/`.
+
+- `aidenybai/react-grab`: component-level UI precision repair.
+  In Planarian, this should be used after a formal clone exists, mainly to create focused repair tasks for selected UI elements.
+
+Current status: Planarian has the monorepo foundation, CloneSession workflow, target capture, task-bundle generation, and readiness checks. It does not yet deeply integrate those upstream tools.
 
 ## Safety
 
-Planarian only targets visible UI, public page structure, static assets, front-end interactions, and mock data. It must not bypass authentication, paywalls, private APIs, private data, or backend systems.
+Planarian only targets visible UI, public page structure, static assets, front-end interactions, and mock data.
+
+Planarian must not:
+
+- bypass authentication
+- bypass paywalls
+- access private APIs
+- copy private data
+- reproduce private backend systems
+- implement real payment, trading, account, database, or user-data behavior without explicit ownership
+
+If a target site has login, API, payment, dashboard, or private-data behavior, the clone should use local mock data and placeholder routes.
+
+## Requirements
+
+- Node.js 22 or newer
+- Corepack
+- pnpm 9.x
+- Git
+- Playwright-compatible Chromium
+
+On this Windows environment, plain `pnpm` may not be available on `PATH`. Use `corepack pnpm ...` if needed.
+
+## Install
+
+```bash
+git clone https://github.com/alexliluz/planarian.git
+cd planarian
+corepack pnpm install
+```
+
+If `pnpm` is available directly:
+
+```bash
+pnpm install
+```
+
+## Quick Start
+
+Create or reuse a CloneSession:
+
+```bash
+corepack pnpm cli init https://example.com
+```
+
+List sessions:
+
+```bash
+corepack pnpm cli list
+```
+
+Show session metadata:
+
+```bash
+corepack pnpm cli show example-com-0f115db062
+```
+
+Create the formal clone task bundle:
+
+```bash
+corepack pnpm cli formal-task example-com-0f115db062
+```
+
+Check whether the session is ready for formal clone work:
+
+```bash
+corepack pnpm cli formal-status example-com-0f115db062
+```
+
+Run project health checks:
+
+```bash
+corepack pnpm cli doctor
+corepack pnpm check
+```
+
+## Workflow
+
+1. Capture a target website.
+
+```bash
+corepack pnpm cli init https://target-site.example
+```
+
+This creates:
+
+```text
+workspace/sessions/<session-id>/
+```
+
+2. Review target research.
+
+Important files:
+
+```text
+clone-session.json
+target-research/raw-html.html
+target-research/desktop.png
+target-research/network-analysis.json
+agent-memory/TASKS.md
+agent-memory/DECISIONS.md
+agent-memory/PROMPTS.md
+```
+
+3. Generate a formal clone task bundle.
+
+```bash
+corepack pnpm cli formal-task <session-id>
+```
+
+This creates:
+
+```text
+workspace/sessions/<session-id>/formal-clone/TASK_BUNDLE.md
+```
+
+4. Check readiness.
+
+```bash
+corepack pnpm cli formal-status <session-id>
+```
+
+5. Let Codex or Cursor continue from `TASK_BUNDLE.md`.
+
+The formal clone should be built inside:
+
+```text
+workspace/sessions/<session-id>/formal-clone/
+```
+
+## Session Layout
+
+Each target website gets a CloneSession:
+
+```text
+workspace/sessions/<session-id>/
+  clone-session.json
+  target-research/
+    raw-html.html
+    desktop.png
+    network-analysis.json
+  open-lovable-version/
+  formal-clone/
+    TASK_BUNDLE.md
+  comparison/
+  references/
+  mock-data/
+  agent-memory/
+    TASKS.md
+    DECISIONS.md
+    CHANGELOG_AGENT.md
+    PROMPTS.md
+```
+
+`formal-clone/` is the main final codebase for a session.
+
+`open-lovable-version/` is only a quick visual reference.
+
+`agent-memory/` is the handoff layer for AI agents.
 
 ## Commands
 
 ```bash
-pnpm install
-pnpm cli init https://example.com
-pnpm cli list
-pnpm cli show example-com-0f115db062
-pnpm cli doctor
-pnpm cli formal-task example-com-0f115db062
-pnpm cli formal-status example-com-0f115db062
-pnpm typecheck
-pnpm test
-pnpm test:smoke
-pnpm check
-pnpm clean
-pnpm safe:status
+corepack pnpm cli init <url>
+corepack pnpm cli init <url> --refresh
+corepack pnpm cli list
+corepack pnpm cli show <session-id>
+corepack pnpm cli doctor
+corepack pnpm cli formal-task <session-id>
+corepack pnpm cli formal-status <session-id>
+corepack pnpm typecheck
+corepack pnpm test
+corepack pnpm test:smoke
+corepack pnpm check
+corepack pnpm clean
+corepack pnpm safe:status
+```
+
+## Deployment
+
+Planarian currently ships as a local CLI-oriented monorepo. There is no web server or hosted app to deploy yet.
+
+Recommended deployment model today:
+
+1. Push the repository to GitHub.
+2. Clone it on the workstation or agent runner that will perform clone work.
+3. Install dependencies with `corepack pnpm install`.
+4. Run Planarian commands locally from the repository root.
+5. Commit session task bundles and agent-memory updates as workflow checkpoints.
+
+For a fresh machine:
+
+```bash
+git clone https://github.com/alexliluz/planarian.git
+cd planarian
+corepack pnpm install
+corepack pnpm check
+```
+
+For CI or an agent runner:
+
+```bash
+corepack pnpm install
+corepack pnpm typecheck
+corepack pnpm test
+```
+
+Future deployment targets may include:
+
+- a packaged CLI
+- GitHub Actions checks
+- a local web UI
+- a workspace runner for generated formal clone apps
+
+## Development
+
+Run all checks:
+
+```bash
+corepack pnpm check
+```
+
+Run the end-to-end smoke test:
+
+```bash
+corepack pnpm test:smoke
+```
+
+Clean TypeScript build outputs:
+
+```bash
+corepack pnpm clean
+```
+
+Check git status safely:
+
+```bash
+corepack pnpm safe:status
 ```
 
 ## AI Handoff
 
 Future AI agents should read and update `AI_HANDOFF.md` before ending a task. It records the current project state, completed work, validation results, known limitations, and next plan.
 
-## Session Layout
-
-Each target creates a session under:
+For session-specific work, also update:
 
 ```text
-workspace/sessions/<session-id>/
+workspace/sessions/<session-id>/agent-memory/CHANGELOG_AGENT.md
 ```
 
-The `formal-clone/` folder is the final main codebase. The `open-lovable-version/` folder is only a quick visual reference.
