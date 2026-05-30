@@ -43,3 +43,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/package.json`, `formal-clone/app/*`, `formal-clone/data/target-summary.json`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli formal-scaffold example-com-0f115db062`, `corepack pnpm cli formal-status example-com-0f115db062`
 - Notes: Generated scaffold app files are intentionally git-ignored by default; `TASK_BUNDLE.md` remains tracked as the durable task contract.
+
+## 2026-05-30 - Codex
+
+- Summary: Generated upstream integration task files for Open Lovable, the formal clone pipeline, comparison, and React Grab repair workflows.
+- Files changed: `open-lovable-version/OPEN_LOVABLE_TASK.md`, `open-lovable-version/.env.example`, `formal-clone/FORMAL_CLONE_PIPELINE.md`, `formal-clone/AGENTS.md`, `comparison/VERSION_COMPARISON_CHECKLIST.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli integrate-upstreams example-com-0f115db062`
+- Notes: These files are task contracts and integration guides. They do not vendor upstream repositories or store private API keys.

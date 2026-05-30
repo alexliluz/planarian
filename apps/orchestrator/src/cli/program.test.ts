@@ -77,6 +77,17 @@ describe("createProgram", () => {
     expect(output).toContain("Written:");
     expect(output).toContain("Skipped:");
   });
+
+  it("creates upstream integration task files", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "integrate-upstreams", "demo"]);
+
+    expect(output).toContain("Created upstream integration tasks for demo");
+    expect(output).toContain("open-lovable-version/OPEN_LOVABLE_TASK.md");
+    expect(output).toContain("formal-clone/FORMAL_CLONE_PIPELINE.md");
+  });
 });
 
 async function runCommand(projectRoot: string, args: string[]): Promise<string> {

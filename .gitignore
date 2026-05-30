@@ -17,15 +17,28 @@ temp/
 
 # Generated clone outputs
 outputs/sessions/*/open-lovable-version/
+outputs/sessions/*/open-lovable-version/**
 outputs/sessions/*/formal-clone/
 outputs/sessions/*/formal-clone/**
 outputs/sessions/*/comparison/
+outputs/sessions/*/comparison/**
 outputs/sessions/*/references/
 outputs/sessions/*/mock-data/
+outputs/sessions/*/react-grab-repairs/
+outputs/sessions/*/react-grab-repairs/**
 
 # Keep session metadata and research artifacts visible for early development.
 !outputs/sessions/*/clone-session.json
 !outputs/sessions/*/target-research/
 !outputs/sessions/*/agent-memory/
+!outputs/sessions/*/open-lovable-version/
+!outputs/sessions/*/open-lovable-version/OPEN_LOVABLE_TASK.md
+!outputs/sessions/*/open-lovable-version/.env.example
 !outputs/sessions/*/formal-clone/
 !outputs/sessions/*/formal-clone/TASK_BUNDLE.md
+!outputs/sessions/*/formal-clone/FORMAL_CLONE_PIPELINE.md
+!outputs/sessions/*/formal-clone/AGENTS.md
+!outputs/sessions/*/comparison/
+!outputs/sessions/*/comparison/VERSION_COMPARISON_CHECKLIST.md
+!outputs/sessions/*/react-grab-repairs/
+!outputs/sessions/*/react-grab-repairs/*.md

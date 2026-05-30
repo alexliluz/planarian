@@ -33,6 +33,12 @@ importers:
       '@planarian/crawler':
         specifier: workspace:*
         version: link:../../packages/crawler
+      '@planarian/generator':
+        specifier: workspace:*
+        version: link:../../packages/generator
+      '@planarian/react-grab-bridge':
+        specifier: workspace:*
+        version: link:../../packages/react-grab-bridge
       '@planarian/shared':
         specifier: workspace:*
         version: link:../../packages/shared

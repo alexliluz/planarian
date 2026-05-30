@@ -96,6 +96,12 @@ Create a minimal runnable formal clone scaffold:
 corepack pnpm cli formal-scaffold example-com-0f115db062
 ```
 
+Create upstream integration task files:
+
+```bash
+corepack pnpm cli integrate-upstreams example-com-0f115db062
+```
+
 Run project health checks:
 
 ```bash
@@ -224,6 +230,8 @@ corepack pnpm cli formal-task <session-id>
 corepack pnpm cli formal-status <session-id>
 corepack pnpm cli formal-scaffold <session-id>
 corepack pnpm cli formal-scaffold <session-id> --force
+corepack pnpm cli integrate-upstreams <session-id>
+corepack pnpm cli react-grab-task <session-id> --context ./grab-context.json
 corepack pnpm typecheck
 corepack pnpm test
 corepack pnpm test:smoke

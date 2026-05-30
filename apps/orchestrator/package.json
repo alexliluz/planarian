@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@planarian/crawler": "workspace:*",
+    "@planarian/generator": "workspace:*",
+    "@planarian/react-grab-bridge": "workspace:*",
     "@planarian/shared": "workspace:*",
     "commander": "^12.1.0"
   },
@@ -18,4 +20,3 @@
     "typescript": "^5.7.2"
   }
 }
-

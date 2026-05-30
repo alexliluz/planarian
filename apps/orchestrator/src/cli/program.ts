@@ -3,6 +3,7 @@ import { initCloneSession } from "../core/initCloneSession.js";
 import { runDoctor } from "../core/doctor.js";
 import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
+import { createReactGrabRepairTask, createUpstreamIntegrationTasks } from "../core/upstreamIntegrations.js";
 import { createSessionId } from "../core/createCloneSession.js";
 import { cloneSessionExists, listCloneSessions, readCloneSession } from "../core/sessionRepository.js";
 
@@ -112,6 +113,30 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       console.log(`Path: ${result.formalCloneRoot}`);
       console.log(`Written: ${result.writtenFiles.length}`);
       console.log(`Skipped: ${result.skippedFiles.length}`);
+    });
+
+  program
+    .command("integrate-upstreams")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create integration task files for Open Lovable, formal clone, comparison, and React Grab workflows")
+    .action(async (sessionId: string) => {
+      const result = await createUpstreamIntegrationTasks(getProjectRoot(), sessionId);
+      console.log(`Created upstream integration tasks for ${result.sessionId}`);
+      for (const file of result.files) {
+        console.log(`- ${file}`);
+      }
+    });
+
+  program
+    .command("react-grab-task")
+    .argument("<session-id>", "CloneSession id")
+    .requiredOption("--context <path>", "Path to a React Grab context JSON or text file")
+    .description("Create a focused UI repair task from React Grab selected element context")
+    .action(async (sessionId: string, commandOptions: { context: string }) => {
+      const result = await createReactGrabRepairTask(getProjectRoot(), sessionId, commandOptions.context);
+      console.log(`Created React Grab repair task for ${result.sessionId}`);
+      console.log(`Title: ${result.title}`);
+      console.log(`Path: ${result.taskPath}`);
     });
 
   return program;

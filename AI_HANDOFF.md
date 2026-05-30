@@ -75,7 +75,7 @@ Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2
 2. Generate and inspect the example formal scaffold under `outputs/sessions/example-com-0f115db062/formal-clone/`.
 3. Add richer asset extraction from `network-analysis.json`.
 4. Add validation for generated formal clone package files.
-5. Start upstream workflow integration only after the scaffold contract is stable.
+5. Use generated upstream integration task files as the controlled bridge before invoking external tools.
 
 ## Work Log
 
@@ -582,3 +582,48 @@ Results:
 Next:
 
 - Commit and push this development pass.
+
+### 2026-05-30 - Upstream Integration Task Generators
+
+Summary:
+
+- Implemented Open Lovable task generation in `@planarian/generator`.
+- Implemented formal clone pipeline and agent instruction generation in `@planarian/generator`.
+- Implemented version comparison checklist generation in `@planarian/generator`.
+- Replaced React Grab bridge placeholders with structured context parsing and repair task generation.
+- Added orchestrator commands:
+  - `integrate-upstreams <session-id>`
+  - `react-grab-task <session-id> --context <path>`
+- Added tests for generator integrations, React Grab bridge, and orchestrator upstream integration core.
+- Updated README command reference.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/package.json`
+- `apps/orchestrator/tsconfig.json`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/upstreamIntegrations.ts`
+- `apps/orchestrator/src/core/upstreamIntegrations.test.ts`
+- `packages/generator/src/*`
+- `packages/react-grab-bridge/src/*`
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli integrate-upstreams example-com-0f115db062
+```
+
+Results:
+
+- Full check passed.
+- Unit tests passed: 12 files, 43 tests.
+- Upstream integration task files were generated for `example-com-0f115db062`.
+
+Next:
+
+- Commit and push.
