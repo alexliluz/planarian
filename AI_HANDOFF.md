@@ -693,3 +693,44 @@ Next:
 
 - Commit and push.
 - Implement a `react-grab-install-task <session-id>` or `formal-compare <session-id>` adapter as the next small integration step.
+
+### 2026-05-31 - Formal Comparison Adapter
+
+Summary:
+
+- Added `formal-compare <session-id>`.
+- The command checks whether comparison inputs exist and writes:
+  - `comparison/FORMAL_COMPARISON.md`
+  - `comparison/REPAIR_QUEUE.md`
+- Added unit and CLI tests for comparison generation.
+- Updated README and `.gitignore` so comparison reports are documented and tracked.
+- Generated comparison files for `example-com-0f115db062`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalCompare.ts`
+- `apps/orchestrator/src/core/formalCompare.test.ts`
+- `outputs/sessions/example-com-0f115db062/comparison/FORMAL_COMPARISON.md`
+- `outputs/sessions/example-com-0f115db062/comparison/REPAIR_QUEUE.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 14 files, 49 tests.
+  - `check:changed` passed.
+- `corepack pnpm cli formal-compare example-com-0f115db062`
+  - All expected comparison inputs were found.
+  - Generated 2 comparison files.
+
+Next:
+
+- Commit and push.
+- Implement `react-grab-install-task <session-id>` as the next bridge toward component-level repair.

@@ -90,6 +90,12 @@ Create formal clone research notes:
 corepack pnpm cli formal-research example-com-0f115db062
 ```
 
+Create a comparison report and repair queue:
+
+```bash
+corepack pnpm cli formal-compare example-com-0f115db062
+```
+
 Check whether the session is ready for formal clone work:
 
 ```bash
@@ -173,7 +179,20 @@ This creates:
 outputs/sessions/<session-id>/formal-clone/docs/research/
 ```
 
-6. Let Codex or Cursor continue from `TASK_BUNDLE.md` and `docs/research/`.
+6. Create a comparison report and repair queue.
+
+```bash
+corepack pnpm cli formal-compare <session-id>
+```
+
+This creates:
+
+```text
+outputs/sessions/<session-id>/comparison/FORMAL_COMPARISON.md
+outputs/sessions/<session-id>/comparison/REPAIR_QUEUE.md
+```
+
+7. Let Codex or Cursor continue from `TASK_BUNDLE.md`, `docs/research/`, and `comparison/REPAIR_QUEUE.md`.
 
 The formal clone should be built inside:
 
@@ -181,7 +200,7 @@ The formal clone should be built inside:
 outputs/sessions/<session-id>/formal-clone/
 ```
 
-7. Generate a minimal runnable scaffold.
+8. Generate a minimal runnable scaffold.
 
 ```bash
 corepack pnpm cli formal-scaffold <session-id>
@@ -245,6 +264,7 @@ corepack pnpm cli list
 corepack pnpm cli show <session-id>
 corepack pnpm cli doctor
 corepack pnpm cli formal-task <session-id>
+corepack pnpm cli formal-compare <session-id>
 corepack pnpm cli formal-research <session-id>
 corepack pnpm cli formal-status <session-id>
 corepack pnpm cli formal-scaffold <session-id>

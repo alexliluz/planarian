@@ -43,5 +43,7 @@ outputs/sessions/*/react-grab-repairs/**
 !outputs/sessions/*/formal-clone/docs/research/*.md
 !outputs/sessions/*/comparison/
 !outputs/sessions/*/comparison/VERSION_COMPARISON_CHECKLIST.md
+!outputs/sessions/*/comparison/FORMAL_COMPARISON.md
+!outputs/sessions/*/comparison/REPAIR_QUEUE.md
 !outputs/sessions/*/react-grab-repairs/
 !outputs/sessions/*/react-grab-repairs/*.md

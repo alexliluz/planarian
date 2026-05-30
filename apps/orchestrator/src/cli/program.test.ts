@@ -81,6 +81,25 @@ describe("createProgram", () => {
     expect(output).toContain("formal-clone/docs/research/00-target-overview.md");
   });
 
+  it("creates formal clone comparison files", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await mkdir(path.join(sessionRoot, "formal-clone", "docs", "research"), { recursive: true });
+    await writeFile(path.join(sessionRoot, "target-research", "desktop.png"), "fake png", "utf8");
+    await writeFile(path.join(sessionRoot, "target-research", "raw-html.html"), "<html></html>", "utf8");
+    await writeFile(path.join(sessionRoot, "target-research", "network-analysis.json"), "[]", "utf8");
+    await writeFile(path.join(sessionRoot, "formal-clone", "TASK_BUNDLE.md"), "# Task", "utf8");
+    await writeFile(path.join(sessionRoot, "formal-clone", "docs", "research", "README.md"), "# Research", "utf8");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-compare", "demo"]);
+
+    expect(output).toContain("Created formal clone comparison for demo");
+    expect(output).toContain("OK Desktop screenshot: target-research/desktop.png");
+    expect(output).toContain("comparison/FORMAL_COMPARISON.md");
+  });
+
   it("creates a formal clone scaffold", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

@@ -57,3 +57,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/docs/research/*.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli formal-research example-com-0f115db062`
 - Notes: The research notes prepare formal clone implementation but do not call upstream tools or private target APIs.
+
+## 2026-05-31 - Codex
+
+- Summary: Generated the formal comparison report and repair queue for this session.
+- Files changed: `comparison/FORMAL_COMPARISON.md`, `comparison/REPAIR_QUEUE.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-compare example-com-0f115db062`
+- Notes: The comparison output is an agent-facing repair workflow, not an automated visual diff engine yet.

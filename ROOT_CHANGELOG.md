@@ -38,3 +38,4 @@
 - Added upstream integration task generators for Open Lovable, ai-website-cloner-template style formal clone work, comparison, and React Grab repair tasks.
 - Added `docs/UPSTREAM_CODE_REVIEW.md` with source-level upstream workflow analysis.
 - Added `pnpm cli formal-research <session-id>` to generate formal clone research notes from captured target analysis.
+- Added `pnpm cli formal-compare <session-id>` to generate a comparison report and repair queue.

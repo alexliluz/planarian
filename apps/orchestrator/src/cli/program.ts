@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { runDoctor } from "../core/doctor.js";
 import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.js";
+import { createFormalComparison } from "../core/formalCompare.js";
 import { createFormalResearch } from "../core/formalResearch.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
 import { createReactGrabRepairTask, createUpstreamIntegrationTasks } from "../core/upstreamIntegrations.js";
@@ -98,6 +99,21 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
 
       if (!report.ready) {
         process.exitCode = 1;
+      }
+    });
+
+  program
+    .command("formal-compare")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create a formal clone comparison report and repair queue")
+    .action(async (sessionId: string) => {
+      const result = await createFormalComparison(getProjectRoot(), sessionId);
+      console.log(`Created formal clone comparison for ${result.sessionId}`);
+      for (const input of result.inputs) {
+        console.log(`${input.exists ? "OK" : "MISSING"} ${input.name}: ${input.path}`);
+      }
+      for (const file of result.files) {
+        console.log(`- ${file}`);
       }
     });
 
