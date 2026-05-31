@@ -21,4 +21,11 @@ Use this format for future Codex/Cursor changes:
 - Summary: Generated public asset inventory and visual planning notes for this real-site session.
 - Files changed: `references/ASSET_INVENTORY.md`, `references/VISUAL_PLAN.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli asset-inventory kleinerperkins-com-b414a4e408`
-- Notes: Captured 65 image requests, 1 font, 1 stylesheet, 13 scripts, and 8 API candidates. Some extracted visible text has encoding artifacts and should be normalized in a later crawler/research pass.
+- Notes: Captured 65 image requests, 1 font, 1 stylesheet, 13 scripts, and 8 API candidates.
+
+## 2026-06-01 - Codex
+
+- Summary: Regenerated asset inventory and formal research after adding shared HTML text extraction.
+- Files changed: `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli asset-inventory kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-research kleinerperkins-com-b414a4e408`
+- Notes: Node UTF-8 inspection confirmed the previously observed `鈥?` characters were a PowerShell display artifact; generated markdown contains proper Unicode punctuation.

@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { CloneSession, NetworkRequestSummary } from "@planarian/shared";
+import { extractVisibleText } from "./htmlText.js";
 import { getSessionRoot, readCloneSession } from "./sessionRepository.js";
 
 export interface AssetInventoryResult {
@@ -282,21 +283,6 @@ function extractLinkedAssets(rawHtml: string): string[] {
   }
 
   return assets;
-}
-
-function extractVisibleText(html: string): string {
-  return html
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, " ")
-    .trim();
 }
 
 function unique(values: string[]): string[] {

@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { CloneSession, NetworkRequestSummary } from "@planarian/shared";
+import { extractVisibleText } from "./htmlText.js";
 import { getSessionRoot, readCloneSession } from "./sessionRepository.js";
 
 export interface FormalResearchResult {
@@ -243,21 +244,6 @@ function renderImplementationPlan(session: CloneSession, network: NetworkRequest
 - Add mock data for sections inferred from network/API candidates.
 - Compare against \`../../open-lovable-version/\` only as a visual reference when that draft exists.
 `;
-}
-
-function extractVisibleText(html: string): string {
-  return html
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, " ")
-    .trim();
 }
 
 function extractHeadings(html: string): string[] {

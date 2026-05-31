@@ -954,3 +954,41 @@ Next:
 
 - Commit and push.
 - Add an `asset-download-plan` or improve text decoding before starting a serious Kleiner Perkins visual implementation.
+
+### 2026-06-01 - Shared HTML Text Extraction
+
+Summary:
+
+- Added shared `htmlText.ts` utilities for visible text extraction and HTML entity decoding.
+- Reused the shared extractor in:
+  - `assetInventory.ts`
+  - `formalResearch.ts`
+  - `formalStaticPass.ts`
+- Added unit tests for named, decimal, and hexadecimal entity decoding.
+- Regenerated Kleiner Perkins asset inventory and formal research after the refactor.
+- Confirmed with Node UTF-8 reading that the observed `鈥?` characters were PowerShell display encoding artifacts; generated markdown has proper Unicode punctuation.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/core/htmlText.ts`
+- `apps/orchestrator/src/core/htmlText.test.ts`
+- `apps/orchestrator/src/core/assetInventory.ts`
+- `apps/orchestrator/src/core/formalResearch.ts`
+- `apps/orchestrator/src/core/formalStaticPass.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 19 files, 72 tests.
+  - `check:changed` passed.
+- `corepack pnpm cli asset-inventory kleinerperkins-com-b414a4e408`
+- `corepack pnpm cli formal-research kleinerperkins-com-b414a4e408`
+
+Next:
+
+- Commit and push.
+- Add an asset download/selection plan or start a scoped Kleiner Perkins first-viewport formal clone implementation.
