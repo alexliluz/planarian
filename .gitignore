@@ -29,6 +29,7 @@ outputs/sessions/*/react-grab-repairs/**
 
 # Keep session metadata and research artifacts visible for early development.
 !outputs/sessions/*/clone-session.json
+!outputs/sessions/*/RUNBOOK.md
 !outputs/sessions/*/target-research/
 !outputs/sessions/*/agent-memory/
 !outputs/sessions/*/open-lovable-version/

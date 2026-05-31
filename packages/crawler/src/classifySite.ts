@@ -20,9 +20,10 @@ export interface ClassificationResult {
 export function classifySite(signals: ClassificationSignals): ClassificationResult {
   const notes: string[] = [];
   const hasApiRequests = signals.network.some((request) => request.isApiCandidate);
+  const hasAppApiRequests = signals.network.some((request) => request.isApiCandidate && !isTelemetryOrConsentRequest(request.url));
   const hasHeavyClientRendering =
     signals.hasRootOnlyHtml || (signals.scriptCount >= 8 && signals.bodyTextLength < 600);
-  const requiresAuth = signals.authSignals.length > 0 && hasApiRequests;
+  const requiresAuth = signals.authSignals.length > 0 && hasAppApiRequests;
   const hasNext = signals.detectedFrameworks.includes("next");
   const hasNuxt = signals.detectedFrameworks.includes("nuxt");
 
@@ -31,7 +32,7 @@ export function classifySite(signals: ClassificationSignals): ClassificationResu
     return { classification: "auth-gated", requiresAuth, hasApiRequests, hasHeavyClientRendering, notes };
   }
 
-  if (hasApiRequests && hasHeavyClientRendering) {
+  if (hasAppApiRequests && hasHeavyClientRendering) {
     notes.push("API-like requests and heavy client rendering suggest an interactive web app.");
     return { classification: "web-app", requiresAuth, hasApiRequests, hasHeavyClientRendering, notes };
   }
@@ -59,3 +60,14 @@ export function classifySite(signals: ClassificationSignals): ClassificationResu
   return { classification: "unknown", requiresAuth, hasApiRequests, hasHeavyClientRendering, notes };
 }
 
+function isTelemetryOrConsentRequest(url: string): boolean {
+  return [
+    "google-analytics.com",
+    "googletagmanager.com",
+    "cookieyes.com",
+    "parsely.com",
+    "wp.com",
+    "cloudflareinsights.com",
+    "/cdn-cgi/rum"
+  ].some((pattern) => url.toLowerCase().includes(pattern));
+}

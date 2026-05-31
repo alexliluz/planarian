@@ -49,5 +49,35 @@ describe("classifySite", () => {
 
     expect(result.classification).toBe("auth-gated");
   });
-});
 
+  it("does not treat analytics and consent requests as auth-gated app APIs", () => {
+    const result = classifySite({
+      bodyTextLength: 1800,
+      hasRootOnlyHtml: false,
+      scriptCount: 6,
+      detectedFrameworks: ["react-root"],
+      authSignals: ["auth"],
+      network: [
+        {
+          url: "https://cdn-cookieyes.com/client_data/example/config.json",
+          method: "GET",
+          resourceType: "fetch",
+          status: 200,
+          contentType: "application/json",
+          isApiCandidate: true
+        },
+        {
+          url: "https://www.google-analytics.com/g/collect",
+          method: "POST",
+          resourceType: "fetch",
+          status: 204,
+          isApiCandidate: true
+        }
+      ]
+    });
+
+    expect(result.classification).not.toBe("auth-gated");
+    expect(result.requiresAuth).toBe(false);
+    expect(result.hasApiRequests).toBe(true);
+  });
+});

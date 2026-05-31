@@ -78,6 +78,12 @@ Show session metadata:
 corepack pnpm cli show example-com-0f115db062
 ```
 
+Create a session runbook with open/run/validate instructions:
+
+```bash
+corepack pnpm cli session-runbook example-com-0f115db062
+```
+
 Create the formal clone task bundle:
 
 ```bash
@@ -159,6 +165,7 @@ Important files:
 
 ```text
 clone-session.json
+RUNBOOK.md
 target-research/raw-html.html
 target-research/desktop.png
 target-research/network-analysis.json
@@ -323,6 +330,7 @@ corepack pnpm cli init <url> --refresh
 corepack pnpm cli list
 corepack pnpm cli show <session-id>
 corepack pnpm cli doctor
+corepack pnpm cli session-runbook <session-id>
 corepack pnpm cli formal-task <session-id>
 corepack pnpm cli formal-compare <session-id>
 corepack pnpm cli formal-research <session-id>

@@ -100,4 +100,14 @@ describe("checkChangedFiles", () => {
 
     expect(result.warnings).toEqual([]);
   });
+
+  it("does not warn for a brand new untracked session directory", () => {
+    const result = checkChangedFiles({
+      changedFiles: [{ status: "??", file: "outputs/sessions/demo/" }],
+      cwd: "G:/workspace/planarian",
+      fileExists: (filePath) => filePath.replace(/\\/g, "/").endsWith("outputs/sessions/demo/agent-memory/CHANGELOG_AGENT.md")
+    });
+
+    expect(result.warnings).toEqual([]);
+  });
 });

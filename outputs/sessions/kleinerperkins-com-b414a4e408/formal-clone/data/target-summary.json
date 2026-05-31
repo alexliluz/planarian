@@ -1,0 +1,17 @@
+{
+  "sessionId": "kleinerperkins-com-b414a4e408",
+  "url": "https://www.kleinerperkins.com/",
+  "hostname": "www.kleinerperkins.com",
+  "title": "Home | Kleiner Perkins",
+  "classification": "unknown",
+  "cloneMode": "visual-plus-mock-api",
+  "requiresAuth": false,
+  "hasApiRequests": true,
+  "hasHeavyClientRendering": false,
+  "detectedFrameworks": [
+    "react-root"
+  ],
+  "notes": [
+    "Signals were inconclusive; review raw HTML and network analysis."
+  ]
+}

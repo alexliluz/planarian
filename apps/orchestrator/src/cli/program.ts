@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import { initCloneSession } from "../core/initCloneSession.js";
+import { createSessionRunbook } from "../core/sessionRunbook.js";
 import { runDoctor } from "../core/doctor.js";
 import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.js";
 import { createFormalComparison } from "../core/formalCompare.js";
@@ -80,6 +81,16 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       if (!report.ok) {
         process.exitCode = 1;
       }
+    });
+
+  program
+    .command("session-runbook")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create a session runbook with open, run, validate, and next-step instructions")
+    .action(async (sessionId: string) => {
+      const result = await createSessionRunbook(getProjectRoot(), sessionId);
+      console.log(`Created session runbook for ${result.sessionId}`);
+      console.log(`Path: ${result.runbookPath}`);
     });
 
   program

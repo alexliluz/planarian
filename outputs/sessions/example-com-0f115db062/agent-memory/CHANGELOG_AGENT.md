@@ -85,3 +85,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/app/page.tsx`, `formal-clone/app/globals.css`, `formal-clone/data/static-content.json`, `formal-clone/STATIC_IMPLEMENTATION.md`, `formal-clone/VALIDATION.md`, `comparison/FORMAL_COMPARISON.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli formal-static-pass example-com-0f115db062`, `corepack pnpm cli formal-validate example-com-0f115db062`, `corepack pnpm cli formal-compare example-com-0f115db062`
 - Notes: `example.com` is an intentionally simple public demonstration target. The static pass preserves visible public content only.
+
+## 2026-05-31 - Codex
+
+- Summary: Generated the session runbook with open, run, validation, and continuation instructions.
+- Files changed: `RUNBOOK.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli session-runbook example-com-0f115db062`
+- Notes: The runbook explains how to open captured artifacts and run the formal clone app.

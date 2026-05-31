@@ -48,7 +48,11 @@ export function checkChangedFiles(input: ChangedFilesCheckInput): ChangedFilesCh
   for (const sessionPath of sessionsTouched) {
     const changelogPath = `${sessionPath}/agent-memory/CHANGELOG_AGENT.md`;
     const changelogChanged = input.changedFiles.some((changed) => normalizeChangedFilePath(changed.file) === changelogPath);
-    if (input.fileExists(path.join(input.cwd, changelogPath)) && !changelogChanged) {
+    const newSessionDirectory = input.changedFiles.some((changed) => {
+      const normalized = normalizeChangedFilePath(changed.file);
+      return changed.status === "??" && (normalized === `${sessionPath}/` || normalized === sessionPath);
+    });
+    if (input.fileExists(path.join(input.cwd, changelogPath)) && !changelogChanged && !newSessionDirectory) {
       warnings.push(`${changelogPath} exists but was not updated while session files changed.`);
     }
   }

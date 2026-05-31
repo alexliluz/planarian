@@ -47,6 +47,16 @@ describe("createProgram", () => {
     expect(output).toContain("OK clone sessions: 0 session(s) found");
   });
 
+  it("creates a session runbook", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "session-runbook", "demo"]);
+
+    expect(output).toContain("Created session runbook for demo");
+    expect(output).toContain("RUNBOOK.md");
+  });
+
   it("creates a formal clone task bundle", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

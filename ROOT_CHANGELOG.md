@@ -42,3 +42,6 @@
 - Added `pnpm cli react-grab-install-task <session-id>` to create a React Grab setup task for formal clone repair.
 - Added `pnpm cli formal-validate <session-id>` to validate formal clone structure and write `formal-clone/VALIDATION.md`.
 - Added `pnpm cli formal-static-pass <session-id>` to generate a simple static formal clone from captured HTML.
+- Added `pnpm cli session-runbook <session-id>` to generate per-session open/run/validate instructions.
+- Added a real-site test session for `https://www.kleinerperkins.com/`.
+- Improved site classification to avoid treating telemetry and consent requests as auth-gated app APIs.

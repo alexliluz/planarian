@@ -864,3 +864,48 @@ Next:
 
 - Commit and push.
 - Optionally install dependencies inside `formal-clone/` and run `formal-validate --run-build`.
+
+### 2026-05-31 - Session Runbook And Kleiner Perkins Test
+
+Summary:
+
+- Added `session-runbook <session-id>` to generate per-session open/run/validate instructions.
+- Generated `RUNBOOK.md` for `example-com-0f115db062`.
+- Created and refreshed a real-site session for `https://www.kleinerperkins.com/`.
+- Improved classification heuristics so third-party telemetry/consent API calls do not force `auth-gated`.
+- Generated runbook, formal task, research, upstream task files, scaffold, validation, comparison, and React Grab install task for `kleinerperkins-com-b414a4e408`.
+- Did not run `formal-static-pass` for Kleiner Perkins because the site is complex and visual/asset-heavy.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/sessionRunbook.ts`
+- `apps/orchestrator/src/core/sessionRunbook.test.ts`
+- `packages/crawler/src/analyzeTarget.ts`
+- `packages/crawler/src/classifySite.ts`
+- `packages/crawler/tests/classifySite.test.ts`
+- `outputs/sessions/example-com-0f115db062/RUNBOOK.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/**`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 17 files, 65 tests.
+  - `check:changed` passed with changelog warnings before changelog updates.
+- `corepack pnpm cli init https://www.kleinerperkins.com --refresh`
+  - Session: `kleinerperkins-com-b414a4e408`
+  - Classification after heuristic fix: `unknown`
+- Generated session workflow artifacts for Kleiner Perkins with CLI commands listed in its `agent-memory/CHANGELOG_AGENT.md`.
+
+Next:
+
+- Run final validation after changelog updates.
+- Commit and push.
+- Consider adding asset inventory/download planning before attempting a serious Kleiner Perkins visual clone.

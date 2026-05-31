@@ -136,8 +136,19 @@ async function collectPageSignals(page: Page, html: string) {
       detectedFrameworks.add("vite");
     }
 
-    const authTerms = ["sign in", "log in", "login", "logout", "dashboard", "my account", "auth", "session", "password"];
-    const authSignals = authTerms.filter((term) => bodyTextLower.includes(term) || documentHtml.toLowerCase().includes(term));
+    const authPatterns = [
+      { term: "sign in", pattern: /\bsign\s+in\b/i },
+      { term: "log in", pattern: /\blog\s+in\b/i },
+      { term: "login", pattern: /\blogin\b/i },
+      { term: "logout", pattern: /\blogout\b/i },
+      { term: "dashboard", pattern: /\bdashboard\b/i },
+      { term: "my account", pattern: /\bmy\s+account\b/i },
+      { term: "auth", pattern: /(?:\/|[?&_-])auth(?:\/|[=&_-]|$)/i },
+      { term: "session", pattern: /(?:\/|[?&_-])session(?:\/|[=&_-]|$)/i },
+      { term: "password", pattern: /\bpassword\b/i }
+    ];
+    const authSource = `${bodyTextLower}\n${documentHtml}`;
+    const authSignals = authPatterns.filter((entry) => entry.pattern.test(authSource)).map((entry) => entry.term);
 
     return {
       title: document.title || undefined,
