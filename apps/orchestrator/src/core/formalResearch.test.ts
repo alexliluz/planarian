@@ -28,7 +28,8 @@ describe("renderFormalResearch", () => {
           contentType: "application/json",
           isApiCandidate: true
         }
-      ]
+      ],
+      pageMap: []
     });
 
     expect(files.map((file) => file.path)).toEqual([
@@ -36,11 +37,13 @@ describe("renderFormalResearch", () => {
       "00-target-overview.md",
       "01-page-structure.md",
       "02-network-and-data.md",
-      "03-implementation-plan.md"
+      "03-implementation-plan.md",
+      "04-multi-page-map.md"
     ]);
     expect(files.find((file) => file.path === "01-page-structure.md")?.content).toContain("Hello");
     expect(files.find((file) => file.path === "02-network-and-data.md")?.content).toContain("Use `../../../mock-data/`");
     expect(files.find((file) => file.path === "03-implementation-plan.md")?.content).toContain("Cursor Auto Tasks");
+    expect(files.find((file) => file.path === "04-multi-page-map.md")?.content).toContain("No captured pages found yet");
   });
 });
 
@@ -50,6 +53,7 @@ describe("createFormalResearch", () => {
     const session = createSession();
     const sessionRoot = path.join(tempRoot, "outputs", "sessions", session.sessionId);
     await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await mkdir(path.join(sessionRoot, "target-research", "pages", "about"), { recursive: true });
     await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
     await writeFile(path.join(sessionRoot, "target-research", "raw-html.html"), "<h1>Example Domain</h1>", "utf8");
     await writeFile(
@@ -57,14 +61,40 @@ describe("createFormalResearch", () => {
       JSON.stringify(session.network),
       "utf8"
     );
+    await writeFile(
+      path.join(sessionRoot, "target-research", "site-map.json"),
+      JSON.stringify([
+        { url: "https://example.com/", pathname: "/", title: "Home", priority: 0 },
+        { url: "https://example.com/about", pathname: "/about", title: "About", priority: 10 }
+      ]),
+      "utf8"
+    );
+    await writeFile(
+      path.join(sessionRoot, "target-research", "pages", "capture-manifest.json"),
+      JSON.stringify({
+        sessionId: session.sessionId,
+        pages: [{ url: "https://example.com/about", outputDir: "target-research/pages/about", skipped: false }]
+      }),
+      "utf8"
+    );
+    await writeFile(path.join(sessionRoot, "target-research", "pages", "about", "raw-html.html"), "<h1>About Us</h1>", "utf8");
+    await writeFile(
+      path.join(sessionRoot, "target-research", "pages", "about", "network-analysis.json"),
+      JSON.stringify(session.network),
+      "utf8"
+    );
 
     const result = await createFormalResearch(tempRoot, session.sessionId);
     const overview = await readFile(path.join(result.researchRoot, "00-target-overview.md"), "utf8");
     const structure = await readFile(path.join(result.researchRoot, "01-page-structure.md"), "utf8");
+    const pageMap = await readFile(path.join(result.researchRoot, "04-multi-page-map.md"), "utf8");
 
     expect(result.files).toContain("formal-clone/docs/research/00-target-overview.md");
+    expect(result.files).toContain("formal-clone/docs/research/04-multi-page-map.md");
     expect(overview).toContain("https://example.com/");
     expect(structure).toContain("Example Domain");
+    expect(pageMap).toContain("Captured pages: 1");
+    expect(pageMap).toContain("About Us");
   });
 });
 

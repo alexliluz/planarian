@@ -14,6 +14,7 @@ interface ResearchInput {
   session: CloneSession;
   rawHtml: string;
   network: NetworkRequestSummary[];
+  pageMap: ResearchPageSummary[];
 }
 
 const RESEARCH_FILES = [
@@ -21,16 +22,46 @@ const RESEARCH_FILES = [
   "00-target-overview.md",
   "01-page-structure.md",
   "02-network-and-data.md",
-  "03-implementation-plan.md"
+  "03-implementation-plan.md",
+  "04-multi-page-map.md"
 ];
+
+interface ResearchPageSummary {
+  url: string;
+  pathname: string;
+  label?: string;
+  priority?: number;
+  captured: boolean;
+  outputDir?: string;
+  textLength?: number;
+  headings: string[];
+  networkCount?: number;
+  apiCandidateCount?: number;
+}
+
+interface SiteMapPage {
+  url: string;
+  pathname: string;
+  title?: string;
+  priority?: number;
+}
+
+interface CaptureManifest {
+  pages?: Array<{
+    url: string;
+    outputDir: string;
+    skipped: boolean;
+  }>;
+}
 
 export async function createFormalResearch(projectRoot: string, sessionId: string): Promise<FormalResearchResult> {
   const sessionRoot = getSessionRoot(projectRoot, sessionId);
   const session = await readCloneSession(projectRoot, sessionId);
   const rawHtml = await readFile(path.join(sessionRoot, "target-research", "raw-html.html"), "utf8");
   const network = await readNetworkSummary(sessionRoot, session.network);
+  const pageMap = await readResearchPageMap(sessionRoot);
   const researchRoot = path.join(sessionRoot, "formal-clone", "docs", "research");
-  const input = { session, rawHtml, network };
+  const input = { session, rawHtml, network, pageMap };
   const files = renderFormalResearch(input);
 
   await mkdir(researchRoot, { recursive: true });
@@ -66,6 +97,10 @@ export function renderFormalResearch(input: ResearchInput): Array<{ path: string
     {
       path: "03-implementation-plan.md",
       content: renderImplementationPlan(input.session, input.network)
+    },
+    {
+      path: "04-multi-page-map.md",
+      content: renderMultiPageMap(input.session, input.pageMap)
     }
   ];
 }
@@ -76,6 +111,80 @@ async function readNetworkSummary(sessionRoot: string, fallback: NetworkRequestS
     return JSON.parse(content) as NetworkRequestSummary[];
   } catch {
     return fallback;
+  }
+}
+
+async function readResearchPageMap(sessionRoot: string): Promise<ResearchPageSummary[]> {
+  let siteMap: SiteMapPage[];
+  try {
+    const content = await readFile(path.join(sessionRoot, "target-research", "site-map.json"), "utf8");
+    siteMap = JSON.parse(content) as SiteMapPage[];
+  } catch {
+    return [];
+  }
+
+  const manifest = await readCaptureManifest(sessionRoot);
+  const capturedByUrl = new Map((manifest.pages ?? []).map((page) => [page.url, page]));
+  const summaries: ResearchPageSummary[] = [];
+
+  for (const page of siteMap) {
+    const capture = capturedByUrl.get(page.url);
+    if (!capture) {
+      summaries.push({
+        url: page.url,
+        pathname: page.pathname,
+        label: page.title,
+        priority: page.priority,
+        captured: false,
+        headings: []
+      });
+      continue;
+    }
+
+    const pageRoot = path.join(sessionRoot, capture.outputDir);
+    const html = await readOptionalFile(path.join(pageRoot, "raw-html.html"));
+    const network = await readOptionalNetwork(path.join(pageRoot, "network-analysis.json"));
+
+    summaries.push({
+      url: page.url,
+      pathname: page.pathname,
+      label: page.title,
+      priority: page.priority,
+      captured: true,
+      outputDir: capture.outputDir,
+      textLength: html ? extractVisibleText(html).length : undefined,
+      headings: html ? extractHeadings(html).slice(0, 12) : [],
+      networkCount: network?.length,
+      apiCandidateCount: network?.filter((request) => request.isApiCandidate).length
+    });
+  }
+
+  return summaries;
+}
+
+async function readCaptureManifest(sessionRoot: string): Promise<CaptureManifest> {
+  try {
+    const content = await readFile(path.join(sessionRoot, "target-research", "pages", "capture-manifest.json"), "utf8");
+    return JSON.parse(content) as CaptureManifest;
+  } catch {
+    return {};
+  }
+}
+
+async function readOptionalFile(filePath: string): Promise<string | undefined> {
+  try {
+    return await readFile(filePath, "utf8");
+  } catch {
+    return undefined;
+  }
+}
+
+async function readOptionalNetwork(filePath: string): Promise<NetworkRequestSummary[] | undefined> {
+  try {
+    const content = await readFile(filePath, "utf8");
+    return JSON.parse(content) as NetworkRequestSummary[];
+  } catch {
+    return undefined;
   }
 }
 
@@ -97,10 +206,47 @@ ${RESEARCH_FILES.filter((file) => file !== "README.md").map((file) => `- \`${fil
 - \`../../../target-research/raw-html.html\`
 - \`../../../target-research/desktop.png\`
 - \`../../../target-research/network-analysis.json\`
+- \`../../../target-research/site-map.json\`
+- \`../../../target-research/pages/capture-manifest.json\`
 
 ## Rule
 
 Use these notes to rebuild visible public UI only. Private backend, auth, payment, trading, account, and user-data behavior must be mocked unless explicitly owned by this project.
+`;
+}
+
+function renderMultiPageMap(session: CloneSession, pages: ResearchPageSummary[]): string {
+  const captured = pages.filter((page) => page.captured);
+  const pending = pages.filter((page) => !page.captured);
+
+  return `# Multi-Page Map
+
+Session: ${session.sessionId}
+Target: ${session.target.normalizedUrl}
+
+This file summarizes the multi-page capture queue. Use it to decide shared routes, layout components, and content models before implementing the formal clone.
+
+## Summary
+
+- Discovered pages: ${pages.length}
+- Captured pages: ${captured.length}
+- Pending pages: ${pending.length}
+
+## Captured Pages
+
+${captured.length > 0 ? captured.map(renderPageSummary).join("\n") : "- No captured pages found yet. Run `corepack pnpm cli capture-pages ${session.sessionId} --limit 4`."}
+
+## Pending Queue
+
+${pending.length > 0 ? pending.slice(0, 30).map((page) => `- ${page.pathname}: ${page.url}`).join("\n") : "- No pending pages in the current discovery queue."}
+
+## Route And Component Notes
+
+- Build shared navigation, footer, typography, image treatment, and page shell before individual detail pages.
+- Prefer top-level pages first: homepage, about, people, perspectives, portfolio, companies, contact, or equivalent sections.
+- Treat detail pages as content-model examples unless the user explicitly asks for broad page coverage.
+- Use captured page screenshots and HTML as public UI references only.
+- Do not call private APIs or reproduce backend behavior from page captures.
 `;
 }
 
@@ -243,6 +389,24 @@ function renderImplementationPlan(session: CloneSession, network: NetworkRequest
 - Refine responsive layout against desktop and mobile screenshots when available.
 - Add mock data for sections inferred from network/API candidates.
 - Compare against \`../../open-lovable-version/\` only as a visual reference when that draft exists.
+`;
+}
+
+function renderPageSummary(page: ResearchPageSummary): string {
+  const headings =
+    page.headings.length > 0 ? page.headings.map((heading) => `  - ${heading}`).join("\n") : "  - No headings detected.";
+
+  return `### ${page.pathname}
+
+- URL: ${page.url}
+- Label: ${page.label ?? "Unknown"}
+- Priority: ${page.priority ?? "unknown"}
+- Output: \`../../../${page.outputDir ?? "target-research/pages"}\`
+- Text length: ${page.textLength ?? "unknown"}
+- Network responses: ${page.networkCount ?? "unknown"}
+- API candidates: ${page.apiCandidateCount ?? "unknown"}
+- Headings:
+${headings}
 `;
 }
 

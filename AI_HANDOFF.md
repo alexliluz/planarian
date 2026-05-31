@@ -1094,3 +1094,48 @@ Next:
 - Commit this pass after final validation.
 - Extend `formal-research` so it summarizes `target-research/pages/` in addition to the homepage.
 - Start first-viewport formal clone work for the Kleiner Perkins homepage with the localized asset plan.
+
+### 2026-06-01 - Multi-Page Formal Research
+
+Summary:
+
+- Extended `formal-research <session-id>` to read:
+  - `target-research/site-map.json`
+  - `target-research/pages/capture-manifest.json`
+  - captured per-page HTML and network summaries when available
+- Added `formal-clone/docs/research/04-multi-page-map.md`.
+- The multi-page map summarizes discovered pages, captured pages, pending pages, page headings, text lengths, network counts, and API candidate counts.
+- Regenerated formal research for `kleinerperkins-com-b414a4e408`.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/core/formalResearch.ts`
+- `apps/orchestrator/src/core/formalResearch.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/docs/research/README.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/docs/research/01-page-structure.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/docs/research/04-multi-page-map.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli formal-research kleinerperkins-com-b414a4e408
+```
+
+Results:
+
+- Full check passed before regeneration.
+- Unit tests passed: 22 files, 83 tests.
+- Generated `04-multi-page-map.md` with 25 discovered pages and 4 captured core pages.
+- Local commit created: `cdc4a43 Add multi-page formal research`.
+- Push attempt failed with `Recv failure: Connection was reset`; local `main` remains ahead of `origin/main`.
+
+Next:
+
+- Run final `corepack pnpm check`.
+- Commit this pass.
+- Start Kleiner Perkins formal clone implementation using the multi-page research and asset download plan.

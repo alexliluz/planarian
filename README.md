@@ -247,6 +247,12 @@ This creates:
 outputs/sessions/<session-id>/formal-clone/docs/research/
 ```
 
+When page discovery and page capture have been run, formal research also creates:
+
+```text
+outputs/sessions/<session-id>/formal-clone/docs/research/04-multi-page-map.md
+```
+
 7. Generate public asset inventory and localization planning.
 
 ```bash

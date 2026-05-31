@@ -11,6 +11,7 @@ This directory converts Planarian target analysis into formal clone research not
 - `01-page-structure.md`
 - `02-network-and-data.md`
 - `03-implementation-plan.md`
+- `04-multi-page-map.md`
 
 ## Source Inputs
 
@@ -18,6 +19,8 @@ This directory converts Planarian target analysis into formal clone research not
 - `../../../target-research/raw-html.html`
 - `../../../target-research/desktop.png`
 - `../../../target-research/network-analysis.json`
+- `../../../target-research/site-map.json`
+- `../../../target-research/pages/capture-manifest.json`
 
 ## Rule
 

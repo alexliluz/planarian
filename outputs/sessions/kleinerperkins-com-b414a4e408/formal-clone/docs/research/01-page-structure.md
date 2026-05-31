@@ -42,8 +42,8 @@
 - Read More (https://www.kleinerperkins.com/perspectives/alkira-built-the-network-for-multi-cloud-now-it-becomes-the-network-for-the-ai-era/)
 - Website (https://about.google/)
 - John Doerr (https://www.kleinerperkins.com/people/john-doerr/)
-- Thomas Kurian – Google Cloud – Competitor-Aware and Customer-Obsessed (https://www.kleinerperkins.com/perspectives/thomas-kurian-google-cloud/)
-- Google: Organizing the world’s information and making it searchable (https://www.kleinerperkins.com/perspectives/google/)
+- Thomas Kurian - Google Cloud - Competitor-Aware and Customer-Obsessed (https://www.kleinerperkins.com/perspectives/thomas-kurian-google-cloud/)
+- Google: Organizing the world's information and making it searchable (https://www.kleinerperkins.com/perspectives/google/)
 - Website (http://www.amazon.com/)
 - Bing Gordon (https://www.kleinerperkins.com/people/bing-gordon/)
 - Amazon: Reimagining commerce (https://www.kleinerperkins.com/perspectives/amazon/)
@@ -59,8 +59,8 @@
 - Figma: Crazy Ramping Series C (https://www.kleinerperkins.com/perspectives/crazy-ramping-series-c/)
 - Website (https://rippling.com)
 - Ilya Fushman (https://www.kleinerperkins.com/people/ilya-fushman/)
-- EP 1 | The Finance Leader’s Playbook (https://www.kleinerperkins.com/perspectives/the-finance-leaders-playbook-with-adam-swiecicki-and-michael-miao/)
-- Parker Conrad – Rippling – Compounding (https://www.kleinerperkins.com/perspectives/parker-conrad-rippling/)
+- EP 1 | The Finance Leader's Playbook (https://www.kleinerperkins.com/perspectives/the-finance-leaders-playbook-with-adam-swiecicki-and-michael-miao/)
+- Parker Conrad - Rippling - Compounding (https://www.kleinerperkins.com/perspectives/parker-conrad-rippling/)
 - Rippling: Unifying employee data and workplace systems (https://www.kleinerperkins.com/perspectives/rippling/)
 
 ## Text Excerpt

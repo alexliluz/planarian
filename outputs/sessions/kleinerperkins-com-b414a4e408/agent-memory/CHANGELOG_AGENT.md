@@ -43,3 +43,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `target-research/site-map.json`, `target-research/PAGE_DISCOVERY.md`, `target-research/pages/capture-manifest.json`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli discover-pages kleinerperkins-com-b414a4e408 --max 25`, `corepack pnpm cli capture-pages kleinerperkins-com-b414a4e408 --limit 4`
 - Notes: The first queue now prioritizes `/`, `/about`, `/people`, and `/perspectives` before section detail pages. Captured page directories are generated under `target-research/pages/`; heavy page artifacts are ignored by git except the capture manifest.
+
+## 2026-06-01 - Codex
+
+- Summary: Regenerated formal research with a multi-page map.
+- Files changed: `formal-clone/docs/research/README.md`, `formal-clone/docs/research/01-page-structure.md`, `formal-clone/docs/research/04-multi-page-map.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-research kleinerperkins-com-b414a4e408`
+- Notes: The multi-page map summarizes 25 discovered pages, 4 captured core pages, headings, text lengths, network counts, API candidate counts, and pending route queue.
