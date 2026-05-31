@@ -5,6 +5,7 @@ import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.
 import { createFormalComparison } from "../core/formalCompare.js";
 import { createFormalResearch } from "../core/formalResearch.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
+import { createFormalStaticPass } from "../core/formalStaticPass.js";
 import { validateFormalClone } from "../core/formalValidate.js";
 import {
   createReactGrabInstallTaskFile,
@@ -129,6 +130,18 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
     .action(async (sessionId: string) => {
       const result = await createFormalResearch(getProjectRoot(), sessionId);
       console.log(`Created formal clone research for ${result.sessionId}`);
+      for (const file of result.files) {
+        console.log(`- ${file}`);
+      }
+    });
+
+  program
+    .command("formal-static-pass")
+    .argument("<session-id>", "CloneSession id")
+    .description("Generate a simple static first pass inside formal-clone from captured HTML")
+    .action(async (sessionId: string) => {
+      const result = await createFormalStaticPass(getProjectRoot(), sessionId);
+      console.log(`Created formal static pass for ${result.sessionId}`);
       for (const file of result.files) {
         console.log(`- ${file}`);
       }

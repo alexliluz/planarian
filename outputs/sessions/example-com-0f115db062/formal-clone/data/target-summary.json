@@ -1,0 +1,15 @@
+{
+  "sessionId": "example-com-0f115db062",
+  "url": "https://example.com/",
+  "hostname": "example.com",
+  "title": "Example Domain",
+  "classification": "unknown",
+  "cloneMode": "visual-plus-interactions",
+  "requiresAuth": false,
+  "hasApiRequests": false,
+  "hasHeavyClientRendering": false,
+  "detectedFrameworks": [],
+  "notes": [
+    "Signals were inconclusive; review raw HTML and network analysis."
+  ]
+}

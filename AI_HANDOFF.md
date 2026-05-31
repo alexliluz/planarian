@@ -814,3 +814,53 @@ Next:
 
 - Commit and push.
 - Start a first real formal clone implementation pass for `example-com-0f115db062`, then rerun `formal-validate`.
+
+### 2026-05-31 - Static Formal Clone First Pass
+
+Summary:
+
+- Confirmed `example.com` is the intentionally selected simple public demonstration target.
+- Added `formal-static-pass <session-id>`.
+- The command reads `target-research/raw-html.html` and writes a simple formal clone implementation:
+  - `formal-clone/app/page.tsx`
+  - `formal-clone/app/globals.css`
+  - `formal-clone/data/static-content.json`
+  - `formal-clone/STATIC_IMPLEMENTATION.md`
+- Updated `.gitignore` so actual formal clone app files can be tracked.
+- Ran the static pass, validation, and comparison for `example-com-0f115db062`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalStaticPass.ts`
+- `apps/orchestrator/src/core/formalStaticPass.test.ts`
+- `outputs/sessions/example-com-0f115db062/formal-clone/app/page.tsx`
+- `outputs/sessions/example-com-0f115db062/formal-clone/app/globals.css`
+- `outputs/sessions/example-com-0f115db062/formal-clone/data/static-content.json`
+- `outputs/sessions/example-com-0f115db062/formal-clone/STATIC_IMPLEMENTATION.md`
+- `outputs/sessions/example-com-0f115db062/formal-clone/VALIDATION.md`
+- `outputs/sessions/example-com-0f115db062/comparison/FORMAL_COMPARISON.md`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 16 files, 61 tests.
+  - `check:changed` passed.
+- `corepack pnpm cli formal-static-pass example-com-0f115db062`
+  - Generated the static app pass.
+- `corepack pnpm cli formal-validate example-com-0f115db062`
+  - Static validation passed.
+- `corepack pnpm cli formal-compare example-com-0f115db062`
+  - Comparison report updated with the new implementation files.
+
+Next:
+
+- Commit and push.
+- Optionally install dependencies inside `formal-clone/` and run `formal-validate --run-build`.

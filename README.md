@@ -108,6 +108,12 @@ Validate the formal clone app structure:
 corepack pnpm cli formal-validate example-com-0f115db062
 ```
 
+Generate a simple static first pass from captured HTML:
+
+```bash
+corepack pnpm cli formal-static-pass example-com-0f115db062
+```
+
 Check whether the session is ready for formal clone work:
 
 ```bash
@@ -248,6 +254,18 @@ outputs/sessions/<session-id>/formal-clone/
 corepack pnpm cli formal-scaffold <session-id>
 ```
 
+11. For simple static targets, generate a static first pass from captured HTML.
+
+```bash
+corepack pnpm cli formal-static-pass <session-id>
+```
+
+This updates the formal clone app files and creates:
+
+```text
+outputs/sessions/<session-id>/formal-clone/STATIC_IMPLEMENTATION.md
+```
+
 This creates a small Next.js work area inside `formal-clone/`.
 
 7. Run the generated formal clone app.
@@ -313,6 +331,7 @@ corepack pnpm cli formal-validate <session-id>
 corepack pnpm cli formal-validate <session-id> --run-build
 corepack pnpm cli formal-scaffold <session-id>
 corepack pnpm cli formal-scaffold <session-id> --force
+corepack pnpm cli formal-static-pass <session-id>
 corepack pnpm cli integrate-upstreams <session-id>
 corepack pnpm cli react-grab-install-task <session-id>
 corepack pnpm cli react-grab-task <session-id> --context ./grab-context.json

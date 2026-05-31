@@ -27,10 +27,13 @@ This document coordinates comparison between the captured target, the quick visu
 - `../formal-clone/AGENTS.md`
 - `../formal-clone/FORMAL_CLONE_PIPELINE.md`
 - `../formal-clone/README.md`
+- `../formal-clone/STATIC_IMPLEMENTATION.md`
 - `../formal-clone/TASK_BUNDLE.md`
+- `../formal-clone/VALIDATION.md`
 - `../formal-clone/app/globals.css`
 - `../formal-clone/app/layout.tsx`
 - `../formal-clone/app/page.tsx`
+- `../formal-clone/data/static-content.json`
 - `../formal-clone/data/target-summary.json`
 - `../formal-clone/docs/research/00-target-overview.md`
 - `../formal-clone/docs/research/01-page-structure.md`

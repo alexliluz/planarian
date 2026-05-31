@@ -78,3 +78,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli formal-validate example-com-0f115db062`
 - Notes: Static validation passed. No build command was run because dependency installation inside the generated formal clone was not performed in this step.
+
+## 2026-05-31 - Codex
+
+- Summary: Generated the first simple static formal clone implementation from captured HTML.
+- Files changed: `formal-clone/app/page.tsx`, `formal-clone/app/globals.css`, `formal-clone/data/static-content.json`, `formal-clone/STATIC_IMPLEMENTATION.md`, `formal-clone/VALIDATION.md`, `comparison/FORMAL_COMPARISON.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-static-pass example-com-0f115db062`, `corepack pnpm cli formal-validate example-com-0f115db062`, `corepack pnpm cli formal-compare example-com-0f115db062`
+- Notes: `example.com` is an intentionally simple public demonstration target. The static pass preserves visible public content only.

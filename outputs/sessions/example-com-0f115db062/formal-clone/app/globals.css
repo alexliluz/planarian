@@ -1,0 +1,45 @@
+:root {
+  color: #111111;
+  background: #eeeeee;
+  font-family: system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #eeeeee;
+}
+
+a:link,
+a:visited {
+  color: #334488;
+}
+
+.page-shell {
+  width: 60vw;
+  margin: 15vh auto;
+}
+
+.example-panel {
+  opacity: 0.8;
+}
+
+.example-panel h1 {
+  margin: 0 0 0.67em;
+  font-size: 1.5em;
+  line-height: 1.2;
+}
+
+.example-panel p {
+  margin: 1em 0;
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: calc(100vw - 48px);
+    margin: 10vh auto;
+  }
+}

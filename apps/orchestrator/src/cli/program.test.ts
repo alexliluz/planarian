@@ -123,6 +123,20 @@ describe("createProgram", () => {
     expect(output).toContain("VALIDATION.md");
   });
 
+  it("creates a static first pass", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await writeFile(path.join(sessionRoot, "target-research", "raw-html.html"), "<h1>Example Domain</h1>", "utf8");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-static-pass", "demo"]);
+
+    expect(output).toContain("Created formal static pass for demo");
+    expect(output).toContain("formal-clone/app/page.tsx");
+    expect(output).toContain("formal-clone/STATIC_IMPLEMENTATION.md");
+  });
+
   it("creates upstream integration task files", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");
