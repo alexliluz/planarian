@@ -992,3 +992,49 @@ Next:
 
 - Commit and push.
 - Add an asset download/selection plan or start a scoped Kleiner Perkins first-viewport formal clone implementation.
+
+### 2026-06-01 - Asset Download Plan
+
+Summary:
+
+- Added `asset-download-plan <session-id>`.
+- The command writes `references/ASSET_DOWNLOAD_PLAN.md`.
+- It classifies captured public asset requests as:
+  - `localize`
+  - `reference`
+  - `ignore`
+- It prioritizes hero/logo/font assets for local formal clone use, keeps long-tail visual assets as references, and ignores original scripts, analytics, consent, telemetry, and backend-like assets.
+- Generated the asset download plan for `kleinerperkins-com-b414a4e408`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/assetDownloadPlan.ts`
+- `apps/orchestrator/src/core/assetDownloadPlan.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/references/ASSET_DOWNLOAD_PLAN.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli asset-download-plan kleinerperkins-com-b414a4e408
+```
+
+Results:
+
+- Full check passed.
+- Unit tests passed: 20 files, 75 tests.
+- Generated `references/ASSET_DOWNLOAD_PLAN.md`.
+- The Kleiner Perkins plan currently lists 22 assets to localize, 40 to keep as references, and 18 to ignore.
+
+Next:
+
+- Commit and push.
+- Start a scoped first-viewport formal clone implementation for `kleinerperkins-com-b414a4e408`.
+- Use `ASSET_DOWNLOAD_PLAN.md` before copying any public visual assets into `formal-clone/public/assets/`.

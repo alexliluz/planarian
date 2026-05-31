@@ -90,6 +90,12 @@ Create a public asset inventory and visual plan:
 corepack pnpm cli asset-inventory example-com-0f115db062
 ```
 
+Create a public asset localization plan:
+
+```bash
+corepack pnpm cli asset-download-plan example-com-0f115db062
+```
+
 Create the formal clone task bundle:
 
 ```bash
@@ -210,7 +216,22 @@ This creates:
 outputs/sessions/<session-id>/formal-clone/docs/research/
 ```
 
-6. Create a comparison report and repair queue.
+6. Generate public asset inventory and localization planning.
+
+```bash
+corepack pnpm cli asset-inventory <session-id>
+corepack pnpm cli asset-download-plan <session-id>
+```
+
+This creates:
+
+```text
+outputs/sessions/<session-id>/references/ASSET_INVENTORY.md
+outputs/sessions/<session-id>/references/VISUAL_PLAN.md
+outputs/sessions/<session-id>/references/ASSET_DOWNLOAD_PLAN.md
+```
+
+7. Create a comparison report and repair queue.
 
 ```bash
 corepack pnpm cli formal-compare <session-id>
@@ -223,7 +244,7 @@ outputs/sessions/<session-id>/comparison/FORMAL_COMPARISON.md
 outputs/sessions/<session-id>/comparison/REPAIR_QUEUE.md
 ```
 
-7. Create the React Grab install task when the formal clone is ready for precision repair.
+8. Create the React Grab install task when the formal clone is ready for precision repair.
 
 ```bash
 corepack pnpm cli react-grab-install-task <session-id>
@@ -235,7 +256,7 @@ This creates:
 outputs/sessions/<session-id>/react-grab-repairs/INSTALL_REACT_GRAB.md
 ```
 
-8. Validate the formal clone app structure.
+9. Validate the formal clone app structure.
 
 ```bash
 corepack pnpm cli formal-validate <session-id>
@@ -253,7 +274,7 @@ When dependencies are installed inside `formal-clone/`, you can also run:
 corepack pnpm cli formal-validate <session-id> --run-build
 ```
 
-9. Let Codex or Cursor continue from `TASK_BUNDLE.md`, `docs/research/`, `comparison/REPAIR_QUEUE.md`, `formal-clone/VALIDATION.md`, and `react-grab-repairs/INSTALL_REACT_GRAB.md`.
+10. Let Codex or Cursor continue from `TASK_BUNDLE.md`, `docs/research/`, `references/ASSET_DOWNLOAD_PLAN.md`, `comparison/REPAIR_QUEUE.md`, `formal-clone/VALIDATION.md`, and `react-grab-repairs/INSTALL_REACT_GRAB.md`.
 
 The formal clone should be built inside:
 
@@ -261,13 +282,13 @@ The formal clone should be built inside:
 outputs/sessions/<session-id>/formal-clone/
 ```
 
-10. Generate a minimal runnable scaffold.
+11. Generate a minimal runnable scaffold.
 
 ```bash
 corepack pnpm cli formal-scaffold <session-id>
 ```
 
-11. For simple static targets, generate a static first pass from captured HTML.
+12. For simple static targets, generate a static first pass from captured HTML.
 
 ```bash
 corepack pnpm cli formal-static-pass <session-id>
@@ -281,7 +302,7 @@ outputs/sessions/<session-id>/formal-clone/STATIC_IMPLEMENTATION.md
 
 This creates a small Next.js work area inside `formal-clone/`.
 
-7. Run the generated formal clone app.
+13. Run the generated formal clone app.
 
 ```bash
 cd outputs/sessions/<session-id>/formal-clone
@@ -338,6 +359,7 @@ corepack pnpm cli show <session-id>
 corepack pnpm cli doctor
 corepack pnpm cli session-runbook <session-id>
 corepack pnpm cli asset-inventory <session-id>
+corepack pnpm cli asset-download-plan <session-id>
 corepack pnpm cli formal-task <session-id>
 corepack pnpm cli formal-compare <session-id>
 corepack pnpm cli formal-research <session-id>

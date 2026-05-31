@@ -29,3 +29,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli asset-inventory kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-research kleinerperkins-com-b414a4e408`
 - Notes: Node UTF-8 inspection confirmed the previously observed `鈥?` characters were a PowerShell display artifact; generated markdown contains proper Unicode punctuation.
+
+## 2026-06-01 - Codex
+
+- Summary: Generated an asset download plan for the Kleiner Perkins session.
+- Files changed: `references/ASSET_DOWNLOAD_PLAN.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli asset-download-plan kleinerperkins-com-b414a4e408`
+- Notes: The plan marks primary hero/logo/font assets for localization, keeps long-tail public images as references, and ignores original scripts, analytics, consent, and telemetry assets.

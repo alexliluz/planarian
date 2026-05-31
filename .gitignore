@@ -59,6 +59,7 @@ outputs/sessions/*/react-grab-repairs/**
 !outputs/sessions/*/comparison/REPAIR_QUEUE.md
 !outputs/sessions/*/references/
 !outputs/sessions/*/references/ASSET_INVENTORY.md
+!outputs/sessions/*/references/ASSET_DOWNLOAD_PLAN.md
 !outputs/sessions/*/references/VISUAL_PLAN.md
 !outputs/sessions/*/react-grab-repairs/
 !outputs/sessions/*/react-grab-repairs/INSTALL_REACT_GRAB.md

@@ -71,6 +71,32 @@ describe("createProgram", () => {
     expect(output).toContain("references/ASSET_INVENTORY.md");
   });
 
+  it("creates an asset download plan", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await writeFile(
+      path.join(sessionRoot, "target-research", "network-analysis.json"),
+      JSON.stringify([
+        {
+          url: "https://example.com/home-hero.webp",
+          method: "GET",
+          resourceType: "image",
+          status: 200,
+          contentType: "image/webp",
+          isApiCandidate: false
+        }
+      ]),
+      "utf8"
+    );
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "asset-download-plan", "demo"]);
+
+    expect(output).toContain("Created asset download plan for demo");
+    expect(output).toContain("ASSET_DOWNLOAD_PLAN.md");
+  });
+
   it("creates a formal clone task bundle", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

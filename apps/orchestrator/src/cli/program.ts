@@ -1,4 +1,5 @@
 import { Command } from "commander";
+import { createAssetDownloadPlan } from "../core/assetDownloadPlan.js";
 import { createAssetInventory } from "../core/assetInventory.js";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { createSessionRunbook } from "../core/sessionRunbook.js";
@@ -94,6 +95,16 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       for (const file of result.files) {
         console.log(`- ${file}`);
       }
+    });
+
+  program
+    .command("asset-download-plan")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create a public asset localization, reference, and ignore plan")
+    .action(async (sessionId: string) => {
+      const result = await createAssetDownloadPlan(getProjectRoot(), sessionId);
+      console.log(`Created asset download plan for ${result.sessionId}`);
+      console.log(`Path: ${result.planPath}`);
     });
 
   program
