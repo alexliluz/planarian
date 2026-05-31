@@ -1,0 +1,202 @@
+[
+  {
+    "url": "https://www.kleinerperkins.com/",
+    "pathname": "/",
+    "title": "Home | Kleiner Perkins",
+    "source": "homepage-link",
+    "priority": 0,
+    "reason": "Homepage is always the root capture target."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/about",
+    "pathname": "/about",
+    "title": "About",
+    "source": "homepage-link",
+    "priority": 10,
+    "reason": "Likely primary navigation or core site section."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people",
+    "pathname": "/people",
+    "title": "People",
+    "source": "homepage-link",
+    "priority": 10,
+    "reason": "Likely primary navigation or core site section."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives",
+    "pathname": "/perspectives",
+    "title": "Perspectives",
+    "source": "homepage-link",
+    "priority": 20,
+    "reason": "Likely editorial, jobs, or supporting section."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/brand-assets",
+    "pathname": "/brand-assets",
+    "title": "Brand Assets",
+    "source": "homepage-link",
+    "priority": 30,
+    "reason": "Top-level internal page."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/disclosures",
+    "pathname": "/disclosures",
+    "title": "Disclosures",
+    "source": "homepage-link",
+    "priority": 30,
+    "reason": "Top-level internal page."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/fellows",
+    "pathname": "/fellows",
+    "title": "Kleiner Perkins Fellows",
+    "source": "homepage-link",
+    "priority": 30,
+    "reason": "Top-level internal page."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/partnerships",
+    "pathname": "/partnerships",
+    "title": "Partnerships",
+    "source": "homepage-link",
+    "priority": 30,
+    "reason": "Top-level internal page."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/privacy-policy",
+    "pathname": "/privacy-policy",
+    "title": "Privacy Policy",
+    "source": "homepage-link",
+    "priority": 30,
+    "reason": "Top-level internal page."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/terms-conditions",
+    "pathname": "/terms-conditions",
+    "title": "Terms of Use",
+    "source": "homepage-link",
+    "priority": 30,
+    "reason": "Top-level internal page."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/aditya-naganath",
+    "pathname": "/people/aditya-naganath",
+    "title": "Aditya Naganath",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/bing-gordon",
+    "pathname": "/people/bing-gordon",
+    "title": "Bing Gordon",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/brook-byers",
+    "pathname": "/people/brook-byers",
+    "title": "Brook Byers",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/ilya-fushman",
+    "pathname": "/people/ilya-fushman",
+    "title": "Ilya Fushman",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/john-doerr",
+    "pathname": "/people/john-doerr",
+    "title": "John Doerr",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/josh-coyne",
+    "pathname": "/people/josh-coyne",
+    "title": "Josh Coyne",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/lucas-oliveira",
+    "pathname": "/people/lucas-oliveira",
+    "title": "Lucas Oliveira",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/mamoon-hamid",
+    "pathname": "/people/mamoon-hamid",
+    "title": "Mamoon Hamid",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people/nadia-cochinwala",
+    "pathname": "/people/nadia-cochinwala",
+    "title": "Nadia Cochinwala",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/alkira-built-the-network-for-multi-cloud-now-it-becomes-the-network-for-the-ai-era",
+    "pathname": "/perspectives/alkira-built-the-network-for-multi-cloud-now-it-becomes-the-network-for-the-ai-era",
+    "title": "Read More",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/amazon",
+    "pathname": "/perspectives/amazon",
+    "title": "Amazon: Reimagining commerce",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/applied-intuition-powering-the-next-era-of-vehicle-intelligence",
+    "pathname": "/perspectives/applied-intuition-powering-the-next-era-of-vehicle-intelligence",
+    "title": "Applied Intuition: Powering the next era of vehicle intelligence",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/applied-intuition-powering-the-next-era-of-vehicle-intelligence-2",
+    "pathname": "/perspectives/applied-intuition-powering-the-next-era-of-vehicle-intelligence-2",
+    "title": "Applied Intuition: Powering the Next Era of Vehicle Intelligence",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/armadin-the-ultimate-attacker",
+    "pathname": "/perspectives/armadin-the-ultimate-attacker",
+    "title": "Armadin: The Ultimate Attacker",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/arvind-jain-glean",
+    "pathname": "/perspectives/arvind-jain-glean",
+    "title": "Arvind Jain - Glean - New Playbook",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  }
+]

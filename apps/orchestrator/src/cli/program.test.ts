@@ -97,6 +97,20 @@ describe("createProgram", () => {
     expect(output).toContain("ASSET_DOWNLOAD_PLAN.md");
   });
 
+  it("discovers pages from captured homepage HTML", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await writeFile(path.join(sessionRoot, "target-research", "raw-html.html"), '<a href="/people">People</a>', "utf8");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "discover-pages", "demo"]);
+
+    expect(output).toContain("Discovered 2 page(s) for demo");
+    expect(output).toContain("target-research/site-map.json");
+    expect(output).toContain("target-research/PAGE_DISCOVERY.md");
+  });
+
   it("creates a formal clone task bundle", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

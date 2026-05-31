@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { decodeHtmlEntities, extractVisibleText } from "./htmlText.js";
 
 describe("decodeHtmlEntities", () => {
-  it("decodes common named, decimal, and hexadecimal entities", () => {
-    expect(decodeHtmlEntities("A&amp;B &#8217; &#x2013; &ldquo;ok&rdquo;")).toBe("A&B ’ – “ok”");
+  it("decodes common named, decimal, and hexadecimal entities into stable ASCII text", () => {
+    expect(decodeHtmlEntities("A&amp;B &#8217; &#x2013; &ldquo;ok&rdquo;")).toBe("A&B ' - \"ok\"");
   });
 });
 

@@ -1,0 +1,26 @@
+{
+  "sessionId": "kleinerperkins-com-b414a4e408",
+  "capturedAt": "2026-05-31T19:46:36.660Z",
+  "pages": [
+    {
+      "url": "https://www.kleinerperkins.com/",
+      "outputDir": "target-research/pages/home",
+      "skipped": true
+    },
+    {
+      "url": "https://www.kleinerperkins.com/about",
+      "outputDir": "target-research/pages/about",
+      "skipped": true
+    },
+    {
+      "url": "https://www.kleinerperkins.com/people",
+      "outputDir": "target-research/pages/people",
+      "skipped": true
+    },
+    {
+      "url": "https://www.kleinerperkins.com/perspectives",
+      "outputDir": "target-research/pages/perspectives",
+      "skipped": false
+    }
+  ]
+}

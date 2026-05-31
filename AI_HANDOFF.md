@@ -17,7 +17,7 @@ This file is the fixed handoff document for Planarian. Every AI agent working in
 - Project name: `Planarian`
 - Package name: `planarian`
 - Current phase: `Phase 1.5 stabilization in progress`
-- Repository status: local `main` is pushed to GitHub and tracks `origin/main`.
+- Repository status: local `main` tracks `origin/main` but is currently ahead by local commits because the latest push attempt failed with a GitHub HTTPS connection reset.
 - GitHub repository: `alexliluz/planarian`
 - Package manager: `pnpm@9.15.4`
 - Local note: plain `pnpm` may not be available on PATH in this environment; `corepack pnpm ...` works.
@@ -1038,3 +1038,59 @@ Next:
 - Commit and push.
 - Start a scoped first-viewport formal clone implementation for `kleinerperkins-com-b414a4e408`.
 - Use `ASSET_DOWNLOAD_PLAN.md` before copying any public visual assets into `formal-clone/public/assets/`.
+
+### 2026-06-01 - Multi-Page Discovery And Capture
+
+Summary:
+
+- Added `discover-pages <session-id>`.
+- Added `capture-pages <session-id>`.
+- `discover-pages` extracts same-host public page URLs from captured homepage HTML and writes:
+  - `target-research/site-map.json`
+  - `target-research/PAGE_DISCOVERY.md`
+- `capture-pages` reads the site map and captures per-page HTML, desktop screenshots, network summaries, and page metadata under `target-research/pages/`.
+- Added conservative priority rules so top-level navigation pages come before section detail pages.
+- Generated a 25-page discovery queue for `kleinerperkins-com-b414a4e408`.
+- Captured the first 4 core pages: `/`, `/about`, `/people`, and `/perspectives`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/htmlText.ts`
+- `apps/orchestrator/src/core/htmlText.test.ts`
+- `apps/orchestrator/src/core/pageDiscovery.ts`
+- `apps/orchestrator/src/core/pageDiscovery.test.ts`
+- `apps/orchestrator/src/core/pageCapture.ts`
+- `apps/orchestrator/src/core/pageCapture.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/target-research/site-map.json`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/target-research/PAGE_DISCOVERY.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/target-research/pages/capture-manifest.json`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli discover-pages kleinerperkins-com-b414a4e408 --max 25
+corepack pnpm cli capture-pages kleinerperkins-com-b414a4e408 --limit 4
+```
+
+Results:
+
+- Full check passed.
+- Unit tests passed: 22 files, 83 tests.
+- Multi-page discovery found 25 same-host public pages.
+- `capture-pages --limit 4` captured or reused the first 4 prioritized pages.
+- Local commit created: `969012d Add multi-page session capture`.
+- Push attempt failed with `Recv failure: Connection was reset`; retry `git push origin main` when GitHub connectivity is stable.
+
+Next:
+
+- Commit this pass after final validation.
+- Extend `formal-research` so it summarizes `target-research/pages/` in addition to the homepage.
+- Start first-viewport formal clone work for the Kleiner Perkins homepage with the localized asset plan.

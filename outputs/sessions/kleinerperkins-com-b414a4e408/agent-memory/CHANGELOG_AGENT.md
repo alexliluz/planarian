@@ -36,3 +36,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `references/ASSET_DOWNLOAD_PLAN.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli asset-download-plan kleinerperkins-com-b414a4e408`
 - Notes: The plan marks primary hero/logo/font assets for localization, keeps long-tail public images as references, and ignores original scripts, analytics, consent, and telemetry assets.
+
+## 2026-06-01 - Codex
+
+- Summary: Added multi-page discovery and captured the first core Kleiner Perkins pages.
+- Files changed: `target-research/site-map.json`, `target-research/PAGE_DISCOVERY.md`, `target-research/pages/capture-manifest.json`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli discover-pages kleinerperkins-com-b414a4e408 --max 25`, `corepack pnpm cli capture-pages kleinerperkins-com-b414a4e408 --limit 4`
+- Notes: The first queue now prioritizes `/`, `/about`, `/people`, and `/perspectives` before section detail pages. Captured page directories are generated under `target-research/pages/`; heavy page artifacts are ignored by git except the capture manifest.

@@ -26,11 +26,17 @@ outputs/sessions/*/references/
 outputs/sessions/*/mock-data/
 outputs/sessions/*/react-grab-repairs/
 outputs/sessions/*/react-grab-repairs/**
+outputs/sessions/*/target-research/pages/
+outputs/sessions/*/target-research/pages/**
 
 # Keep session metadata and research artifacts visible for early development.
 !outputs/sessions/*/clone-session.json
 !outputs/sessions/*/RUNBOOK.md
 !outputs/sessions/*/target-research/
+!outputs/sessions/*/target-research/site-map.json
+!outputs/sessions/*/target-research/PAGE_DISCOVERY.md
+!outputs/sessions/*/target-research/pages/
+!outputs/sessions/*/target-research/pages/capture-manifest.json
 !outputs/sessions/*/agent-memory/
 !outputs/sessions/*/open-lovable-version/
 !outputs/sessions/*/open-lovable-version/OPEN_LOVABLE_TASK.md

@@ -84,6 +84,18 @@ Create a session runbook with open/run/validate instructions:
 corepack pnpm cli session-runbook example-com-0f115db062
 ```
 
+Discover same-host public pages from captured homepage HTML:
+
+```bash
+corepack pnpm cli discover-pages example-com-0f115db062
+```
+
+Capture discovered pages for multi-page research:
+
+```bash
+corepack pnpm cli capture-pages example-com-0f115db062 --limit 10
+```
+
 Create a public asset inventory and visual plan:
 
 ```bash
@@ -181,12 +193,31 @@ RUNBOOK.md
 target-research/raw-html.html
 target-research/desktop.png
 target-research/network-analysis.json
+target-research/site-map.json
+target-research/PAGE_DISCOVERY.md
 agent-memory/TASKS.md
 agent-memory/DECISIONS.md
 agent-memory/PROMPTS.md
 ```
 
-3. Generate a formal clone task bundle.
+3. Discover and capture core pages for multi-page targets.
+
+```bash
+corepack pnpm cli discover-pages <session-id>
+corepack pnpm cli capture-pages <session-id> --limit 10
+```
+
+This creates a conservative same-host page queue and saves captured page artifacts under:
+
+```text
+outputs/sessions/<session-id>/target-research/site-map.json
+outputs/sessions/<session-id>/target-research/PAGE_DISCOVERY.md
+outputs/sessions/<session-id>/target-research/pages/
+```
+
+For large sites, keep the first capture small. Start with 5-10 pages, inspect the queue, then increase the limit only when the scope is clear.
+
+4. Generate a formal clone task bundle.
 
 ```bash
 corepack pnpm cli formal-task <session-id>
@@ -198,13 +229,13 @@ This creates:
 outputs/sessions/<session-id>/formal-clone/TASK_BUNDLE.md
 ```
 
-4. Check readiness.
+5. Check readiness.
 
 ```bash
 corepack pnpm cli formal-status <session-id>
 ```
 
-5. Generate formal clone research notes.
+6. Generate formal clone research notes.
 
 ```bash
 corepack pnpm cli formal-research <session-id>
@@ -216,7 +247,7 @@ This creates:
 outputs/sessions/<session-id>/formal-clone/docs/research/
 ```
 
-6. Generate public asset inventory and localization planning.
+7. Generate public asset inventory and localization planning.
 
 ```bash
 corepack pnpm cli asset-inventory <session-id>
@@ -231,7 +262,7 @@ outputs/sessions/<session-id>/references/VISUAL_PLAN.md
 outputs/sessions/<session-id>/references/ASSET_DOWNLOAD_PLAN.md
 ```
 
-7. Create a comparison report and repair queue.
+8. Create a comparison report and repair queue.
 
 ```bash
 corepack pnpm cli formal-compare <session-id>
@@ -244,7 +275,7 @@ outputs/sessions/<session-id>/comparison/FORMAL_COMPARISON.md
 outputs/sessions/<session-id>/comparison/REPAIR_QUEUE.md
 ```
 
-8. Create the React Grab install task when the formal clone is ready for precision repair.
+9. Create the React Grab install task when the formal clone is ready for precision repair.
 
 ```bash
 corepack pnpm cli react-grab-install-task <session-id>
@@ -256,7 +287,7 @@ This creates:
 outputs/sessions/<session-id>/react-grab-repairs/INSTALL_REACT_GRAB.md
 ```
 
-9. Validate the formal clone app structure.
+10. Validate the formal clone app structure.
 
 ```bash
 corepack pnpm cli formal-validate <session-id>
@@ -274,7 +305,7 @@ When dependencies are installed inside `formal-clone/`, you can also run:
 corepack pnpm cli formal-validate <session-id> --run-build
 ```
 
-10. Let Codex or Cursor continue from `TASK_BUNDLE.md`, `docs/research/`, `references/ASSET_DOWNLOAD_PLAN.md`, `comparison/REPAIR_QUEUE.md`, `formal-clone/VALIDATION.md`, and `react-grab-repairs/INSTALL_REACT_GRAB.md`.
+11. Let Codex or Cursor continue from `TASK_BUNDLE.md`, `docs/research/`, `references/ASSET_DOWNLOAD_PLAN.md`, `comparison/REPAIR_QUEUE.md`, `formal-clone/VALIDATION.md`, and `react-grab-repairs/INSTALL_REACT_GRAB.md`.
 
 The formal clone should be built inside:
 
@@ -282,13 +313,13 @@ The formal clone should be built inside:
 outputs/sessions/<session-id>/formal-clone/
 ```
 
-11. Generate a minimal runnable scaffold.
+12. Generate a minimal runnable scaffold.
 
 ```bash
 corepack pnpm cli formal-scaffold <session-id>
 ```
 
-12. For simple static targets, generate a static first pass from captured HTML.
+13. For simple static targets, generate a static first pass from captured HTML.
 
 ```bash
 corepack pnpm cli formal-static-pass <session-id>
@@ -302,7 +333,7 @@ outputs/sessions/<session-id>/formal-clone/STATIC_IMPLEMENTATION.md
 
 This creates a small Next.js work area inside `formal-clone/`.
 
-13. Run the generated formal clone app.
+14. Run the generated formal clone app.
 
 ```bash
 cd outputs/sessions/<session-id>/formal-clone
@@ -358,6 +389,10 @@ corepack pnpm cli list
 corepack pnpm cli show <session-id>
 corepack pnpm cli doctor
 corepack pnpm cli session-runbook <session-id>
+corepack pnpm cli discover-pages <session-id>
+corepack pnpm cli discover-pages <session-id> --max 20
+corepack pnpm cli capture-pages <session-id> --limit 10
+corepack pnpm cli capture-pages <session-id> --limit 10 --refresh
 corepack pnpm cli asset-inventory <session-id>
 corepack pnpm cli asset-download-plan <session-id>
 corepack pnpm cli formal-task <session-id>

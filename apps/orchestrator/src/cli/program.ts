@@ -1,6 +1,8 @@
 import { Command } from "commander";
 import { createAssetDownloadPlan } from "../core/assetDownloadPlan.js";
 import { createAssetInventory } from "../core/assetInventory.js";
+import { capturePages } from "../core/pageCapture.js";
+import { discoverPages } from "../core/pageDiscovery.js";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { createSessionRunbook } from "../core/sessionRunbook.js";
 import { runDoctor } from "../core/doctor.js";
@@ -105,6 +107,39 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       const result = await createAssetDownloadPlan(getProjectRoot(), sessionId);
       console.log(`Created asset download plan for ${result.sessionId}`);
       console.log(`Path: ${result.planPath}`);
+    });
+
+  program
+    .command("discover-pages")
+    .argument("<session-id>", "CloneSession id")
+    .option("--max <count>", "Maximum pages to include in the discovery queue", parsePositiveInteger)
+    .description("Discover same-host public page URLs from captured homepage HTML")
+    .action(async (sessionId: string, commandOptions: { max?: number }) => {
+      const result = await discoverPages(getProjectRoot(), sessionId, commandOptions.max);
+      console.log(`Discovered ${result.pageCount} page(s) for ${result.sessionId}`);
+      for (const file of result.files) {
+        console.log(`- ${file}`);
+      }
+    });
+
+  program
+    .command("capture-pages")
+    .argument("<session-id>", "CloneSession id")
+    .option("--limit <count>", "Maximum pages to capture from target-research/site-map.json", parsePositiveInteger)
+    .option("--refresh", "Re-capture pages that already have saved HTML")
+    .description("Capture HTML, desktop screenshots, and network summaries for discovered pages")
+    .action(async (sessionId: string, commandOptions: { limit?: number; refresh?: boolean }) => {
+      const result = await capturePages({
+        projectRoot: getProjectRoot(),
+        sessionId,
+        limit: commandOptions.limit,
+        refresh: commandOptions.refresh
+      });
+      console.log(`Captured ${result.captured.length} page(s) for ${result.sessionId}`);
+      for (const page of result.captured) {
+        console.log(`${page.skipped ? "SKIP" : "OK"} ${page.url}: ${page.outputDir}`);
+      }
+      console.log(`Manifest: ${result.manifestPath}`);
     });
 
   program
@@ -260,4 +295,12 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
 
 function defaultProjectRoot(): string {
   return process.env.PLANARIAN_PROJECT_ROOT ?? process.cwd();
+}
+
+function parsePositiveInteger(value: string): number {
+  const parsed = Number.parseInt(value, 10);
+  if (!Number.isFinite(parsed) || parsed < 1) {
+    throw new Error(`Expected a positive integer, received: ${value}`);
+  }
+  return parsed;
 }
