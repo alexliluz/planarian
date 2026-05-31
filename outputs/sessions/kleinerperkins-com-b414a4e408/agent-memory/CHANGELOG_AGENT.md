@@ -15,3 +15,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `clone-session.json`, `RUNBOOK.md`, `target-research/*`, `formal-clone/TASK_BUNDLE.md`, `formal-clone/docs/research/*.md`, `open-lovable-version/*`, `formal-clone/FORMAL_CLONE_PIPELINE.md`, `formal-clone/AGENTS.md`, `formal-clone/*`, `comparison/*`, `react-grab-repairs/INSTALL_REACT_GRAB.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli init https://www.kleinerperkins.com --refresh`, `corepack pnpm cli session-runbook kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-task kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-research kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-scaffold kleinerperkins-com-b414a4e408`, `corepack pnpm cli integrate-upstreams kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-compare kleinerperkins-com-b414a4e408`, `corepack pnpm cli react-grab-install-task kleinerperkins-com-b414a4e408`
 - Notes: The refreshed classification is `unknown`, which is more appropriate than the earlier telemetry-driven `auth-gated` result. The formal clone is still scaffold-level and should not be treated as a completed visual clone.
+
+## 2026-06-01 - Codex
+
+- Summary: Generated public asset inventory and visual planning notes for this real-site session.
+- Files changed: `references/ASSET_INVENTORY.md`, `references/VISUAL_PLAN.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli asset-inventory kleinerperkins-com-b414a4e408`
+- Notes: Captured 65 image requests, 1 font, 1 stylesheet, 13 scripts, and 8 API candidates. Some extracted visible text has encoding artifacts and should be normalized in a later crawler/research pass.

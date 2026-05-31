@@ -45,3 +45,4 @@
 - Added `pnpm cli session-runbook <session-id>` to generate per-session open/run/validate instructions.
 - Added a real-site test session for `https://www.kleinerperkins.com/`.
 - Improved site classification to avoid treating telemetry and consent requests as auth-gated app APIs.
+- Added `pnpm cli asset-inventory <session-id>` to generate public asset inventory and visual planning notes.

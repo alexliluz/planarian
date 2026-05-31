@@ -909,3 +909,48 @@ Next:
 - Run final validation after changelog updates.
 - Commit and push.
 - Consider adding asset inventory/download planning before attempting a serious Kleiner Perkins visual clone.
+
+### 2026-06-01 - Asset Inventory And Visual Plan
+
+Summary:
+
+- Added `asset-inventory <session-id>`.
+- The command writes:
+  - `references/ASSET_INVENTORY.md`
+  - `references/VISUAL_PLAN.md`
+- It groups captured public network resources into images, fonts, stylesheets, scripts, videos/media, API candidates, and other requests.
+- It extracts visual planning signals from raw HTML: navigation labels, headings, HTML/body classes, linked assets, and visible text excerpt.
+- Generated asset inventory and visual plan for `kleinerperkins-com-b414a4e408`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/assetInventory.ts`
+- `apps/orchestrator/src/core/assetInventory.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/references/ASSET_INVENTORY.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/references/VISUAL_PLAN.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+- `corepack pnpm check`
+  - `typecheck` passed.
+  - Unit tests passed: 18 files, 70 tests.
+  - `check:changed` passed.
+- `corepack pnpm cli asset-inventory kleinerperkins-com-b414a4e408`
+  - Generated 2 reference files.
+  - Captured 65 image requests, 1 font, 1 stylesheet, 13 scripts, and 8 API candidates.
+
+Known limitation:
+
+- Some extracted text in `VISUAL_PLAN.md` has encoding artifacts such as `鈥?`; improve HTML/entity decoding before relying on text extraction for final copy.
+
+Next:
+
+- Commit and push.
+- Add an `asset-download-plan` or improve text decoding before starting a serious Kleiner Perkins visual implementation.

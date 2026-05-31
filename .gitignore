@@ -57,6 +57,9 @@ outputs/sessions/*/react-grab-repairs/**
 !outputs/sessions/*/comparison/VERSION_COMPARISON_CHECKLIST.md
 !outputs/sessions/*/comparison/FORMAL_COMPARISON.md
 !outputs/sessions/*/comparison/REPAIR_QUEUE.md
+!outputs/sessions/*/references/
+!outputs/sessions/*/references/ASSET_INVENTORY.md
+!outputs/sessions/*/references/VISUAL_PLAN.md
 !outputs/sessions/*/react-grab-repairs/
 !outputs/sessions/*/react-grab-repairs/INSTALL_REACT_GRAB.md
 !outputs/sessions/*/react-grab-repairs/*.md

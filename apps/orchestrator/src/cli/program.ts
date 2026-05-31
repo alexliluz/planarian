@@ -1,4 +1,5 @@
 import { Command } from "commander";
+import { createAssetInventory } from "../core/assetInventory.js";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { createSessionRunbook } from "../core/sessionRunbook.js";
 import { runDoctor } from "../core/doctor.js";
@@ -80,6 +81,18 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
 
       if (!report.ok) {
         process.exitCode = 1;
+      }
+    });
+
+  program
+    .command("asset-inventory")
+    .argument("<session-id>", "CloneSession id")
+    .description("Create public asset inventory and visual planning notes for a CloneSession")
+    .action(async (sessionId: string) => {
+      const result = await createAssetInventory(getProjectRoot(), sessionId);
+      console.log(`Created asset inventory for ${result.sessionId}`);
+      for (const file of result.files) {
+        console.log(`- ${file}`);
       }
     });
 

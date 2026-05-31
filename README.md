@@ -84,6 +84,12 @@ Create a session runbook with open/run/validate instructions:
 corepack pnpm cli session-runbook example-com-0f115db062
 ```
 
+Create a public asset inventory and visual plan:
+
+```bash
+corepack pnpm cli asset-inventory example-com-0f115db062
+```
+
 Create the formal clone task bundle:
 
 ```bash
@@ -331,6 +337,7 @@ corepack pnpm cli list
 corepack pnpm cli show <session-id>
 corepack pnpm cli doctor
 corepack pnpm cli session-runbook <session-id>
+corepack pnpm cli asset-inventory <session-id>
 corepack pnpm cli formal-task <session-id>
 corepack pnpm cli formal-compare <session-id>
 corepack pnpm cli formal-research <session-id>

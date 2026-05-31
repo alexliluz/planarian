@@ -57,6 +57,20 @@ describe("createProgram", () => {
     expect(output).toContain("RUNBOOK.md");
   });
 
+  it("creates an asset inventory", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await writeFile(path.join(sessionRoot, "target-research", "raw-html.html"), "<h1>Make History</h1>", "utf8");
+    await writeFile(path.join(sessionRoot, "target-research", "network-analysis.json"), "[]", "utf8");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "asset-inventory", "demo"]);
+
+    expect(output).toContain("Created asset inventory for demo");
+    expect(output).toContain("references/ASSET_INVENTORY.md");
+  });
+
   it("creates a formal clone task bundle", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");
