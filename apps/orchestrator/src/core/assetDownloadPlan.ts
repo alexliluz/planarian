@@ -8,7 +8,7 @@ export interface AssetDownloadPlanResult {
   planPath: string;
 }
 
-interface AssetCandidate {
+export interface AssetCandidate {
   url: string;
   kind: "image" | "font" | "stylesheet" | "script" | "other";
   priority: "localize" | "reference" | "ignore";

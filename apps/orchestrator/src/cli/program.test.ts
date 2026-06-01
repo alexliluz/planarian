@@ -97,6 +97,33 @@ describe("createProgram", () => {
     expect(output).toContain("ASSET_DOWNLOAD_PLAN.md");
   });
 
+  it("creates an asset localization dry-run manifest", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research"), { recursive: true });
+    await writeFile(
+      path.join(sessionRoot, "target-research", "network-analysis.json"),
+      JSON.stringify([
+        {
+          url: "https://example.com/home-hero.webp",
+          method: "GET",
+          resourceType: "image",
+          status: 200,
+          contentType: "image/webp",
+          isApiCandidate: false
+        }
+      ]),
+      "utf8"
+    );
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "asset-localize", "demo", "--dry-run"]);
+
+    expect(output).toContain("Localized assets for demo");
+    expect(output).toContain("PLANNED /assets/images/home-hero.webp");
+    expect(output).toContain("ASSET_MANIFEST.json");
+  });
+
   it("discovers pages from captured homepage HTML", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

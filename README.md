@@ -108,6 +108,12 @@ Create a public asset localization plan:
 corepack pnpm cli asset-download-plan example-com-0f115db062
 ```
 
+Download a small batch of high-priority public assets into the formal clone:
+
+```bash
+corepack pnpm cli asset-localize example-com-0f115db062 --limit 6
+```
+
 Create the formal clone task bundle:
 
 ```bash
@@ -258,6 +264,7 @@ outputs/sessions/<session-id>/formal-clone/docs/research/04-multi-page-map.md
 ```bash
 corepack pnpm cli asset-inventory <session-id>
 corepack pnpm cli asset-download-plan <session-id>
+corepack pnpm cli asset-localize <session-id> --limit 6
 ```
 
 This creates:
@@ -266,6 +273,7 @@ This creates:
 outputs/sessions/<session-id>/references/ASSET_INVENTORY.md
 outputs/sessions/<session-id>/references/VISUAL_PLAN.md
 outputs/sessions/<session-id>/references/ASSET_DOWNLOAD_PLAN.md
+outputs/sessions/<session-id>/formal-clone/public/assets/ASSET_MANIFEST.json
 ```
 
 8. Create a comparison report and repair queue.
@@ -401,6 +409,8 @@ corepack pnpm cli capture-pages <session-id> --limit 10
 corepack pnpm cli capture-pages <session-id> --limit 10 --refresh
 corepack pnpm cli asset-inventory <session-id>
 corepack pnpm cli asset-download-plan <session-id>
+corepack pnpm cli asset-localize <session-id> --dry-run
+corepack pnpm cli asset-localize <session-id> --limit 6
 corepack pnpm cli formal-task <session-id>
 corepack pnpm cli formal-compare <session-id>
 corepack pnpm cli formal-research <session-id>

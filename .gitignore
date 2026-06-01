@@ -54,6 +54,13 @@ outputs/sessions/*/target-research/pages/**
 !outputs/sessions/*/formal-clone/VALIDATION.md
 !outputs/sessions/*/formal-clone/app/
 !outputs/sessions/*/formal-clone/app/**
+!outputs/sessions/*/formal-clone/public/
+!outputs/sessions/*/formal-clone/public/assets/
+!outputs/sessions/*/formal-clone/public/assets/ASSET_MANIFEST.json
+!outputs/sessions/*/formal-clone/public/assets/images/
+!outputs/sessions/*/formal-clone/public/assets/images/*
+!outputs/sessions/*/formal-clone/public/assets/fonts/
+!outputs/sessions/*/formal-clone/public/assets/fonts/*
 !outputs/sessions/*/formal-clone/data/
 !outputs/sessions/*/formal-clone/data/**
 !outputs/sessions/*/formal-clone/docs/

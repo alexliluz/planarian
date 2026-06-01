@@ -1246,3 +1246,68 @@ Recommended next work:
 3. Add a visual comparison report for original screenshot vs formal clone screenshot metrics.
 4. Tune first-viewport spacing, logo proportions, cookie banner position, and story card brightness.
 5. Add top-level routes for `/about`, `/people`, and `/perspectives` from the captured pages.
+
+### 2026-06-01 - Asset Localization Workflow
+
+Summary:
+
+- Added `asset-localize <session-id>`.
+- The command reads captured network analysis, reuses the `localize` priorities from asset planning, and writes selected public assets into `formal-clone/public/assets/`.
+- It supports `--dry-run` so agents can inspect the batch before downloading.
+- Generated `formal-clone/public/assets/ASSET_MANIFEST.json`.
+- Localized the first 4 high-priority Kleiner Perkins public assets.
+- Updated the formal clone hero background from a remote URL to `/assets/images/alkira-x-lumen-home-takeover-opt-04-1.jpg`.
+
+Files changed:
+
+- `.gitignore`
+- `AI_HANDOFF.md`
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/assetDownloadPlan.ts`
+- `apps/orchestrator/src/core/assetLocalize.ts`
+- `apps/orchestrator/src/core/assetLocalize.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/globals.css`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/public/assets/ASSET_MANIFEST.json`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/public/assets/images/*`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/VALIDATION.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli asset-localize kleinerperkins-com-b414a4e408 --dry-run --limit 4
+corepack pnpm cli asset-localize kleinerperkins-com-b414a4e408 --limit 4
+corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build
+```
+
+Result:
+
+- Full check passed: 23 test files, 85 tests.
+- The first 4 high-priority public assets downloaded successfully.
+- Formal clone build validation remains ready after switching the hero background to the local asset.
+
+Workflow note:
+
+- A large target should not be fully crawled on every run.
+- Preferred staged flow:
+  1. `init` captures homepage.
+  2. `discover-pages` builds a same-host queue.
+  3. `capture-pages --limit N` captures a small priority set.
+  4. `asset-inventory`, `asset-download-plan`, and `asset-localize --limit N` handle public assets in batches.
+  5. `formal-research` and `formal-validate` turn those artifacts into implementation guidance and guardrails.
+- Later this should become a single orchestrated pipeline command with sensible defaults.
+
+Next:
+
+- Add route scaffolding for `/about`, `/people`, and `/perspectives`.
+- Add visual repair tasks comparing the original screenshot against the formal clone first viewport.
+
+Push status:
+
+- Local commit created: `b6dbdee Add asset localization workflow`.
+- Push attempt failed with `Failed to connect to github.com port 443`.
+- Local `main` remains ahead of `origin/main`.

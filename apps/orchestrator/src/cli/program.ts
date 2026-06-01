@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { createAssetDownloadPlan } from "../core/assetDownloadPlan.js";
 import { createAssetInventory } from "../core/assetInventory.js";
+import { localizeAssets } from "../core/assetLocalize.js";
 import { capturePages } from "../core/pageCapture.js";
 import { discoverPages } from "../core/pageDiscovery.js";
 import { initCloneSession } from "../core/initCloneSession.js";
@@ -107,6 +108,26 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       const result = await createAssetDownloadPlan(getProjectRoot(), sessionId);
       console.log(`Created asset download plan for ${result.sessionId}`);
       console.log(`Path: ${result.planPath}`);
+    });
+
+  program
+    .command("asset-localize")
+    .argument("<session-id>", "CloneSession id")
+    .option("--limit <count>", "Maximum localize-first assets to download", parsePositiveInteger)
+    .option("--dry-run", "Write the manifest without downloading assets")
+    .description("Download high-priority public assets into formal-clone/public/assets")
+    .action(async (sessionId: string, commandOptions: { limit?: number; dryRun?: boolean }) => {
+      const result = await localizeAssets({
+        projectRoot: getProjectRoot(),
+        sessionId,
+        limit: commandOptions.limit,
+        dryRun: commandOptions.dryRun
+      });
+      console.log(`Localized assets for ${result.sessionId}`);
+      for (const asset of result.assets) {
+        console.log(`${asset.status.toUpperCase()} ${asset.publicPath}: ${asset.url}`);
+      }
+      console.log(`Manifest: ${result.manifestPath}`);
     });
 
   program

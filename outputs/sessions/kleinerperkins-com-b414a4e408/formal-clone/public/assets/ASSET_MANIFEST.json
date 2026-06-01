@@ -1,0 +1,41 @@
+{
+  "sessionId": "kleinerperkins-com-b414a4e408",
+  "assets": [
+    {
+      "url": "https://www.kleinerperkins.com/wp-content/uploads/2026/05/alkira-x-lumen-home-takeover-opt-04-1.jpg?resize=1536,864",
+      "kind": "image",
+      "localPath": "formal-clone/public/assets/images/alkira-x-lumen-home-takeover-opt-04-1.jpg",
+      "publicPath": "/assets/images/alkira-x-lumen-home-takeover-opt-04-1.jpg",
+      "status": "downloaded",
+      "contentType": "image/webp",
+      "bytes": 912636
+    },
+    {
+      "url": "https://www.kleinerperkins.com/wp-content/uploads/2026/05/9-16-Portrait-1.jpg",
+      "kind": "image",
+      "localPath": "formal-clone/public/assets/images/9-16-Portrait-1.jpg",
+      "publicPath": "/assets/images/9-16-Portrait-1.jpg",
+      "status": "downloaded",
+      "contentType": "image/webp",
+      "bytes": 19692
+    },
+    {
+      "url": "https://www.kleinerperkins.com/wp-content/uploads/2026/05/alkira-x-lumen-logo-desktop-1.svg",
+      "kind": "image",
+      "localPath": "formal-clone/public/assets/images/alkira-x-lumen-logo-desktop-1.svg",
+      "publicPath": "/assets/images/alkira-x-lumen-logo-desktop-1.svg",
+      "status": "downloaded",
+      "contentType": "image/svg+xml",
+      "bytes": 11129
+    },
+    {
+      "url": "https://www.kleinerperkins.com/wp-content/uploads/2026/05/alkira-x-lumen-logo-lock-mobile.svg",
+      "kind": "image",
+      "localPath": "formal-clone/public/assets/images/alkira-x-lumen-logo-lock-mobile.svg",
+      "publicPath": "/assets/images/alkira-x-lumen-logo-lock-mobile.svg",
+      "status": "downloaded",
+      "contentType": "image/svg+xml",
+      "bytes": 11111
+    }
+  ]
+}

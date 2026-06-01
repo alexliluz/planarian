@@ -145,7 +145,7 @@ button {
     linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) 42%, #000000 96%),
     radial-gradient(circle at 20% 58%, rgba(190, 40, 145, 0.55), transparent 32%),
     radial-gradient(circle at 80% 44%, rgba(38, 71, 180, 0.55), transparent 38%),
-    url("https://www.kleinerperkins.com/wp-content/uploads/2026/05/alkira-x-lumen-home-takeover-opt-04-1.jpg?resize=1536,864");
+    url("/assets/images/alkira-x-lumen-home-takeover-opt-04-1.jpg");
   background-position: center;
   background-size: cover;
 }

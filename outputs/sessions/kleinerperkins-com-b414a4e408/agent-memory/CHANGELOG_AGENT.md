@@ -64,3 +64,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, production `next start` smoke check on local port `3215`
 - Notes: Validation is ready and `corepack pnpm build` passes. Browser smoke check confirmed brand text, hero text, Read More, footer links, 3 story cards, `.hero` at 1440 x 760, fixed header at 1440 x 56, hero background asset reference, and a non-empty screenshot buffer. The next highest-value work is asset localization, then visual spacing/typography repair, then multi-page route implementation.
+
+## 2026-06-01 - Codex
+
+- Summary: Added asset localization workflow and localized the first Kleiner Perkins hero assets.
+- Files changed: `formal-clone/public/assets/ASSET_MANIFEST.json`, `formal-clone/public/assets/images/*`, `formal-clone/app/globals.css`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli asset-localize kleinerperkins-com-b414a4e408 --dry-run --limit 4`, `corepack pnpm cli asset-localize kleinerperkins-com-b414a4e408 --limit 4`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`
+- Notes: Downloaded the first 4 high-priority public assets and switched the hero background to `/assets/images/alkira-x-lumen-home-takeover-opt-04-1.jpg`. The workflow should stay staged: discover pages, capture a small priority set, localize a small asset batch, then repair visually.
