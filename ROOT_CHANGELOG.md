@@ -52,3 +52,4 @@
 - Extended `pnpm cli formal-research <session-id>` to generate `04-multi-page-map.md` from discovered and captured pages.
 - Implemented the first Kleiner Perkins formal clone homepage pass and fixed Windows build validation command handling.
 - Added `pnpm cli asset-localize <session-id>` to download high-priority public assets into `formal-clone/public/assets/`.
+- Added `pnpm cli pipeline <url>` as the first default staged workflow for testing new public websites.

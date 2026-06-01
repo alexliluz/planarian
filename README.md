@@ -60,6 +60,18 @@ pnpm install
 
 ## Quick Start
 
+Run the default staged pipeline for a new public target:
+
+```bash
+corepack pnpm cli pipeline https://example.com --pages 5
+```
+
+For asset localization, opt in explicitly:
+
+```bash
+corepack pnpm cli pipeline https://example.com --pages 5 --assets 6
+```
+
 Create or reuse a CloneSession:
 
 ```bash
@@ -399,6 +411,9 @@ outputs/sessions/<session-id>/
 ```bash
 corepack pnpm cli init <url>
 corepack pnpm cli init <url> --refresh
+corepack pnpm cli pipeline <url>
+corepack pnpm cli pipeline <url> --pages 10 --assets 6
+corepack pnpm cli pipeline <url> --pages 10 --assets 6 --run-build
 corepack pnpm cli list
 corepack pnpm cli show <session-id>
 corepack pnpm cli doctor

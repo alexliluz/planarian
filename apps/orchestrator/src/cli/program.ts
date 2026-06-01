@@ -3,6 +3,7 @@ import { createAssetDownloadPlan } from "../core/assetDownloadPlan.js";
 import { createAssetInventory } from "../core/assetInventory.js";
 import { localizeAssets } from "../core/assetLocalize.js";
 import { capturePages } from "../core/pageCapture.js";
+import { runClonePipeline } from "../core/clonePipeline.js";
 import { discoverPages } from "../core/pageDiscovery.js";
 import { initCloneSession } from "../core/initCloneSession.js";
 import { createSessionRunbook } from "../core/sessionRunbook.js";
@@ -48,6 +49,48 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       console.log(`${action} session ${session.sessionId}`);
       console.log(`Classification: ${session.target.classification}`);
     });
+
+  program
+    .command("pipeline")
+    .argument("<url>", "Target public website URL")
+    .option("--refresh", "Re-analyze and overwrite generated target research for an existing session")
+    .option("--pages <count>", "Maximum discovered pages to capture", parsePositiveInteger)
+    .option("--assets <count>", "Maximum high-priority public assets to download", parsePositiveInteger)
+    .option("--asset-dry-run", "Plan asset localization without downloading assets")
+    .option("--skip-page-capture", "Skip discovered page capture")
+    .option("--skip-scaffold", "Skip formal clone scaffold creation")
+    .option("--run-build", "Run formal clone build validation at the end")
+    .description("Run the default Planarian capture, research, asset, scaffold, and validation workflow")
+    .action(
+      async (
+        url: string,
+        commandOptions: {
+          refresh?: boolean;
+          pages?: number;
+          assets?: number;
+          assetDryRun?: boolean;
+          skipPageCapture?: boolean;
+          skipScaffold?: boolean;
+          runBuild?: boolean;
+        }
+      ) => {
+        const result = await runClonePipeline({
+          projectRoot: getProjectRoot(),
+          url,
+          refresh: commandOptions.refresh,
+          pageLimit: commandOptions.pages,
+          assetLimit: commandOptions.assets,
+          assetDryRun: commandOptions.assetDryRun,
+          skipPageCapture: commandOptions.skipPageCapture,
+          skipScaffold: commandOptions.skipScaffold,
+          runBuild: commandOptions.runBuild
+        });
+        console.log(`Pipeline completed for ${result.sessionId}`);
+        for (const step of result.steps) {
+          console.log(`${step.status.toUpperCase()} ${step.name}: ${step.detail}`);
+        }
+      }
+    );
 
   program
     .command("list")

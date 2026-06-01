@@ -92,3 +92,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `RUNBOOK.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli session-runbook example-com-0f115db062`
 - Notes: The runbook explains how to open captured artifacts and run the formal clone app.
+
+## 2026-06-02 - Codex
+
+- Summary: Ran the new default Planarian pipeline against the existing example.com session.
+- Files changed: `target-research/site-map.json`, `target-research/PAGE_DISCOVERY.md`, `target-research/pages/capture-manifest.json`, `references/*`, `formal-clone/docs/research/*`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold`
+- Notes: Pipeline completed successfully with 1 discovered page, 1 captured page, asset planning, formal research, and validation. Asset localization was skipped because no `--assets` value was provided.

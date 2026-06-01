@@ -1311,3 +1311,57 @@ Push status:
 - Local commit created: `b6dbdee Add asset localization workflow`.
 - Push attempt failed with `Failed to connect to github.com port 443`.
 - Local `main` remains ahead of `origin/main`.
+
+### 2026-06-02 - Default Pipeline Command
+
+Summary:
+
+- Added `pipeline <url>` as the first default staged workflow for testing new public websites.
+- The pipeline runs:
+  - `init`
+  - `session-runbook`
+  - `discover-pages`
+  - `capture-pages`
+  - `asset-inventory`
+  - `asset-download-plan`
+  - optional `asset-localize`
+  - `formal-research`
+  - `formal-scaffold`
+  - `formal-validate`
+- Defaults are conservative:
+  - page capture defaults to 5 pages
+  - asset downloading is skipped unless `--assets <count>` is provided
+  - build validation is skipped unless `--run-build` is provided
+- Verified the command against the existing `example.com` session.
+
+Commands:
+
+```bash
+corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold
+corepack pnpm check
+```
+
+Results:
+
+- Pipeline completed for `example-com-0f115db062`.
+- It discovered 1 page, captured 1 page, generated references, formal research, and validation.
+- Full check passed: 24 test files, 86 tests.
+
+Recommended usage:
+
+```bash
+corepack pnpm cli pipeline <url> --pages 5
+corepack pnpm cli pipeline <url> --pages 10 --assets 6
+corepack pnpm cli pipeline <url> --pages 10 --assets 6 --run-build
+```
+
+Workflow note:
+
+- Large websites should not be fully crawled by default.
+- Use `--pages` and `--assets` as budgets, then expand only after inspecting generated artifacts.
+
+Push status:
+
+- Local commit created: `aa71360 Add default clone pipeline`.
+- Push attempt failed with `Recv failure: Connection was reset`.
+- Local `main` remains ahead of `origin/main`.

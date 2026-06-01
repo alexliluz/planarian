@@ -1,0 +1,10 @@
+[
+  {
+    "url": "https://example.com/",
+    "pathname": "/",
+    "title": "Example Domain",
+    "source": "homepage-link",
+    "priority": 0,
+    "reason": "Homepage is always the root capture target."
+  }
+]
