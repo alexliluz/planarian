@@ -57,3 +57,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/app/page.tsx`, `formal-clone/app/globals.css`, `formal-clone/next.config.mjs`, `formal-clone/next-env.d.ts`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, `corepack pnpm --dir outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone exec next build`
 - Notes: The homepage now has a first-viewport implementation with navigation, hero background, feature messaging, story cards, cookie banner mock, and footer. Visual smoke check confirmed hero text, brand text, hero dimensions, CSS background reference, and non-empty screenshot buffer. Public visual assets are still remote references and should be localized next.
+
+## 2026-06-01 - Codex
+
+- Summary: Re-ran the Kleiner Perkins formal clone validation and production-page smoke check.
+- Files changed: `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, production `next start` smoke check on local port `3215`
+- Notes: Validation is ready and `corepack pnpm build` passes. Browser smoke check confirmed brand text, hero text, Read More, footer links, 3 story cards, `.hero` at 1440 x 760, fixed header at 1440 x 56, hero background asset reference, and a non-empty screenshot buffer. The next highest-value work is asset localization, then visual spacing/typography repair, then multi-page route implementation.

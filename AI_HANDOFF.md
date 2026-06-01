@@ -1203,3 +1203,46 @@ Push status:
 - Local commit created: `09f6473 Add Kleiner Perkins homepage first pass`.
 - Push attempt failed with `schannel: server closed abruptly (missing close_notify)`.
 - Local `main` remains ahead of `origin/main`.
+
+### 2026-06-01 - Kleiner Perkins Rerun Check
+
+Summary:
+
+- Re-ran the Kleiner Perkins formal clone after the homepage first pass.
+- Confirmed formal clone build validation is still ready.
+- Confirmed production-page smoke check renders the expected first-pass homepage content.
+
+Validation:
+
+```bash
+corepack pnpm check
+corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build
+```
+
+Production-page smoke check:
+
+- Started the formal clone with production `next start` on local port `3215`.
+- Browser inspection confirmed:
+  - brand text exists
+  - hero copy exists
+  - `Read More` exists
+  - footer links exist
+  - 3 story cards render
+  - `.hero` renders at 1440 x 760
+  - `.site-header` renders at 1440 x 56
+  - hero background CSS references the Alkira/Lumen image
+  - screenshot buffer was non-empty
+- Saving screenshot files still hits environment-level file write restrictions, so visual verification was done in-memory.
+
+Result:
+
+- The clone is runnable and buildable.
+- It is still a first-pass visual reconstruction, not yet a finished high-fidelity clone.
+
+Recommended next work:
+
+1. Localize key public assets listed in `references/ASSET_DOWNLOAD_PLAN.md`.
+2. Replace remote hero/story image URLs with `formal-clone/public/assets/...`.
+3. Add a visual comparison report for original screenshot vs formal clone screenshot metrics.
+4. Tune first-viewport spacing, logo proportions, cookie banner position, and story card brightness.
+5. Add top-level routes for `/about`, `/people`, and `/perspectives` from the captured pages.
