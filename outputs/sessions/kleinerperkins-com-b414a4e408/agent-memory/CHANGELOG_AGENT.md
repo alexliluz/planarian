@@ -50,3 +50,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/docs/research/README.md`, `formal-clone/docs/research/01-page-structure.md`, `formal-clone/docs/research/04-multi-page-map.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli formal-research kleinerperkins-com-b414a4e408`
 - Notes: The multi-page map summarizes 25 discovered pages, 4 captured core pages, headings, text lengths, network counts, API candidate counts, and pending route queue.
+
+## 2026-06-01 - Codex
+
+- Summary: Implemented the first formal clone homepage pass for the Kleiner Perkins session.
+- Files changed: `formal-clone/app/page.tsx`, `formal-clone/app/globals.css`, `formal-clone/next.config.mjs`, `formal-clone/next-env.d.ts`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm check`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, `corepack pnpm --dir outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone exec next build`
+- Notes: The homepage now has a first-viewport implementation with navigation, hero background, feature messaging, story cards, cookie banner mock, and footer. Visual smoke check confirmed hero text, brand text, hero dimensions, CSS background reference, and non-empty screenshot buffer. Public visual assets are still remote references and should be localized next.

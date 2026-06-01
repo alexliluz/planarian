@@ -1139,3 +1139,67 @@ Next:
 - Run final `corepack pnpm check`.
 - Commit this pass.
 - Start Kleiner Perkins formal clone implementation using the multi-page research and asset download plan.
+
+### 2026-06-01 - Kleiner Perkins Homepage First Pass
+
+Summary:
+
+- Replaced the scaffold placeholder homepage with a first-pass visual clone for the Kleiner Perkins homepage.
+- Implemented:
+  - fixed dark header
+  - brand mark and wordmark
+  - primary navigation
+  - hero section with public remote hero image reference
+  - Alkira x Lumen feature copy
+  - slider dots
+  - "History in the Making ..." story row
+  - static cookie preference mock
+  - footer link columns
+- Added `outputFileTracingRoot` to the generated formal clone Next config.
+- Fixed Windows build validation by running `corepack pnpm build` through `cmd.exe /c` in `formalValidate.ts`.
+- Sanitized formal validation command output to ASCII for AI-readable reports.
+
+Files changed:
+
+- `AI_HANDOFF.md`
+- `ROOT_CHANGELOG.md`
+- `apps/orchestrator/src/core/formalValidate.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/page.tsx`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/globals.css`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/next.config.mjs`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/next-env.d.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/VALIDATION.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408
+corepack pnpm --dir outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone install --ignore-workspace
+corepack pnpm --dir outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone exec next build
+corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build
+corepack pnpm check
+```
+
+Visual smoke check:
+
+- Started the generated app with `next start` on port `3212`.
+- Playwright confirmed:
+  - hero copy exists
+  - brand text exists
+  - `.hero` renders at 1440 x 760
+  - hero background CSS references the Alkira/Lumen public image
+  - screenshot buffer was non-empty
+- Saving Playwright PNG files to this environment failed with `EPERM`, so no preview image was committed.
+
+Next:
+
+- Commit this pass.
+- Localize the first hero/logo/font assets into `formal-clone/public/assets/`.
+- Run a closer responsive visual repair pass against the captured screenshot.
+
+Push status:
+
+- Local commit created: `09f6473 Add Kleiner Perkins homepage first pass`.
+- Push attempt failed with `schannel: server closed abruptly (missing close_notify)`.
+- Local `main` remains ahead of `origin/main`.

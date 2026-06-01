@@ -50,3 +50,4 @@
 - Added `pnpm cli asset-download-plan <session-id>` to classify captured public assets as localize, reference, or ignore.
 - Added `pnpm cli discover-pages <session-id>` and `pnpm cli capture-pages <session-id>` for conservative multi-page target research.
 - Extended `pnpm cli formal-research <session-id>` to generate `04-multi-page-map.md` from discovered and captured pages.
+- Implemented the first Kleiner Perkins formal clone homepage pass and fixed Windows build validation command handling.

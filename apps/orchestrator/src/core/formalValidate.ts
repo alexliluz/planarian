@@ -173,11 +173,12 @@ function dependencyCheck(packageJson: FormalPackageJson, dependencyName: string)
 }
 
 async function runFormalBuild(formalCloneRoot: string): Promise<FormalValidationCommandResult> {
-  const executable = process.platform === "win32" ? "corepack.cmd" : "corepack";
+  const executable = process.platform === "win32" ? "cmd.exe" : "corepack";
+  const args = process.platform === "win32" ? ["/c", "corepack", "pnpm", "build"] : ["pnpm", "build"];
   const command = "corepack pnpm build";
 
   try {
-    const result = await execFileAsync(executable, ["pnpm", "build"], {
+    const result = await execFileAsync(executable, args, {
       cwd: formalCloneRoot,
       timeout: 120_000,
       windowsHide: true
@@ -214,5 +215,8 @@ ${trimCommandOutput(result.stderr) || "(no stderr)"}
 }
 
 function trimCommandOutput(output: string): string {
-  return output.trim().slice(0, 4000);
+  return output
+    .replace(/[^\x09\x0a\x0d\x20-\x7e]/g, "")
+    .trim()
+    .slice(0, 4000);
 }

@@ -18,7 +18,43 @@ Status: ready
 
 ## Commands
 
-- No commands were run. Use `formal-validate <session-id> --run-build` when dependencies are installed.
+### corepack pnpm build
+
+- Status: passed
+
+```text
+> planarian-formal-clone-kleinerperkins-com-b414a4e408@0.1.0 build G:\workspace\planarian\outputs\sessions\kleinerperkins-com-b414a4e408\formal-clone
+> next build
+
+    Next.js 15.5.18
+
+   Creating an optimized production build ...
+  Compiled successfully in 2.8s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/4) ...
+   Generating static pages (1/4) 
+   Generating static pages (2/4) 
+   Generating static pages (3/4) 
+  Generating static pages (4/4)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+  /                                      123 B         102 kB
+  /_not-found                            995 B         102 kB
++ First Load JS shared by all             102 kB
+   chunks/146-1bafdb6c616a2346.js       45.3 kB
+   chunks/6fe292aa-e0ec2ab9f0ce6bb7.js  54.2 kB
+   other shared chunks (total)          1.97 kB
+
+
+  (Static)  prerendered as static content
+```
+
+```text
+(no stderr)
+```
 
 ## Next
 
