@@ -85,3 +85,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/app/about/page.tsx`, `formal-clone/app/people/page.tsx`, `formal-clone/app/perspectives/page.tsx`, `formal-clone/app/globals.css`, `formal-clone/data/route-content.json`, `formal-clone/ROUTE_IMPLEMENTATION.md`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm cli formal-routes-pass kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, `corepack pnpm check`
 - Notes: `/about`, `/people`, and `/perspectives` now render extracted public page titles, section headings, paragraphs, and filtered public links. This is still a first-pass reconstruction and should be visually repaired against captured route screenshots. Full project check passed with 25 test files and 91 tests.
+
+## 2026-06-02 - Codex
+
+- Summary: Added static route smoke validation for generated formal clone routes.
+- Files changed: `formal-clone/ROUTE_SMOKE.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm cli formal-route-smoke kleinerperkins-com-b414a4e408`, `corepack pnpm check`
+- Notes: Route smoke passed for `/about`, `/people`, and `/perspectives`. Each route has a page file, rendered title signal, `route-shell` layout usage, content signal, and route CSS. Full project check passed with 26 test files and 94 tests.

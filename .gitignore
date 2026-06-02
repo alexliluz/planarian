@@ -52,6 +52,7 @@ outputs/sessions/*/target-research/pages/**
 !outputs/sessions/*/formal-clone/AGENTS.md
 !outputs/sessions/*/formal-clone/STATIC_IMPLEMENTATION.md
 !outputs/sessions/*/formal-clone/VALIDATION.md
+!outputs/sessions/*/formal-clone/ROUTE_SMOKE.md
 !outputs/sessions/*/formal-clone/app/
 !outputs/sessions/*/formal-clone/app/**
 !outputs/sessions/*/formal-clone/public/

@@ -12,6 +12,7 @@ import { createFormalCloneTask, getFormalCloneStatus } from "../core/formalTask.
 import { createFormalComparison } from "../core/formalCompare.js";
 import { createFormalResearch } from "../core/formalResearch.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
+import { runFormalRouteSmoke } from "../core/formalRouteSmoke.js";
 import { createFormalStaticPass } from "../core/formalStaticPass.js";
 import { createFormalRoutesPass } from "../core/formalRoutesPass.js";
 import { validateFormalClone } from "../core/formalValidate.js";
@@ -295,6 +296,23 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
       console.log(`Created formal routes pass for ${result.sessionId}`);
       for (const file of result.files) {
         console.log(`- ${file}`);
+      }
+    });
+
+  program
+    .command("formal-route-smoke")
+    .argument("<session-id>", "CloneSession id")
+    .description("Run static smoke checks for generated non-home formal clone routes")
+    .action(async (sessionId: string) => {
+      const report = await runFormalRouteSmoke(getProjectRoot(), sessionId);
+      console.log(`Formal route smoke for ${report.sessionId}: ${report.ready ? "ready" : "not ready"}`);
+      for (const route of report.routes) {
+        console.log(`${route.ok ? "OK" : "FAIL"} ${route.routePath}: ${route.checks.length} check(s)`);
+      }
+      console.log(`Report: ${report.reportPath}`);
+
+      if (!report.ready) {
+        process.exitCode = 1;
       }
     });
 

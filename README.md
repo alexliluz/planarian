@@ -185,6 +185,12 @@ Generate content-aware first-pass pages for captured non-home routes:
 corepack pnpm cli formal-routes-pass example-com-0f115db062
 ```
 
+Run static smoke checks for generated non-home routes:
+
+```bash
+corepack pnpm cli formal-route-smoke example-com-0f115db062
+```
+
 Check whether the session is ready for formal clone work:
 
 ```bash
@@ -473,6 +479,7 @@ corepack pnpm cli formal-scaffold <session-id>
 corepack pnpm cli formal-scaffold <session-id> --force
 corepack pnpm cli formal-static-pass <session-id>
 corepack pnpm cli formal-routes-pass <session-id>
+corepack pnpm cli formal-route-smoke <session-id>
 corepack pnpm cli integrate-upstreams <session-id>
 corepack pnpm cli react-grab-install-task <session-id>
 corepack pnpm cli react-grab-task <session-id> --context ./grab-context.json

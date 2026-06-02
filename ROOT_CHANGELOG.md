@@ -64,3 +64,5 @@
 - Updated `pnpm cli formal-scaffold <session-id>` to generate basic Next.js route placeholders for captured non-home pages.
 - Added `pnpm cli formal-routes-pass <session-id>` to generate content-aware first-pass pages for captured non-home routes.
 - Added `formal-routes-pass` to the default pipeline when page capture is enabled.
+- Added `pnpm cli formal-route-smoke <session-id>` to write static route smoke reports for generated formal clone routes.
+- Allowed `formal-clone/ROUTE_SMOKE.md` reports to be committed as durable session artifacts.

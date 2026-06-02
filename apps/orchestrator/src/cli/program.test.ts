@@ -255,6 +255,31 @@ describe("createProgram", () => {
     expect(output).toContain("formal-clone/ROUTE_IMPLEMENTATION.md");
   });
 
+  it("runs formal route smoke checks", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    const formalCloneRoot = path.join(tempRoot, "outputs", "sessions", "demo", "formal-clone");
+    await mkdir(path.join(formalCloneRoot, "app", "people"), { recursive: true });
+    await mkdir(path.join(formalCloneRoot, "data"), { recursive: true });
+    await writeFile(
+      path.join(formalCloneRoot, "data", "route-content.json"),
+      JSON.stringify([{ title: "Our Team", routePath: "/people", sections: ["Jane Doe"], paragraphs: [], links: [] }]),
+      "utf8"
+    );
+    await writeFile(
+      path.join(formalCloneRoot, "app", "people", "page.tsx"),
+      `const route = { "title": "Our Team" };\nexport default function Page() { return <main className="route-shell">{route.title}</main>; }`,
+      "utf8"
+    );
+    await writeFile(path.join(formalCloneRoot, "app", "globals.css"), ".route-shell { min-height: 100vh; }", "utf8");
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-route-smoke", "demo"]);
+
+    expect(output).toContain("Formal route smoke for demo: ready");
+    expect(output).toContain("OK /people: 5 check(s)");
+    expect(output).toContain("ROUTE_SMOKE.md");
+  });
+
   it("creates upstream integration task files", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

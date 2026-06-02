@@ -480,6 +480,7 @@ Summary:
 
 Files changed:
 
+- `.gitignore`
 - `README.md`
 - `ROOT_CHANGELOG.md`
 - `AI_HANDOFF.md`
@@ -1511,3 +1512,47 @@ Next:
 
 - Run the full project check.
 - Add visual route smoke checks for `/about`, `/people`, and `/perspectives`.
+
+### 2026-06-02 - Formal Route Smoke Checks
+
+Summary:
+
+- Added `formal-route-smoke <session-id>`.
+- The command checks `formal-clone/data/route-content.json`.
+- It verifies each generated route page exists.
+- It verifies each route title appears in its page file.
+- It verifies route pages use `route-shell`.
+- It verifies route CSS exists in `app/globals.css`.
+- It writes `formal-clone/ROUTE_SMOKE.md`.
+- Verified against the Kleiner Perkins session.
+
+Files changed:
+
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `AI_HANDOFF.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalRouteSmoke.ts`
+- `apps/orchestrator/src/core/formalRouteSmoke.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/ROUTE_SMOKE.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm exec vitest run apps/orchestrator/src/core/formalRouteSmoke.test.ts apps/orchestrator/src/cli/program.test.ts
+corepack pnpm typecheck
+corepack pnpm cli formal-route-smoke kleinerperkins-com-b414a4e408
+corepack pnpm check
+```
+
+Result:
+
+- Route smoke passed for `/about`, `/people`, and `/perspectives`.
+- Full check passed: 26 test files, 94 tests.
+
+Next:
+
+- Run the full project check.
+- Add optional browser-backed route smoke when a local formal clone server is running.
