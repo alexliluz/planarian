@@ -92,3 +92,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/ROUTE_SMOKE.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm cli formal-route-smoke kleinerperkins-com-b414a4e408`, `corepack pnpm check`
 - Notes: Route smoke passed for `/about`, `/people`, and `/perspectives`. Each route has a page file, rendered title signal, `route-shell` layout usage, content signal, and route CSS. Full project check passed with 26 test files and 94 tests.
+
+## 2026-06-02 - Codex
+
+- Summary: Ran browser-backed route smoke against the generated formal clone routes.
+- Files changed: `formal-clone/ROUTE_SMOKE.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm cli formal-route-smoke kleinerperkins-com-b414a4e408 --browser --start-server --port 3222`, `corepack pnpm check`
+- Notes: Browser-backed route smoke passed for `/about`, `/people`, and `/perspectives`. Each route returned HTTP 200, rendered its title text, and had a visible `.route-shell`. Port `3222` had no remaining listener after the run. Full project check passed with 26 test files and 95 tests.

@@ -2,15 +2,16 @@
 
 Session: kleinerperkins-com-b414a4e408
 Formal clone root: G:\workspace\planarian\outputs\sessions\kleinerperkins-com-b414a4e408\formal-clone
+Mode: browser
 Status: ready
 
 ## Routes
 
 | Route | Status | Checks |
 | --- | --- | --- |
-| /about | ok | 5 |
-| /people | ok | 5 |
-| /perspectives | ok | 5 |
+| /about | ok | 8 |
+| /people | ok | 8 |
+| /perspectives | ok | 8 |
 
 ## Details
 
@@ -21,6 +22,9 @@ Status: ready
 - [x] route shell: page uses route-shell layout class
 - [x] content signal: 3 sections, 0 paragraphs, 8 links
 - [x] route css: app/globals.css contains route-shell styles
+- [x] browser response: 200 http://127.0.0.1:3222/about
+- [x] browser title text: Our History
+- [x] browser route shell visible: 1440x1000
 
 ### /people
 
@@ -29,6 +33,9 @@ Status: ready
 - [x] route shell: page uses route-shell layout class
 - [x] content signal: 24 sections, 10 paragraphs, 18 links
 - [x] route css: app/globals.css contains route-shell styles
+- [x] browser response: 200 http://127.0.0.1:3222/people
+- [x] browser title text: Our Team
+- [x] browser route shell visible: 1440x2438
 
 ### /perspectives
 
@@ -37,6 +44,9 @@ Status: ready
 - [x] route shell: page uses route-shell layout class
 - [x] content signal: 6 sections, 0 paragraphs, 18 links
 - [x] route css: app/globals.css contains route-shell styles
+- [x] browser response: 200 http://127.0.0.1:3222/perspectives
+- [x] browser title text: Our Thoughts
+- [x] browser route shell visible: 1440x1000
 
 ## Next
 

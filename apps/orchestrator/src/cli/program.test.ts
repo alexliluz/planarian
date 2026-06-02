@@ -276,6 +276,7 @@ describe("createProgram", () => {
     const output = await runCommand(tempRoot, ["node", "planarian", "formal-route-smoke", "demo"]);
 
     expect(output).toContain("Formal route smoke for demo: ready");
+    expect(output).toContain("Mode: static");
     expect(output).toContain("OK /people: 5 check(s)");
     expect(output).toContain("ROUTE_SMOKE.md");
   });

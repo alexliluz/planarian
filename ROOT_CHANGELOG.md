@@ -66,3 +66,4 @@
 - Added `formal-routes-pass` to the default pipeline when page capture is enabled.
 - Added `pnpm cli formal-route-smoke <session-id>` to write static route smoke reports for generated formal clone routes.
 - Allowed `formal-clone/ROUTE_SMOKE.md` reports to be committed as durable session artifacts.
+- Extended `formal-route-smoke` with browser-backed checks using `--browser --start-server --port <number>`.

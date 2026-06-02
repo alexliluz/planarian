@@ -191,6 +191,12 @@ Run static smoke checks for generated non-home routes:
 corepack pnpm cli formal-route-smoke example-com-0f115db062
 ```
 
+Run browser-backed route smoke checks by starting the formal clone dev server:
+
+```bash
+corepack pnpm cli formal-route-smoke example-com-0f115db062 --browser --start-server --port 3222
+```
+
 Check whether the session is ready for formal clone work:
 
 ```bash
@@ -480,6 +486,7 @@ corepack pnpm cli formal-scaffold <session-id> --force
 corepack pnpm cli formal-static-pass <session-id>
 corepack pnpm cli formal-routes-pass <session-id>
 corepack pnpm cli formal-route-smoke <session-id>
+corepack pnpm cli formal-route-smoke <session-id> --browser --start-server --port 3222
 corepack pnpm cli integrate-upstreams <session-id>
 corepack pnpm cli react-grab-install-task <session-id>
 corepack pnpm cli react-grab-task <session-id> --context ./grab-context.json

@@ -302,19 +302,39 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
   program
     .command("formal-route-smoke")
     .argument("<session-id>", "CloneSession id")
+    .option("--browser", "Run browser-backed route checks with Playwright")
+    .option("--start-server", "Start the formal clone dev server for browser-backed checks")
+    .option("--base-url <url>", "Use an already-running formal clone server")
+    .option("--port <count>", "Port for --start-server browser checks", parsePositiveInteger)
     .description("Run static smoke checks for generated non-home formal clone routes")
-    .action(async (sessionId: string) => {
-      const report = await runFormalRouteSmoke(getProjectRoot(), sessionId);
-      console.log(`Formal route smoke for ${report.sessionId}: ${report.ready ? "ready" : "not ready"}`);
-      for (const route of report.routes) {
-        console.log(`${route.ok ? "OK" : "FAIL"} ${route.routePath}: ${route.checks.length} check(s)`);
-      }
-      console.log(`Report: ${report.reportPath}`);
+    .action(
+      async (
+        sessionId: string,
+        commandOptions: {
+          browser?: boolean;
+          startServer?: boolean;
+          baseUrl?: string;
+          port?: number;
+        }
+      ) => {
+        const report = await runFormalRouteSmoke(getProjectRoot(), sessionId, {
+          browser: commandOptions.browser,
+          startServer: commandOptions.startServer,
+          baseUrl: commandOptions.baseUrl,
+          port: commandOptions.port
+        });
+        console.log(`Formal route smoke for ${report.sessionId}: ${report.ready ? "ready" : "not ready"}`);
+        console.log(`Mode: ${report.mode}`);
+        for (const route of report.routes) {
+          console.log(`${route.ok ? "OK" : "FAIL"} ${route.routePath}: ${route.checks.length} check(s)`);
+        }
+        console.log(`Report: ${report.reportPath}`);
 
-      if (!report.ready) {
-        process.exitCode = 1;
+        if (!report.ready) {
+          process.exitCode = 1;
+        }
       }
-    });
+    );
 
   program
     .command("formal-validate")

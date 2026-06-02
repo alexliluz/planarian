@@ -17,7 +17,7 @@ This file is the fixed handoff document for Planarian. Every AI agent working in
 - Project name: `Planarian`
 - Package name: `planarian`
 - Current phase: `Phase 1.5 stabilization in progress`
-- Repository status: local `main` tracks `origin/main` but is currently ahead by local commits because the latest push attempt failed with a GitHub HTTPS connection reset.
+- Repository status: local `main` tracks `origin/main` but is currently ahead by local commits because the latest push attempt failed with a GitHub HTTPS connection failure.
 - GitHub repository: `alexliluz/planarian`
 - Package manager: `pnpm@9.15.4`
 - Local note: plain `pnpm` may not be available on PATH in this environment; `corepack pnpm ...` works.
@@ -1556,3 +1556,61 @@ Next:
 
 - Run the full project check.
 - Add optional browser-backed route smoke when a local formal clone server is running.
+
+Push status:
+
+- Local `main` was ahead of `origin/main` by 10 commits.
+- Push attempt failed on 2026-06-02:
+  - `Failed to connect to github.com port 443 after 21069 ms: Could not connect to server`
+- Treat this as a network connectivity issue, not a merge or authentication conflict.
+
+### 2026-06-02 - Browser-Backed Route Smoke
+
+Summary:
+
+- Extended `formal-route-smoke <session-id>` with browser-backed checks.
+- New options:
+  - `--browser`
+  - `--start-server`
+  - `--base-url <url>`
+  - `--port <count>`
+- Browser mode can start the formal clone dev server, wait for it, visit each generated route with Playwright, and verify:
+  - HTTP response below 400
+  - route title text appears in the rendered page
+  - `.route-shell` is visible and has non-zero size
+- The server is stopped after the run.
+- Verified against the Kleiner Perkins session on local port `3222`.
+
+Files changed:
+
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `AI_HANDOFF.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/formalRouteSmoke.ts`
+- `apps/orchestrator/src/core/formalRouteSmoke.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/ROUTE_SMOKE.md`
+
+Validation:
+
+```bash
+git push origin main
+corepack pnpm exec vitest run apps/orchestrator/src/core/formalRouteSmoke.test.ts apps/orchestrator/src/cli/program.test.ts
+corepack pnpm typecheck
+corepack pnpm cli formal-route-smoke kleinerperkins-com-b414a4e408 --browser --start-server --port 3222
+Get-NetTCPConnection -LocalPort 3222 -ErrorAction SilentlyContinue
+corepack pnpm check
+```
+
+Result:
+
+- Push failed because GitHub port 443 was unreachable from this environment.
+- Browser-backed route smoke passed for `/about`, `/people`, and `/perspectives`.
+- No dev server process remained on port `3222`.
+- Full check passed: 26 test files, 95 tests.
+
+Next:
+
+- Run the full project check.
+- Add optional browser screenshot artifacts or visual metrics for route smoke.
