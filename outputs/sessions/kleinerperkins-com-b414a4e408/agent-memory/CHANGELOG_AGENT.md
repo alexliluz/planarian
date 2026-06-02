@@ -78,3 +78,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/app/about/page.tsx`, `formal-clone/app/people/page.tsx`, `formal-clone/app/perspectives/page.tsx`, `formal-clone/data/formal-routes.json`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm cli formal-scaffold kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, `corepack pnpm check`
 - Notes: Existing homepage implementation was preserved. New route placeholders point future agents to each route's captured HTML and screenshot. Build validation passed after adding `/about`, `/people`, and `/perspectives`. Full project check passed with 24 test files and 87 tests.
+
+## 2026-06-02 - Codex
+
+- Summary: Replaced route placeholders with content-aware first-pass route pages from captured HTML.
+- Files changed: `formal-clone/app/about/page.tsx`, `formal-clone/app/people/page.tsx`, `formal-clone/app/perspectives/page.tsx`, `formal-clone/app/globals.css`, `formal-clone/data/route-content.json`, `formal-clone/ROUTE_IMPLEMENTATION.md`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm cli formal-routes-pass kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, `corepack pnpm check`
+- Notes: `/about`, `/people`, and `/perspectives` now render extracted public page titles, section headings, paragraphs, and filtered public links. This is still a first-pass reconstruction and should be visually repaired against captured route screenshots. Full project check passed with 25 test files and 91 tests.

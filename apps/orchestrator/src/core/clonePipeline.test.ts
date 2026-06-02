@@ -64,6 +64,7 @@ describe("runClonePipeline", () => {
       "asset-localize",
       "formal-research",
       "formal-scaffold",
+      "formal-routes-pass",
       "formal-validate"
     ]);
     expect(runbook).toContain("Planarian Session Runbook");
@@ -73,6 +74,7 @@ describe("runClonePipeline", () => {
     expect(result.jsonReportPath).toBe(path.join(sessionRoot, "pipeline-run.json"));
     expect(pipelineReport).toContain("# Pipeline Run");
     expect(pipelineReport).toContain("| capture-pages | skipped | Skipped by option |");
+    expect(pipelineReport).toContain("| formal-routes-pass | skipped | Skipped because page capture was skipped |");
     expect(pipelineJson).toContain('"status": "complete"');
   });
 });

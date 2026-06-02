@@ -389,3 +389,91 @@ button {
     margin: 0 24px 48px;
   }
 }
+
+.route-shell {
+  min-height: 100vh;
+  padding: 112px 6vw 96px;
+  color: #ffffff;
+  background: #000000;
+}
+
+.route-hero {
+  max-width: 980px;
+  margin: 0 0 72px;
+}
+
+.route-kicker {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.route-hero h1 {
+  margin: 0;
+  font-size: 64px;
+  line-height: 1;
+}
+
+.route-intro,
+.route-copy {
+  max-width: 860px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 70px 0;
+}
+
+.route-card {
+  min-height: 150px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  background: #0d0d0d;
+}
+
+.route-card h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.route-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 64px;
+}
+
+.route-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .route-shell {
+    padding: 92px 24px 72px;
+  }
+
+  .route-hero h1 {
+    font-size: 44px;
+  }
+
+  .route-grid {
+    grid-template-columns: 1fr;
+  }
+}

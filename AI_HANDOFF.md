@@ -1456,3 +1456,58 @@ Next:
 
 - Run the full project check.
 - Replace route placeholders with content-aware first-pass implementations from each captured page.
+
+### 2026-06-02 - Content-Aware Route Pass
+
+Summary:
+
+- Added `formal-routes-pass <session-id>`.
+- The command reads captured non-home page HTML from `target-research/pages/*/raw-html.html`.
+- It extracts route title, section headings, paragraphs, and useful public links.
+- It writes content-aware route pages under `formal-clone/app/<route>/page.tsx`.
+- It writes `formal-clone/data/route-content.json`.
+- It writes `formal-clone/ROUTE_IMPLEMENTATION.md`.
+- It appends shared `.route-*` CSS to `formal-clone/app/globals.css` once.
+- Integrated `formal-routes-pass` into the default `pipeline <url>` flow when page capture is enabled.
+- Verified against the Kleiner Perkins session.
+
+Files changed:
+
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `AI_HANDOFF.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/cli/program.test.ts`
+- `apps/orchestrator/src/core/clonePipeline.ts`
+- `apps/orchestrator/src/core/clonePipeline.test.ts`
+- `apps/orchestrator/src/core/formalRoutesPass.ts`
+- `apps/orchestrator/src/core/formalRoutesPass.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/about/page.tsx`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/people/page.tsx`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/perspectives/page.tsx`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/globals.css`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/data/route-content.json`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/ROUTE_IMPLEMENTATION.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/VALIDATION.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm exec vitest run apps/orchestrator/src/core/formalRoutesPass.test.ts apps/orchestrator/src/cli/program.test.ts
+corepack pnpm typecheck
+corepack pnpm cli formal-routes-pass kleinerperkins-com-b414a4e408
+corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build
+corepack pnpm check
+```
+
+Result:
+
+- Route first-pass pages generated for `/about`, `/people`, and `/perspectives`.
+- Build validation passed.
+- Full check passed: 25 test files, 91 tests.
+
+Next:
+
+- Run the full project check.
+- Add visual route smoke checks for `/about`, `/people`, and `/perspectives`.

@@ -62,3 +62,5 @@
 - Updated `pnpm cli pipeline <url>` output to print the generated report path.
 - Updated the default formal clone scaffold Next.js config for nested `outputs/` build compatibility.
 - Updated `pnpm cli formal-scaffold <session-id>` to generate basic Next.js route placeholders for captured non-home pages.
+- Added `pnpm cli formal-routes-pass <session-id>` to generate content-aware first-pass pages for captured non-home routes.
+- Added `formal-routes-pass` to the default pipeline when page capture is enabled.

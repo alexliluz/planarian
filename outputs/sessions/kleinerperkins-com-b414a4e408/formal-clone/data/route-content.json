@@ -1,0 +1,255 @@
+[
+  {
+    "title": "Our History",
+    "url": "https://www.kleinerperkins.com/about",
+    "routePath": "/about",
+    "sourceDir": "target-research/pages/about",
+    "sections": [
+      "Our Mission",
+      "Our Ethos",
+      "Our Values"
+    ],
+    "paragraphs": [],
+    "links": [
+      {
+        "label": "Kleiner Perkins Fellows",
+        "href": "https://www.kleinerperkins.com/fellows/"
+      },
+      {
+        "label": "Brand Assets",
+        "href": "https://www.kleinerperkins.com/brand-assets/"
+      },
+      {
+        "label": "Terms of Use",
+        "href": "https://www.kleinerperkins.com/terms-conditions/"
+      },
+      {
+        "label": "Disclosures",
+        "href": "https://www.kleinerperkins.com/disclosures/"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/company/kleinerperkins/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3Br0DzsRvPQJu3RMJD%2BD6cqg%3D%3D"
+      },
+      {
+        "label": "X",
+        "href": "https://x.com/kleinerperkins"
+      },
+      {
+        "label": "YouTube",
+        "href": "https://www.youtube.com/@KleinerPerkinsVideos"
+      },
+      {
+        "label": "LP Login",
+        "href": "https://portal.kleinerperkins.com/"
+      }
+    ]
+  },
+  {
+    "title": "Our Team",
+    "url": "https://www.kleinerperkins.com/people",
+    "routePath": "/people",
+    "sourceDir": "target-research/pages/people",
+    "sections": [
+      "Leigh Marie Braswell",
+      "Josh Coyne",
+      "Ilya Fushman",
+      "Mamoon Hamid",
+      "Aditya Naganath",
+      "Aatish Nayak",
+      "Nadia Cochinwala",
+      "Lucas Oliveira",
+      "Leo Shao",
+      "Tomas Barreto",
+      "Susan Biglieri",
+      "Moustafa ElBialy",
+      "Suzanne Holloway",
+      "Jesse King",
+      "Joubin Mirzadegan",
+      "Lauren Schultz",
+      "Candy Cheng",
+      "Lindsey Keller",
+      "Camille Manso",
+      "Athena Ruland",
+      "Dana Schafer-Smith",
+      "Brook Byers",
+      "John Doerr",
+      "Annie Case"
+    ],
+    "paragraphs": [
+      "Operating Partner, Engineering",
+      "Chief Financial Officer & Chief Operating Officer",
+      "Chief Information Officer",
+      "Operating Partner, Marketing",
+      "Partner, General Counsel",
+      "Operating Partner, Business Development",
+      "Head of Content Identity",
+      "Business Development",
+      "Experience Marketing",
+      "Advisor to the Chairman"
+    ],
+    "links": [
+      {
+        "label": "Leigh Marie Braswell",
+        "href": "https://www.kleinerperkins.com/people/leigh-marie-braswell/"
+      },
+      {
+        "label": "Josh Coyne",
+        "href": "https://www.kleinerperkins.com/people/josh-coyne/"
+      },
+      {
+        "label": "Ilya Fushman",
+        "href": "https://www.kleinerperkins.com/people/ilya-fushman/"
+      },
+      {
+        "label": "Mamoon Hamid",
+        "href": "https://www.kleinerperkins.com/people/mamoon-hamid/"
+      },
+      {
+        "label": "Aditya Naganath",
+        "href": "https://www.kleinerperkins.com/people/aditya-naganath/"
+      },
+      {
+        "label": "Aatish Nayak",
+        "href": "https://www.kleinerperkins.com/people/aatish-nayak/"
+      },
+      {
+        "label": "Nadia Cochinwala",
+        "href": "https://www.kleinerperkins.com/people/nadia-cochinwala/"
+      },
+      {
+        "label": "Lucas Oliveira",
+        "href": "https://www.kleinerperkins.com/people/lucas-oliveira/"
+      },
+      {
+        "label": "Leo Shao",
+        "href": "https://www.kleinerperkins.com/people/leo-shao/"
+      },
+      {
+        "label": "Tomas Barreto",
+        "href": "https://www.kleinerperkins.com/people/tomas-barreto/"
+      },
+      {
+        "label": "Susan Biglieri",
+        "href": "https://www.kleinerperkins.com/people/susan-biglieri/"
+      },
+      {
+        "label": "Moustafa ElBialy",
+        "href": "https://www.kleinerperkins.com/people/moustafa-elbialy/"
+      },
+      {
+        "label": "Suzanne Holloway",
+        "href": "https://www.kleinerperkins.com/people/suzanne-holloway/"
+      },
+      {
+        "label": "Jesse King",
+        "href": "https://www.kleinerperkins.com/people/jesse-king/"
+      },
+      {
+        "label": "Joubin Mirzadegan",
+        "href": "https://www.kleinerperkins.com/people/joubin-mirzadegan/"
+      },
+      {
+        "label": "Lauren Schultz",
+        "href": "https://www.kleinerperkins.com/people/lauren-schultz/"
+      },
+      {
+        "label": "Candy Cheng",
+        "href": "https://www.kleinerperkins.com/people/candy-cheng/"
+      },
+      {
+        "label": "Lindsey Keller",
+        "href": "https://www.kleinerperkins.com/people/lindsey-keller/"
+      }
+    ]
+  },
+  {
+    "title": "Our Thoughts",
+    "url": "https://www.kleinerperkins.com/perspectives",
+    "routePath": "/perspectives",
+    "sourceDir": "target-research/pages/perspectives",
+    "sections": [
+      "Applied Compute: Closing the Gap Between Frontier AI and Real-World Impact",
+      "Mind Robotics: Building the AI-Native Robotics Platform for Manufacturing",
+      "Roadrunner: The new revenue infrastructure",
+      "Rogo: The AI Platform for Global Finance",
+      "Avoca: Bringing AI to the backbone of the real economy",
+      "Saronic: Redefining Maritime Superiority"
+    ],
+    "paragraphs": [],
+    "links": [
+      {
+        "label": "Case Studies",
+        "href": "/perspectives/category/case-study"
+      },
+      {
+        "label": "Media",
+        "href": "/perspectives/category/media"
+      },
+      {
+        "label": "Announcements",
+        "href": "/perspectives/category/announcements"
+      },
+      {
+        "label": "Grid view",
+        "href": "?layout=grid"
+      },
+      {
+        "label": "List view",
+        "href": "?layout=list"
+      },
+      {
+        "label": "Applied Compute: Closing the Gap Between Frontier AI and Real-World Impact",
+        "href": "https://www.kleinerperkins.com/perspectives/applied-compute-closing-the-gap-between-frontier-ai-and-real-world-impact/"
+      },
+      {
+        "label": "Mind Robotics: Building the AI-Native Robotics Platform for Manufacturing",
+        "href": "https://www.kleinerperkins.com/perspectives/mind-robotics-building-the-ai-native-robotics-platform-for-manufacturing/"
+      },
+      {
+        "label": "Roadrunner: The new revenue infrastructure",
+        "href": "https://www.kleinerperkins.com/perspectives/roadrunner-the-new-revenue-infrastructure/"
+      },
+      {
+        "label": "Rogo: The AI Platform for Global Finance",
+        "href": "https://www.kleinerperkins.com/perspectives/rogo-the-ai-platform-for-global-finance/"
+      },
+      {
+        "label": "Avoca: Bringing AI to the backbone of the real economy",
+        "href": "https://www.kleinerperkins.com/perspectives/avoca-bringing-ai-to-the-backbone-of-the-real-economy/"
+      },
+      {
+        "label": "Saronic: Redefining Maritime Superiority",
+        "href": "https://www.kleinerperkins.com/perspectives/saronic-redefining-maritime-superiority/"
+      },
+      {
+        "label": "Kleiner Perkins Fellows",
+        "href": "https://www.kleinerperkins.com/fellows/"
+      },
+      {
+        "label": "Brand Assets",
+        "href": "https://www.kleinerperkins.com/brand-assets/"
+      },
+      {
+        "label": "Terms of Use",
+        "href": "https://www.kleinerperkins.com/terms-conditions/"
+      },
+      {
+        "label": "Disclosures",
+        "href": "https://www.kleinerperkins.com/disclosures/"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/company/kleinerperkins/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3Br0DzsRvPQJu3RMJD%2BD6cqg%3D%3D"
+      },
+      {
+        "label": "X",
+        "href": "https://x.com/kleinerperkins"
+      },
+      {
+        "label": "YouTube",
+        "href": "https://www.youtube.com/@KleinerPerkinsVideos"
+      }
+    ]
+  }
+]

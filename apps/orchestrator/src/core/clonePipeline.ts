@@ -7,6 +7,7 @@ import { capturePages } from "./pageCapture.js";
 import { discoverPages } from "./pageDiscovery.js";
 import { createFormalCloneScaffold } from "./formalScaffold.js";
 import { createFormalResearch } from "./formalResearch.js";
+import { createFormalRoutesPass } from "./formalRoutesPass.js";
 import { validateFormalClone } from "./formalValidate.js";
 import { createSessionRunbook } from "./sessionRunbook.js";
 import { getSessionRoot, readCloneSession } from "./sessionRepository.js";
@@ -22,6 +23,7 @@ export interface ClonePipelineOptions {
   assetDryRun?: boolean;
   skipPageCapture?: boolean;
   skipScaffold?: boolean;
+  skipRoutesPass?: boolean;
   runBuild?: boolean;
   analyzer?: AnalyzeTargetFunction;
 }
@@ -111,6 +113,17 @@ export async function runClonePipeline(options: ClonePipelineOptions): Promise<C
     });
   }
 
+  if (options.skipPageCapture || options.skipRoutesPass) {
+    steps.push({
+      name: "formal-routes-pass",
+      status: "skipped",
+      detail: options.skipRoutesPass ? "Skipped by option" : "Skipped because page capture was skipped"
+    });
+  } else {
+    const routes = await createFormalRoutesPass(options.projectRoot, sessionId);
+    steps.push({ name: "formal-routes-pass", status: "ok", detail: `${routes.files.length} file(s)` });
+  }
+
   const validation = await validateFormalClone(options.projectRoot, sessionId, { runBuild: options.runBuild });
   steps.push({
     name: "formal-validate",
@@ -131,6 +144,7 @@ export async function runClonePipeline(options: ClonePipelineOptions): Promise<C
       assetDryRun: options.assetDryRun ?? false,
       skipPageCapture: options.skipPageCapture ?? false,
       skipScaffold: options.skipScaffold ?? false,
+      skipRoutesPass: options.skipRoutesPass ?? false,
       runBuild: options.runBuild ?? false,
       refresh: options.refresh ?? false
     }
@@ -151,6 +165,7 @@ interface PipelineReportInput {
     assetDryRun: boolean;
     skipPageCapture: boolean;
     skipScaffold: boolean;
+    skipRoutesPass: boolean;
     runBuild: boolean;
     refresh: boolean;
   };

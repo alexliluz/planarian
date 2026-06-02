@@ -228,6 +228,33 @@ describe("createProgram", () => {
     expect(output).toContain("formal-clone/STATIC_IMPLEMENTATION.md");
   });
 
+  it("creates content-aware route pages", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
+    await writeSession(tempRoot, "demo");
+    await writeFormalClone(tempRoot, "demo");
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await mkdir(path.join(sessionRoot, "target-research", "pages", "people"), { recursive: true });
+    await writeFile(
+      path.join(sessionRoot, "target-research", "pages", "capture-manifest.json"),
+      JSON.stringify({
+        sessionId: "demo",
+        pages: [{ url: "https://example.com/people", outputDir: "target-research/pages/people" }]
+      }),
+      "utf8"
+    );
+    await writeFile(
+      path.join(sessionRoot, "target-research", "pages", "people", "raw-html.html"),
+      "<h1>Our Team</h1><h2>Jane Doe</h2><p>Partner focused on early-stage company building.</p>",
+      "utf8"
+    );
+
+    const output = await runCommand(tempRoot, ["node", "planarian", "formal-routes-pass", "demo"]);
+
+    expect(output).toContain("Created formal routes pass for demo");
+    expect(output).toContain("formal-clone/app/people/page.tsx");
+    expect(output).toContain("formal-clone/ROUTE_IMPLEMENTATION.md");
+  });
+
   it("creates upstream integration task files", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-cli-"));
     await writeSession(tempRoot, "demo");

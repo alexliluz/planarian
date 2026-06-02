@@ -13,6 +13,7 @@ import { createFormalComparison } from "../core/formalCompare.js";
 import { createFormalResearch } from "../core/formalResearch.js";
 import { createFormalCloneScaffold } from "../core/formalScaffold.js";
 import { createFormalStaticPass } from "../core/formalStaticPass.js";
+import { createFormalRoutesPass } from "../core/formalRoutesPass.js";
 import { validateFormalClone } from "../core/formalValidate.js";
 import {
   createReactGrabInstallTaskFile,
@@ -59,6 +60,7 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
     .option("--asset-dry-run", "Plan asset localization without downloading assets")
     .option("--skip-page-capture", "Skip discovered page capture")
     .option("--skip-scaffold", "Skip formal clone scaffold creation")
+    .option("--skip-routes-pass", "Skip content-aware route page generation")
     .option("--run-build", "Run formal clone build validation at the end")
     .description("Run the default Planarian capture, research, asset, scaffold, and validation workflow")
     .action(
@@ -71,6 +73,7 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
           assetDryRun?: boolean;
           skipPageCapture?: boolean;
           skipScaffold?: boolean;
+          skipRoutesPass?: boolean;
           runBuild?: boolean;
         }
       ) => {
@@ -83,6 +86,7 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
           assetDryRun: commandOptions.assetDryRun,
           skipPageCapture: commandOptions.skipPageCapture,
           skipScaffold: commandOptions.skipScaffold,
+          skipRoutesPass: commandOptions.skipRoutesPass,
           runBuild: commandOptions.runBuild
         });
         console.log(`Pipeline completed for ${result.sessionId}`);
@@ -277,6 +281,18 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
     .action(async (sessionId: string) => {
       const result = await createFormalStaticPass(getProjectRoot(), sessionId);
       console.log(`Created formal static pass for ${result.sessionId}`);
+      for (const file of result.files) {
+        console.log(`- ${file}`);
+      }
+    });
+
+  program
+    .command("formal-routes-pass")
+    .argument("<session-id>", "CloneSession id")
+    .description("Generate content-aware first-pass pages for captured non-home routes")
+    .action(async (sessionId: string) => {
+      const result = await createFormalRoutesPass(getProjectRoot(), sessionId);
+      console.log(`Created formal routes pass for ${result.sessionId}`);
       for (const file of result.files) {
         console.log(`- ${file}`);
       }
