@@ -99,3 +99,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/ROUTE_SMOKE.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm cli formal-route-smoke kleinerperkins-com-b414a4e408 --browser --start-server --port 3222`, `corepack pnpm check`
 - Notes: Browser-backed route smoke passed for `/about`, `/people`, and `/perspectives`. Each route returned HTTP 200, rendered its title text, and had a visible `.route-shell`. Port `3222` had no remaining listener after the run. Full project check passed with 26 test files and 95 tests.
+
+## 2026-06-02 - Codex
+
+- Summary: Re-ran the full staged pipeline with browser route smoke enabled.
+- Files changed: `PIPELINE_RUN.md`, `pipeline-run.json`, `formal-clone/ROUTE_SMOKE.md`, `target-research/site-map.json`, `target-research/PAGE_DISCOVERY.md`, `target-research/pages/capture-manifest.json`, `references/VISUAL_PLAN.md`, `formal-clone/docs/research/04-multi-page-map.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm cli pipeline https://www.kleinerperkins.com --pages 4 --skip-scaffold --browser-smoke --browser-smoke-port 3224`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, `corepack pnpm check`
+- Notes: Pipeline completed. Browser-backed route smoke passed for 3 routes. Page discovery now reports 40 same-host pages. Build validation was restored after the pipeline run. Port `3224` had no remaining listener after the run. Full project check passed with 26 test files and 97 tests.

@@ -29,8 +29,8 @@ Target: https://www.kleinerperkins.com/
 - Read More
 - Website
 - John Doerr
-- Thomas Kurian – Google Cloud – Competitor-Aware and Customer-Obsessed
-- Google: Organizing the world’s information and making it searchable
+- Thomas Kurian - Google Cloud - Competitor-Aware and Customer-Obsessed
+- Google: Organizing the world's information and making it searchable
 - Bing Gordon
 - Amazon: Reimagining commerce
 - Spotify: Reimagining entertainment one song at a time through streaming music
@@ -41,23 +41,23 @@ Target: https://www.kleinerperkins.com/
 - Figma: Unleashing creativity through collaborative design
 - Figma: Crazy Ramping Series C
 - Ilya Fushman
-- EP 1 | The Finance Leader’s Playbook
-- Parker Conrad – Rippling – Compounding
+- EP 1 | The Finance Leader's Playbook
+- Parker Conrad - Rippling - Compounding
 - Rippling: Unifying employee data and workplace systems
 - Rippling: The system of record for employee data
 - Welcome Rippling
-- Duolingo: The world’s best way to learn a language
+- Duolingo: The world's best way to learn a language
 - Lucas Oliveira
 - LinkedIn
 - Nadia Cochinwala
 - Waymo: The Infrastructure of Autonomy
-- The Expert Network Behind Handshake AI’s Model Training w/ Garrett Lord & Mamoon Hamid
+- The Expert Network Behind Handshake AI's Model Training w/ Garrett Lord & Mamoon Hamid
 - Handshake: Moving the needle on inequality
 - Slack: Building the workplace collaboration hub
-- Slack: it’s where work happens
+- Slack: it's where work happens
 - Motive: The AI Engine Powering the Physical Economy
 - Motive: The AI engine powering the physical economy
-- Shoaib Makani – Motive – Powering the Physical Economy
+- Shoaib Makani - Motive - Powering the Physical Economy
 - Automating the physical economy
 - EP 2 | What Product Leaders Must Rethink in the AI Era
 
@@ -101,8 +101,8 @@ Target: https://www.kleinerperkins.com/
 - Stage
 - Founders
 - Partners
-- Thomas Kurian – Google Cloud – Competitor-Aware and Customer-Obsessed
-- Google: Organizing the world’s information and making it searchable
+- Thomas Kurian - Google Cloud - Competitor-Aware and Customer-Obsessed
+- Google: Organizing the world's information and making it searchable
 
 ## Text Excerpt
 

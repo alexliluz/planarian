@@ -7,9 +7,9 @@ This file summarizes the multi-page capture queue. Use it to decide shared route
 
 ## Summary
 
-- Discovered pages: 25
+- Discovered pages: 40
 - Captured pages: 4
-- Pending pages: 21
+- Pending pages: 36
 
 ## Captured Pages
 
@@ -128,6 +128,15 @@ This file summarizes the multi-page capture queue. Use it to decide shared route
 - /perspectives/applied-intuition-powering-the-next-era-of-vehicle-intelligence-2: https://www.kleinerperkins.com/perspectives/applied-intuition-powering-the-next-era-of-vehicle-intelligence-2
 - /perspectives/armadin-the-ultimate-attacker: https://www.kleinerperkins.com/perspectives/armadin-the-ultimate-attacker
 - /perspectives/arvind-jain-glean: https://www.kleinerperkins.com/perspectives/arvind-jain-glean
+- /perspectives/claire-hughes-johnson-stripe: https://www.kleinerperkins.com/perspectives/claire-hughes-johnson-stripe
+- /perspectives/crazy-ramping-series-c: https://www.kleinerperkins.com/perspectives/crazy-ramping-series-c
+- /perspectives/doordash-delivering-the-future-of-local: https://www.kleinerperkins.com/perspectives/doordash-delivering-the-future-of-local
+- /perspectives/duolingo: https://www.kleinerperkins.com/perspectives/duolingo
+- /perspectives/figma-design: https://www.kleinerperkins.com/perspectives/figma-design
+- /perspectives/figma-made-design-collaborative-today-it-makes-history: https://www.kleinerperkins.com/perspectives/figma-made-design-collaborative-today-it-makes-history
+- /perspectives/genentech: https://www.kleinerperkins.com/perspectives/genentech
+- /perspectives/glean: https://www.kleinerperkins.com/perspectives/glean
+- /perspectives/glean-case-study: https://www.kleinerperkins.com/perspectives/glean-case-study
 
 ## Route And Component Notes
 

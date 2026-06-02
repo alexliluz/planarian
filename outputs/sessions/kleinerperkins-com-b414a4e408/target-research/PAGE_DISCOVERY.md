@@ -7,7 +7,7 @@ This file is the first multi-page capture queue for the target site. It is inten
 
 ## Summary
 
-- Discovered pages: 25
+- Discovered pages: 40
 - Source: homepage HTML links
 - Scope: same-host public URLs only
 
@@ -187,6 +187,111 @@ This file is the first multi-page capture queue for the target site. It is inten
 - Priority: 40
 - Reason: Section detail page; capture after top-level sections.
 - Label: Arvind Jain - Glean - New Playbook
+
+### 26. /perspectives/claire-hughes-johnson-stripe
+
+- URL: https://www.kleinerperkins.com/perspectives/claire-hughes-johnson-stripe
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Claire Hughes-Johnson - Stripe - Scaling People
+
+### 27. /perspectives/crazy-ramping-series-c
+
+- URL: https://www.kleinerperkins.com/perspectives/crazy-ramping-series-c
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Figma: Crazy Ramping Series C
+
+### 28. /perspectives/doordash-delivering-the-future-of-local
+
+- URL: https://www.kleinerperkins.com/perspectives/doordash-delivering-the-future-of-local
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: DoorDash: delivering the future of local
+
+### 29. /perspectives/duolingo
+
+- URL: https://www.kleinerperkins.com/perspectives/duolingo
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Duolingo: The world's best way to learn a language
+
+### 30. /perspectives/figma-design
+
+- URL: https://www.kleinerperkins.com/perspectives/figma-design
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Figma: Unleashing creativity through collaborative design
+
+### 31. /perspectives/figma-made-design-collaborative-today-it-makes-history
+
+- URL: https://www.kleinerperkins.com/perspectives/figma-made-design-collaborative-today-it-makes-history
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Figma made design collaborative. Today, it makes history.
+
+### 32. /perspectives/genentech
+
+- URL: https://www.kleinerperkins.com/perspectives/genentech
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Genentech: Pioneering medical breakthroughs with biotechnology
+
+### 33. /perspectives/glean
+
+- URL: https://www.kleinerperkins.com/perspectives/glean
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Making workplace knowledge accessible
+
+### 34. /perspectives/glean-case-study
+
+- URL: https://www.kleinerperkins.com/perspectives/glean-case-study
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Glean: Work AI for all
+
+### 35. /perspectives/glean-series-c
+
+- URL: https://www.kleinerperkins.com/perspectives/glean-series-c
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Glean: Empowering employees to find answers
+
+### 36. /perspectives/glean-series-d
+
+- URL: https://www.kleinerperkins.com/perspectives/glean-series-d
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: AI for the Enterprise
+
+### 37. /perspectives/google
+
+- URL: https://www.kleinerperkins.com/perspectives/google
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Google: Organizing the world's information and making it searchable
+
+### 38. /perspectives/granola-putting-your-companys-context-to-work
+
+- URL: https://www.kleinerperkins.com/perspectives/granola-putting-your-companys-context-to-work
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Granola: Putting Your Company's Context to Work
+
+### 39. /perspectives/handshake-moving-the-needle-on-inequality
+
+- URL: https://www.kleinerperkins.com/perspectives/handshake-moving-the-needle-on-inequality
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Handshake: Moving the needle on inequality
+
+### 40. /perspectives/harvey-ai
+
+- URL: https://www.kleinerperkins.com/perspectives/harvey-ai
+- Priority: 40
+- Reason: Section detail page; capture after top-level sections.
+- Label: Harvey: Super-powering knowledge work
 
 ## Suggested Command
 

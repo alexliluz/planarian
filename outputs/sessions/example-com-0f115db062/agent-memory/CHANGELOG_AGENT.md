@@ -106,3 +106,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `PIPELINE_RUN.md`, `pipeline-run.json`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold`, `corepack pnpm check`
 - Notes: `PIPELINE_RUN.md` is now the first file to inspect after running the default pipeline. It records budgets, skipped steps, step results, and next actions for future agents. Full project check passed with 24 test files and 86 tests.
+
+## 2026-06-02 - Codex
+
+- Summary: Re-ran the pipeline with browser smoke enabled for this single-page target.
+- Files changed: `PIPELINE_RUN.md`, `pipeline-run.json`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold --browser-smoke --browser-smoke-port 3223`, `corepack pnpm check`
+- Notes: Pipeline completed. `formal-routes-pass` and `formal-route-smoke` were skipped because this session has no generated non-home routes. No empty route smoke artifacts remain for this session. Full project check passed with 26 test files and 97 tests.

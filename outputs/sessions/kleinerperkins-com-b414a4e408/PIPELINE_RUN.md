@@ -1,22 +1,22 @@
 # Pipeline Run
 
-Session: example-com-0f115db062
-Target: https://example.com/
+Session: kleinerperkins-com-b414a4e408
+Target: https://www.kleinerperkins.com/
 Classification: unknown
 Status: complete
-Started: 2026-06-02T12:10:00.478Z
-Finished: 2026-06-02T12:10:01.717Z
+Started: 2026-06-02T12:11:06.594Z
+Finished: 2026-06-02T12:11:31.738Z
 
 ## Options
 
-- pageLimit: 2
+- pageLimit: 4
 - assetLimit: 0
 - assetDryRun: false
 - skipPageCapture: false
 - skipScaffold: true
 - skipRoutesPass: false
 - browserSmoke: true
-- browserSmokePort: 3223
+- browserSmokePort: 3224
 - runBuild: false
 - refresh: false
 
@@ -24,23 +24,23 @@ Finished: 2026-06-02T12:10:01.717Z
 
 | Step | Status | Detail |
 | --- | --- | --- |
-| init | ok | Session example-com-0f115db062 |
+| init | ok | Session kleinerperkins-com-b414a4e408 |
 | session-runbook | ok | RUNBOOK.md |
-| discover-pages | ok | 1 page(s) |
-| capture-pages | ok | 1 page(s) |
+| discover-pages | ok | 40 page(s) |
+| capture-pages | ok | 4 page(s) |
 | asset-inventory | ok | references/ASSET_INVENTORY.md, references/VISUAL_PLAN.md |
-| asset-download-plan | ok | G:\workspace\planarian\outputs\sessions\example-com-0f115db062\references\ASSET_DOWNLOAD_PLAN.md |
+| asset-download-plan | ok | G:\workspace\planarian\outputs\sessions\kleinerperkins-com-b414a4e408\references\ASSET_DOWNLOAD_PLAN.md |
 | asset-localize | skipped | Use --assets <count> to download public assets |
 | formal-research | ok | 6 file(s) |
 | formal-scaffold | skipped | Skipped by option |
-| formal-routes-pass | skipped | No non-home routes |
-| formal-validate | ok | G:\workspace\planarian\outputs\sessions\example-com-0f115db062\formal-clone\VALIDATION.md |
-| formal-route-smoke | skipped | No generated non-home routes |
+| formal-routes-pass | ok | 5 file(s) |
+| formal-validate | ok | G:\workspace\planarian\outputs\sessions\kleinerperkins-com-b414a4e408\formal-clone\VALIDATION.md |
+| formal-route-smoke | ok | browser mode, 3 route(s) |
 
 ## Result
 
 - Failed steps: 0
-- Skipped steps: 4
+- Skipped steps: 2
 - JSON report: pipeline-run.json
 
 ## Next Actions

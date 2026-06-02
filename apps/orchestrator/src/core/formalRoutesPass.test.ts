@@ -85,6 +85,31 @@ describe("createFormalRoutesPass", () => {
     expect(page).toContain("Our Team");
     expect(css).toContain(".route-shell");
   });
+
+  it("does not write route files when only the home page was captured", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-routes-pass-"));
+    const session = createSession();
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", session.sessionId);
+    await mkdir(path.join(sessionRoot, "target-research", "pages", "home"), { recursive: true });
+    await mkdir(path.join(sessionRoot, "formal-clone", "app"), { recursive: true });
+    await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
+    await writeFile(path.join(sessionRoot, "formal-clone", "app", "globals.css"), "body { margin: 0; }\n", "utf8");
+    await writeFile(
+      path.join(sessionRoot, "target-research", "pages", "capture-manifest.json"),
+      JSON.stringify({
+        sessionId: session.sessionId,
+        pages: [{ url: "https://example.com/", outputDir: "target-research/pages/home" }]
+      }),
+      "utf8"
+    );
+    await writeFile(path.join(sessionRoot, "target-research", "pages", "home", "raw-html.html"), "<h1>Home</h1>", "utf8");
+
+    const result = await createFormalRoutesPass(tempRoot, session.sessionId);
+    const css = await readFile(path.join(result.formalCloneRoot, "app", "globals.css"), "utf8");
+
+    expect(result.files).toEqual([]);
+    expect(css).not.toContain(".route-shell");
+  });
 });
 
 function createSession(): CloneSession {

@@ -65,7 +65,8 @@ describe("runClonePipeline", () => {
       "formal-research",
       "formal-scaffold",
       "formal-routes-pass",
-      "formal-validate"
+      "formal-validate",
+      "formal-route-smoke"
     ]);
     expect(runbook).toContain("Planarian Session Runbook");
     expect(siteMap).toContain("https://example.com/about");
@@ -75,6 +76,7 @@ describe("runClonePipeline", () => {
     expect(pipelineReport).toContain("# Pipeline Run");
     expect(pipelineReport).toContain("| capture-pages | skipped | Skipped by option |");
     expect(pipelineReport).toContain("| formal-routes-pass | skipped | Skipped because page capture was skipped |");
+    expect(pipelineReport).toContain("| formal-route-smoke | skipped | Use --browser-smoke to run browser checks |");
     expect(pipelineJson).toContain('"status": "complete"');
   });
 });

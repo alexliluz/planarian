@@ -7,6 +7,7 @@ import { capturePages } from "./pageCapture.js";
 import { discoverPages } from "./pageDiscovery.js";
 import { createFormalCloneScaffold } from "./formalScaffold.js";
 import { createFormalResearch } from "./formalResearch.js";
+import { runFormalRouteSmoke } from "./formalRouteSmoke.js";
 import { createFormalRoutesPass } from "./formalRoutesPass.js";
 import { validateFormalClone } from "./formalValidate.js";
 import { createSessionRunbook } from "./sessionRunbook.js";
@@ -24,6 +25,8 @@ export interface ClonePipelineOptions {
   skipPageCapture?: boolean;
   skipScaffold?: boolean;
   skipRoutesPass?: boolean;
+  browserSmoke?: boolean;
+  browserSmokePort?: number;
   runBuild?: boolean;
   analyzer?: AnalyzeTargetFunction;
 }
@@ -47,6 +50,7 @@ export async function runClonePipeline(options: ClonePipelineOptions): Promise<C
   const sessionId = createSessionId(options.url);
   const steps: ClonePipelineStep[] = [];
   const startedAt = new Date().toISOString();
+  let generatedRouteCount = 0;
 
   const session = await initCloneSession({
     url: options.url,
@@ -121,7 +125,12 @@ export async function runClonePipeline(options: ClonePipelineOptions): Promise<C
     });
   } else {
     const routes = await createFormalRoutesPass(options.projectRoot, sessionId);
-    steps.push({ name: "formal-routes-pass", status: "ok", detail: `${routes.files.length} file(s)` });
+    generatedRouteCount = routes.files.filter((file) => /formal-clone\/app\/.+\/page\.tsx$/.test(file)).length;
+    steps.push({
+      name: "formal-routes-pass",
+      status: generatedRouteCount === 0 ? "skipped" : "ok",
+      detail: generatedRouteCount === 0 ? "No non-home routes" : `${routes.files.length} file(s)`
+    });
   }
 
   const validation = await validateFormalClone(options.projectRoot, sessionId, { runBuild: options.runBuild });
@@ -130,6 +139,35 @@ export async function runClonePipeline(options: ClonePipelineOptions): Promise<C
     status: validation.ready ? "ok" : "failed",
     detail: options.runBuild ? "build checked" : validation.reportPath
   });
+
+  if (options.browserSmoke) {
+    if (options.skipPageCapture || options.skipRoutesPass) {
+      steps.push({
+        name: "formal-route-smoke",
+        status: "skipped",
+        detail: "Skipped because route pages were not generated"
+      });
+    } else if (generatedRouteCount === 0) {
+      steps.push({
+        name: "formal-route-smoke",
+        status: "skipped",
+        detail: "No generated non-home routes"
+      });
+    } else {
+      const smoke = await runFormalRouteSmoke(options.projectRoot, sessionId, {
+        browser: true,
+        startServer: true,
+        port: options.browserSmokePort
+      });
+      steps.push({
+        name: "formal-route-smoke",
+        status: smoke.ready ? "ok" : "failed",
+        detail: `browser mode, ${smoke.routes.length} route(s)`
+      });
+    }
+  } else {
+    steps.push({ name: "formal-route-smoke", status: "skipped", detail: "Use --browser-smoke to run browser checks" });
+  }
 
   const finishedAt = new Date().toISOString();
   const report = await writePipelineReport({
@@ -145,6 +183,8 @@ export async function runClonePipeline(options: ClonePipelineOptions): Promise<C
       skipPageCapture: options.skipPageCapture ?? false,
       skipScaffold: options.skipScaffold ?? false,
       skipRoutesPass: options.skipRoutesPass ?? false,
+      browserSmoke: options.browserSmoke ?? false,
+      browserSmokePort: options.browserSmokePort ?? 3220,
       runBuild: options.runBuild ?? false,
       refresh: options.refresh ?? false
     }
@@ -166,6 +206,8 @@ interface PipelineReportInput {
     skipPageCapture: boolean;
     skipScaffold: boolean;
     skipRoutesPass: boolean;
+    browserSmoke: boolean;
+    browserSmokePort: number;
     runBuild: boolean;
     refresh: boolean;
   };

@@ -83,6 +83,39 @@ describe("runFormalRouteSmoke", () => {
     expect(content).toContain("Mode: browser");
     expect(content).toContain("- [x] browser response: 200");
   });
+
+  it("records browser runner failures as failed checks", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-route-smoke-"));
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    const formalCloneRoot = path.join(sessionRoot, "formal-clone");
+    await mkdir(path.join(formalCloneRoot, "app", "people"), { recursive: true });
+    await mkdir(path.join(formalCloneRoot, "data"), { recursive: true });
+    await writeFile(
+      path.join(formalCloneRoot, "data", "route-content.json"),
+      JSON.stringify([{ title: "Our Team", routePath: "/people", sections: ["Jane Doe"], paragraphs: [], links: [] }]),
+      "utf8"
+    );
+    await writeFile(
+      path.join(formalCloneRoot, "app", "people", "page.tsx"),
+      `const route = { "title": "Our Team" };\nexport default function Page() { return <main className="route-shell">{route.title}</main>; }`,
+      "utf8"
+    );
+    await writeFile(path.join(formalCloneRoot, "app", "globals.css"), ".route-shell { min-height: 100vh; }", "utf8");
+
+    const report = await runFormalRouteSmoke(tempRoot, "demo", {
+      browser: true,
+      browserRunner: async ({ routes }) =>
+        routes.map((route) => ({
+          routePath: route.routePath,
+          checks: [{ name: "browser smoke", ok: false, detail: "server failed" }]
+        }))
+    });
+    const content = await readFile(report.reportPath, "utf8");
+
+    expect(report.ready).toBe(false);
+    expect(content).toContain("Status: not ready");
+    expect(content).toContain("- [ ] browser smoke: server failed");
+  });
 });
 
 describe("renderRouteSmokeReport", () => {

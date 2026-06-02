@@ -62,6 +62,8 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
     .option("--skip-page-capture", "Skip discovered page capture")
     .option("--skip-scaffold", "Skip formal clone scaffold creation")
     .option("--skip-routes-pass", "Skip content-aware route page generation")
+    .option("--browser-smoke", "Run browser-backed route smoke after formal validation")
+    .option("--browser-smoke-port <count>", "Port for pipeline browser-backed route smoke", parsePositiveInteger)
     .option("--run-build", "Run formal clone build validation at the end")
     .description("Run the default Planarian capture, research, asset, scaffold, and validation workflow")
     .action(
@@ -75,6 +77,8 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
           skipPageCapture?: boolean;
           skipScaffold?: boolean;
           skipRoutesPass?: boolean;
+          browserSmoke?: boolean;
+          browserSmokePort?: number;
           runBuild?: boolean;
         }
       ) => {
@@ -88,6 +92,8 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
           skipPageCapture: commandOptions.skipPageCapture,
           skipScaffold: commandOptions.skipScaffold,
           skipRoutesPass: commandOptions.skipRoutesPass,
+          browserSmoke: commandOptions.browserSmoke,
+          browserSmokePort: commandOptions.browserSmokePort,
           runBuild: commandOptions.runBuild
         });
         console.log(`Pipeline completed for ${result.sessionId}`);

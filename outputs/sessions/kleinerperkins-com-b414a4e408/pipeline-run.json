@@ -1,19 +1,19 @@
 {
-  "sessionId": "example-com-0f115db062",
-  "targetUrl": "https://example.com/",
+  "sessionId": "kleinerperkins-com-b414a4e408",
+  "targetUrl": "https://www.kleinerperkins.com/",
   "classification": "unknown",
   "status": "complete",
-  "startedAt": "2026-06-02T12:10:00.478Z",
-  "finishedAt": "2026-06-02T12:10:01.717Z",
+  "startedAt": "2026-06-02T12:11:06.594Z",
+  "finishedAt": "2026-06-02T12:11:31.738Z",
   "options": {
-    "pageLimit": 2,
+    "pageLimit": 4,
     "assetLimit": 0,
     "assetDryRun": false,
     "skipPageCapture": false,
     "skipScaffold": true,
     "skipRoutesPass": false,
     "browserSmoke": true,
-    "browserSmokePort": 3223,
+    "browserSmokePort": 3224,
     "runBuild": false,
     "refresh": false
   },
@@ -21,7 +21,7 @@
     {
       "name": "init",
       "status": "ok",
-      "detail": "Session example-com-0f115db062"
+      "detail": "Session kleinerperkins-com-b414a4e408"
     },
     {
       "name": "session-runbook",
@@ -31,12 +31,12 @@
     {
       "name": "discover-pages",
       "status": "ok",
-      "detail": "1 page(s)"
+      "detail": "40 page(s)"
     },
     {
       "name": "capture-pages",
       "status": "ok",
-      "detail": "1 page(s)"
+      "detail": "4 page(s)"
     },
     {
       "name": "asset-inventory",
@@ -46,7 +46,7 @@
     {
       "name": "asset-download-plan",
       "status": "ok",
-      "detail": "G:\\workspace\\planarian\\outputs\\sessions\\example-com-0f115db062\\references\\ASSET_DOWNLOAD_PLAN.md"
+      "detail": "G:\\workspace\\planarian\\outputs\\sessions\\kleinerperkins-com-b414a4e408\\references\\ASSET_DOWNLOAD_PLAN.md"
     },
     {
       "name": "asset-localize",
@@ -65,18 +65,18 @@
     },
     {
       "name": "formal-routes-pass",
-      "status": "skipped",
-      "detail": "No non-home routes"
+      "status": "ok",
+      "detail": "5 file(s)"
     },
     {
       "name": "formal-validate",
       "status": "ok",
-      "detail": "G:\\workspace\\planarian\\outputs\\sessions\\example-com-0f115db062\\formal-clone\\VALIDATION.md"
+      "detail": "G:\\workspace\\planarian\\outputs\\sessions\\kleinerperkins-com-b414a4e408\\formal-clone\\VALIDATION.md"
     },
     {
       "name": "formal-route-smoke",
-      "status": "skipped",
-      "detail": "No generated non-home routes"
+      "status": "ok",
+      "detail": "browser mode, 3 route(s)"
     }
   ],
   "nextActions": [

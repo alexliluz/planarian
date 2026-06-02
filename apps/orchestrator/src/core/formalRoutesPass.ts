@@ -51,6 +51,14 @@ export async function createFormalRoutesPass(projectRoot: string, sessionId: str
     routeContents.push(extractRouteContent(rawHtml, page.url, routePath, page.outputDir));
   }
 
+  if (routeContents.length === 0) {
+    return {
+      sessionId,
+      formalCloneRoot,
+      files: []
+    };
+  }
+
   const files = renderFormalRoutesPass(routeContents);
 
   for (const file of files) {

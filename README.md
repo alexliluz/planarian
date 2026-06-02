@@ -81,6 +81,12 @@ For asset localization, opt in explicitly:
 corepack pnpm cli pipeline https://example.com --pages 5 --assets 6
 ```
 
+For multi-page formal clone route checks, opt into browser-backed smoke:
+
+```bash
+corepack pnpm cli pipeline https://www.kleinerperkins.com --pages 4 --skip-scaffold --browser-smoke --browser-smoke-port 3224
+```
+
 For large websites, keep the first run small:
 
 ```bash
@@ -463,6 +469,7 @@ corepack pnpm cli init <url> --refresh
 corepack pnpm cli pipeline <url>
 corepack pnpm cli pipeline <url> --pages 10 --assets 6
 corepack pnpm cli pipeline <url> --pages 10 --assets 6 --run-build
+corepack pnpm cli pipeline <url> --pages 10 --browser-smoke --browser-smoke-port 3224
 corepack pnpm cli list
 corepack pnpm cli show <session-id>
 corepack pnpm cli doctor

@@ -1559,10 +1559,8 @@ Next:
 
 Push status:
 
-- Local `main` was ahead of `origin/main` by 10 commits.
-- Push attempt failed on 2026-06-02:
-  - `Failed to connect to github.com port 443 after 21069 ms: Could not connect to server`
-- Treat this as a network connectivity issue, not a merge or authentication conflict.
+- A retry on 2026-06-02 succeeded.
+- Remote `origin/main` was updated from `f7f87a9` to `e23361d`.
 
 ### 2026-06-02 - Browser-Backed Route Smoke
 
@@ -1614,3 +1612,65 @@ Next:
 
 - Run the full project check.
 - Add optional browser screenshot artifacts or visual metrics for route smoke.
+
+### 2026-06-02 - Pipeline Browser Smoke Integration
+
+Summary:
+
+- Retried `git push origin main`; this time it succeeded.
+- Added pipeline options:
+  - `--browser-smoke`
+  - `--browser-smoke-port <count>`
+- Pipeline now runs browser-backed route smoke after formal validation when requested.
+- If no non-home route pages were generated, browser smoke is skipped cleanly.
+- Updated `formal-routes-pass` so single-page targets do not write empty route artifacts.
+- Verified both single-page and multi-page paths:
+  - `example.com` skips route smoke because there are no non-home routes.
+  - Kleiner Perkins runs browser smoke successfully for `/about`, `/people`, and `/perspectives`.
+
+Files changed:
+
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `AI_HANDOFF.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/core/clonePipeline.ts`
+- `apps/orchestrator/src/core/clonePipeline.test.ts`
+- `apps/orchestrator/src/core/formalRouteSmoke.ts`
+- `apps/orchestrator/src/core/formalRouteSmoke.test.ts`
+- `apps/orchestrator/src/core/formalRoutesPass.ts`
+- `apps/orchestrator/src/core/formalRoutesPass.test.ts`
+- `outputs/sessions/example-com-0f115db062/PIPELINE_RUN.md`
+- `outputs/sessions/example-com-0f115db062/pipeline-run.json`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/PIPELINE_RUN.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/pipeline-run.json`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/ROUTE_SMOKE.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+git push origin main
+corepack pnpm exec vitest run apps/orchestrator/src/core/formalRoutesPass.test.ts apps/orchestrator/src/core/clonePipeline.test.ts apps/orchestrator/src/core/formalRouteSmoke.test.ts
+corepack pnpm typecheck
+corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold --browser-smoke --browser-smoke-port 3223
+corepack pnpm cli pipeline https://www.kleinerperkins.com --pages 4 --skip-scaffold --browser-smoke --browser-smoke-port 3224
+corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build
+Get-NetTCPConnection -LocalPort 3223 -ErrorAction SilentlyContinue
+Get-NetTCPConnection -LocalPort 3224 -ErrorAction SilentlyContinue
+corepack pnpm check
+```
+
+Result:
+
+- Push succeeded.
+- Example pipeline completed with `formal-routes-pass` and `formal-route-smoke` skipped because there are no non-home routes.
+- Kleiner Perkins pipeline completed with browser route smoke ready for 3 routes.
+- Kleiner Perkins build validation was restored after the pipeline run.
+- No dev server process remained on ports `3223` or `3224`.
+- Full check passed: 26 test files, 97 tests.
+
+Next:
+
+- Run the full project check.
+- Add route repair task generation from `ROUTE_SMOKE.md` and captured screenshots.

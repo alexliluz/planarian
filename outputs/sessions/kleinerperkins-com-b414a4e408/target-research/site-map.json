@@ -198,5 +198,125 @@
     "source": "homepage-link",
     "priority": 40,
     "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/claire-hughes-johnson-stripe",
+    "pathname": "/perspectives/claire-hughes-johnson-stripe",
+    "title": "Claire Hughes-Johnson - Stripe - Scaling People",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/crazy-ramping-series-c",
+    "pathname": "/perspectives/crazy-ramping-series-c",
+    "title": "Figma: Crazy Ramping Series C",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/doordash-delivering-the-future-of-local",
+    "pathname": "/perspectives/doordash-delivering-the-future-of-local",
+    "title": "DoorDash: delivering the future of local",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/duolingo",
+    "pathname": "/perspectives/duolingo",
+    "title": "Duolingo: The world's best way to learn a language",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/figma-design",
+    "pathname": "/perspectives/figma-design",
+    "title": "Figma: Unleashing creativity through collaborative design",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/figma-made-design-collaborative-today-it-makes-history",
+    "pathname": "/perspectives/figma-made-design-collaborative-today-it-makes-history",
+    "title": "Figma made design collaborative. Today, it makes history.",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/genentech",
+    "pathname": "/perspectives/genentech",
+    "title": "Genentech: Pioneering medical breakthroughs with biotechnology",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/glean",
+    "pathname": "/perspectives/glean",
+    "title": "Making workplace knowledge accessible",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/glean-case-study",
+    "pathname": "/perspectives/glean-case-study",
+    "title": "Glean: Work AI for all",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/glean-series-c",
+    "pathname": "/perspectives/glean-series-c",
+    "title": "Glean: Empowering employees to find answers",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/glean-series-d",
+    "pathname": "/perspectives/glean-series-d",
+    "title": "AI for the Enterprise",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/google",
+    "pathname": "/perspectives/google",
+    "title": "Google: Organizing the world's information and making it searchable",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/granola-putting-your-companys-context-to-work",
+    "pathname": "/perspectives/granola-putting-your-companys-context-to-work",
+    "title": "Granola: Putting Your Company's Context to Work",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/handshake-moving-the-needle-on-inequality",
+    "pathname": "/perspectives/handshake-moving-the-needle-on-inequality",
+    "title": "Handshake: Moving the needle on inequality",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives/harvey-ai",
+    "pathname": "/perspectives/harvey-ai",
+    "title": "Harvey: Super-powering knowledge work",
+    "source": "homepage-link",
+    "priority": 40,
+    "reason": "Section detail page; capture after top-level sections."
   }
 ]

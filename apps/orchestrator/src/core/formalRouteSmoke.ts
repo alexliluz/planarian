@@ -100,7 +100,7 @@ export async function runFormalRouteSmoke(
     });
   }
 
-  if (options.browser) {
+  if (options.browser && routes.length > 0) {
     const runner = options.browserRunner ?? runBrowserRouteSmoke;
     const browserResults = await runner({
       formalCloneRoot,
@@ -223,6 +223,12 @@ async function runBrowserRouteSmoke(input: BrowserRouteSmokeInput): Promise<Brow
     } finally {
       await browser.close();
     }
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    return input.routes.map((route) => ({
+      routePath: route.routePath,
+      checks: [{ name: "browser smoke", ok: false, detail }]
+    }));
   } finally {
     if (server) {
       stopServer(server);

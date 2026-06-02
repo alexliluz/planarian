@@ -22,7 +22,7 @@ Status: ready
 - [x] route shell: page uses route-shell layout class
 - [x] content signal: 3 sections, 0 paragraphs, 8 links
 - [x] route css: app/globals.css contains route-shell styles
-- [x] browser response: 200 http://127.0.0.1:3222/about
+- [x] browser response: 200 http://127.0.0.1:3224/about
 - [x] browser title text: Our History
 - [x] browser route shell visible: 1440x1000
 
@@ -33,7 +33,7 @@ Status: ready
 - [x] route shell: page uses route-shell layout class
 - [x] content signal: 24 sections, 10 paragraphs, 18 links
 - [x] route css: app/globals.css contains route-shell styles
-- [x] browser response: 200 http://127.0.0.1:3222/people
+- [x] browser response: 200 http://127.0.0.1:3224/people
 - [x] browser title text: Our Team
 - [x] browser route shell visible: 1440x2438
 
@@ -44,7 +44,7 @@ Status: ready
 - [x] route shell: page uses route-shell layout class
 - [x] content signal: 6 sections, 0 paragraphs, 18 links
 - [x] route css: app/globals.css contains route-shell styles
-- [x] browser response: 200 http://127.0.0.1:3222/perspectives
+- [x] browser response: 200 http://127.0.0.1:3224/perspectives
 - [x] browser title text: Our Thoughts
 - [x] browser route shell visible: 1440x1000
 
