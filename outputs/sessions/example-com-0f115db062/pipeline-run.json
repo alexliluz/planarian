@@ -1,0 +1,75 @@
+{
+  "sessionId": "example-com-0f115db062",
+  "targetUrl": "https://example.com/",
+  "classification": "unknown",
+  "status": "complete",
+  "startedAt": "2026-06-01T19:57:47.072Z",
+  "finishedAt": "2026-06-01T19:57:48.369Z",
+  "options": {
+    "pageLimit": 2,
+    "assetLimit": 0,
+    "assetDryRun": false,
+    "skipPageCapture": false,
+    "skipScaffold": true,
+    "runBuild": false,
+    "refresh": false
+  },
+  "steps": [
+    {
+      "name": "init",
+      "status": "ok",
+      "detail": "Session example-com-0f115db062"
+    },
+    {
+      "name": "session-runbook",
+      "status": "ok",
+      "detail": "RUNBOOK.md"
+    },
+    {
+      "name": "discover-pages",
+      "status": "ok",
+      "detail": "1 page(s)"
+    },
+    {
+      "name": "capture-pages",
+      "status": "ok",
+      "detail": "1 page(s)"
+    },
+    {
+      "name": "asset-inventory",
+      "status": "ok",
+      "detail": "references/ASSET_INVENTORY.md, references/VISUAL_PLAN.md"
+    },
+    {
+      "name": "asset-download-plan",
+      "status": "ok",
+      "detail": "G:\\workspace\\planarian\\outputs\\sessions\\example-com-0f115db062\\references\\ASSET_DOWNLOAD_PLAN.md"
+    },
+    {
+      "name": "asset-localize",
+      "status": "skipped",
+      "detail": "Use --assets <count> to download public assets"
+    },
+    {
+      "name": "formal-research",
+      "status": "ok",
+      "detail": "6 file(s)"
+    },
+    {
+      "name": "formal-scaffold",
+      "status": "skipped",
+      "detail": "Skipped by option"
+    },
+    {
+      "name": "formal-validate",
+      "status": "ok",
+      "detail": "G:\\workspace\\planarian\\outputs\\sessions\\example-com-0f115db062\\formal-clone\\VALIDATION.md"
+    }
+  ],
+  "nextActions": [
+    "Review PIPELINE_RUN.md, target-research/PAGE_DISCOVERY.md, and formal-clone/docs/research/04-multi-page-map.md.",
+    "Open formal-clone/ and start the visible UI reconstruction from captured reference materials.",
+    "Use asset-localize with an explicit limit when public assets should be copied into formal-clone/public/assets.",
+    "Run the pipeline again with --assets <count> when local public assets are needed."
+  ]
+}

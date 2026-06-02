@@ -44,6 +44,40 @@ describe("createFormalCloneScaffold", () => {
     });
   });
 
+  it("writes route scaffolds for captured non-home pages", async () => {
+    tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-formal-scaffold-"));
+    await writeSession(tempRoot, createSession());
+    const sessionRoot = path.join(tempRoot, "outputs", "sessions", "demo");
+    await writeCapturedPage(sessionRoot, "about", "https://example.com/about", "<h1>About Us</h1>");
+    await writeCapturedPage(sessionRoot, "people", "https://example.com/people", "<title>People</title>");
+    await writeFile(
+      path.join(sessionRoot, "target-research", "pages", "capture-manifest.json"),
+      `${JSON.stringify(
+        {
+          sessionId: "demo",
+          capturedAt: "2026-01-01T00:00:00.000Z",
+          pages: [
+            { url: "https://example.com/", outputDir: "target-research/pages/home", skipped: true },
+            { url: "https://example.com/about", outputDir: "target-research/pages/about", skipped: false },
+            { url: "https://example.com/people", outputDir: "target-research/pages/people", skipped: false }
+          ]
+        },
+        null,
+        2
+      )}\n`,
+      "utf8"
+    );
+
+    const result = await createFormalCloneScaffold(tempRoot, "demo");
+    const aboutPage = await readFile(path.join(result.formalCloneRoot, "app", "about", "page.tsx"), "utf8");
+    const routes = await readFile(path.join(result.formalCloneRoot, "data", "formal-routes.json"), "utf8");
+
+    expect(result.writtenFiles).toContain("app/about/page.tsx");
+    expect(result.writtenFiles).toContain("app/people/page.tsx");
+    expect(aboutPage).toContain("About Us");
+    expect(routes).toContain('"routePath": "/people"');
+  });
+
   it("skips existing files by default", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "planarian-formal-scaffold-"));
     await writeSession(tempRoot, createSession());
@@ -75,6 +109,13 @@ async function writeSession(projectRoot: string, session: CloneSession): Promise
   await writeFile(path.join(sessionRoot, "clone-session.json"), JSON.stringify(session), "utf8");
 }
 
+async function writeCapturedPage(sessionRoot: string, slug: string, url: string, html: string): Promise<void> {
+  const pageRoot = path.join(sessionRoot, "target-research", "pages", slug);
+  await mkdir(pageRoot, { recursive: true });
+  await writeFile(path.join(pageRoot, "raw-html.html"), html, "utf8");
+  await writeFile(path.join(pageRoot, "page.json"), JSON.stringify({ url, pathname: `/${slug}` }), "utf8");
+}
+
 function createSession(): CloneSession {
   return {
     sessionId: "demo",
@@ -103,4 +144,3 @@ function createSession(): CloneSession {
     status: "analyzed"
   };
 }
-

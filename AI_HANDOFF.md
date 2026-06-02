@@ -69,13 +69,13 @@ Notes:
 
 ## Next Plan
 
-Recommended next phase: continue `Phase 1.5 stabilization`, then move to Phase 2.
+Recommended next phase: continue pipeline hardening for new-site tests, then move to route-aware formal clone generation.
 
-1. Review `outputs/sessions/example-com-0f115db062/formal-clone/TASK_BUNDLE.md`.
-2. Generate and inspect the example formal scaffold under `outputs/sessions/example-com-0f115db062/formal-clone/`.
-3. Add richer asset extraction from `network-analysis.json`.
-4. Add validation for generated formal clone package files.
-5. Use generated upstream integration task files as the controlled bridge before invoking external tools.
+1. Use `corepack pnpm cli pipeline <url> --pages 5` as the default first run for new public targets.
+2. Review `outputs/sessions/<session-id>/PIPELINE_RUN.md` and `target-research/PAGE_DISCOVERY.md`.
+3. Increase `--pages` only after the discovered page scope is understood.
+4. Use `formal-scaffold` to create route placeholders for captured non-home pages.
+5. Add visual repair tasks comparing original screenshots against formal clone pages.
 
 ## Work Log
 
@@ -1365,3 +1365,94 @@ Push status:
 - Local commit created: `aa71360 Add default clone pipeline`.
 - Push attempt failed with `Recv failure: Connection was reset`.
 - Local `main` remains ahead of `origin/main`.
+
+### 2026-06-02 - Pipeline Run Reports
+
+Summary:
+
+- Added persistent reports for every `pipeline <url>` run.
+- Each run now writes:
+  - `PIPELINE_RUN.md`
+  - `pipeline-run.json`
+- The CLI prints the generated report path after pipeline completion.
+- The formal clone scaffold now includes `outputFileTracingRoot: process.cwd()` in `next.config.mjs` so generated apps under `outputs/` build more reliably.
+- Ran the pipeline against the existing `example.com` session to verify the report workflow.
+
+Files changed:
+
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `AI_HANDOFF.md`
+- `apps/orchestrator/src/cli/program.ts`
+- `apps/orchestrator/src/core/clonePipeline.ts`
+- `apps/orchestrator/src/core/clonePipeline.test.ts`
+- `apps/orchestrator/src/core/formalScaffold.ts`
+- `outputs/sessions/example-com-0f115db062/PIPELINE_RUN.md`
+- `outputs/sessions/example-com-0f115db062/pipeline-run.json`
+- `outputs/sessions/example-com-0f115db062/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm exec vitest run apps/orchestrator/src/core/clonePipeline.test.ts apps/orchestrator/src/core/formalScaffold.test.ts
+corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold
+corepack pnpm check
+```
+
+Result:
+
+- Local pipeline completed for `example-com-0f115db062`.
+- Report written to `outputs/sessions/example-com-0f115db062/PIPELINE_RUN.md`.
+- JSON report written to `outputs/sessions/example-com-0f115db062/pipeline-run.json`.
+- Full check passed: 24 test files, 86 tests.
+
+Next:
+
+- Run the full project check.
+- Add route-aware formal scaffold pages for captured multi-page targets.
+
+### 2026-06-02 - Route-Aware Formal Scaffold
+
+Summary:
+
+- Updated `formal-scaffold` to read `target-research/pages/capture-manifest.json`.
+- When captured non-home pages exist, it now writes basic Next.js route placeholders under `formal-clone/app/<route>/page.tsx`.
+- It also writes `formal-clone/data/formal-routes.json` for future agents.
+- The generated route pages point to each route's captured HTML and screenshot.
+- Existing scaffold files are still skipped by default, so manual homepage work is preserved.
+- Verified against the Kleiner Perkins session.
+
+Files changed:
+
+- `README.md`
+- `ROOT_CHANGELOG.md`
+- `AI_HANDOFF.md`
+- `apps/orchestrator/src/core/formalScaffold.ts`
+- `apps/orchestrator/src/core/formalScaffold.test.ts`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/about/page.tsx`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/people/page.tsx`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/app/perspectives/page.tsx`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/data/formal-routes.json`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/formal-clone/VALIDATION.md`
+- `outputs/sessions/kleinerperkins-com-b414a4e408/agent-memory/CHANGELOG_AGENT.md`
+
+Validation:
+
+```bash
+corepack pnpm exec vitest run apps/orchestrator/src/core/formalScaffold.test.ts apps/orchestrator/src/core/clonePipeline.test.ts
+corepack pnpm typecheck
+corepack pnpm cli formal-scaffold kleinerperkins-com-b414a4e408
+corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build
+corepack pnpm check
+```
+
+Result:
+
+- Route placeholders generated for `/about`, `/people`, and `/perspectives`.
+- Formal clone build validation passed.
+- Full check passed: 24 test files, 87 tests.
+
+Next:
+
+- Run the full project check.
+- Replace route placeholders with content-aware first-pass implementations from each captured page.

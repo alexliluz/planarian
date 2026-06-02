@@ -1,0 +1,23 @@
+[
+  {
+    "url": "https://www.kleinerperkins.com/about",
+    "routePath": "/about",
+    "appPath": "app/about/page.tsx",
+    "title": "Our History",
+    "sourceDir": "target-research/pages/about"
+  },
+  {
+    "url": "https://www.kleinerperkins.com/people",
+    "routePath": "/people",
+    "appPath": "app/people/page.tsx",
+    "title": "Our Team",
+    "sourceDir": "target-research/pages/people"
+  },
+  {
+    "url": "https://www.kleinerperkins.com/perspectives",
+    "routePath": "/perspectives",
+    "appPath": "app/perspectives/page.tsx",
+    "title": "Our Thoughts",
+    "sourceDir": "target-research/pages/perspectives"
+  }
+]

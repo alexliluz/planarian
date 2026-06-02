@@ -53,3 +53,12 @@
 - Implemented the first Kleiner Perkins formal clone homepage pass and fixed Windows build validation command handling.
 - Added `pnpm cli asset-localize <session-id>` to download high-priority public assets into `formal-clone/public/assets/`.
 - Added `pnpm cli pipeline <url>` as the first default staged workflow for testing new public websites.
+
+## 2026-06-02
+
+- Added persistent pipeline reports:
+  - `outputs/sessions/<session-id>/PIPELINE_RUN.md`
+  - `outputs/sessions/<session-id>/pipeline-run.json`
+- Updated `pnpm cli pipeline <url>` output to print the generated report path.
+- Updated the default formal clone scaffold Next.js config for nested `outputs/` build compatibility.
+- Updated `pnpm cli formal-scaffold <session-id>` to generate basic Next.js route placeholders for captured non-home pages.

@@ -51,6 +51,8 @@ describe("runClonePipeline", () => {
     const runbook = await readFile(path.join(sessionRoot, "RUNBOOK.md"), "utf8");
     const siteMap = await readFile(path.join(sessionRoot, "target-research", "site-map.json"), "utf8");
     const validation = await readFile(path.join(sessionRoot, "formal-clone", "VALIDATION.md"), "utf8");
+    const pipelineReport = await readFile(path.join(sessionRoot, "PIPELINE_RUN.md"), "utf8");
+    const pipelineJson = await readFile(path.join(sessionRoot, "pipeline-run.json"), "utf8");
 
     expect(result.steps.map((step) => step.name)).toEqual([
       "init",
@@ -67,6 +69,11 @@ describe("runClonePipeline", () => {
     expect(runbook).toContain("Planarian Session Runbook");
     expect(siteMap).toContain("https://example.com/about");
     expect(validation).toContain("Status: ready");
+    expect(result.reportPath).toBe(path.join(sessionRoot, "PIPELINE_RUN.md"));
+    expect(result.jsonReportPath).toBe(path.join(sessionRoot, "pipeline-run.json"));
+    expect(pipelineReport).toContain("# Pipeline Run");
+    expect(pipelineReport).toContain("| capture-pages | skipped | Skipped by option |");
+    expect(pipelineJson).toContain('"status": "complete"');
   });
 });
 

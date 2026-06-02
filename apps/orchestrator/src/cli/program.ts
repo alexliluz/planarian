@@ -89,6 +89,7 @@ export function createProgram(options: CreateProgramOptions = {}): Command {
         for (const step of result.steps) {
           console.log(`${step.status.toUpperCase()} ${step.name}: ${step.detail}`);
         }
+        console.log(`Report: ${result.reportPath}`);
       }
     );
 

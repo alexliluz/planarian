@@ -66,11 +66,28 @@ Run the default staged pipeline for a new public target:
 corepack pnpm cli pipeline https://example.com --pages 5
 ```
 
+Each pipeline run writes a fixed report pair inside the target session:
+
+```text
+outputs/sessions/<session-id>/PIPELINE_RUN.md
+outputs/sessions/<session-id>/pipeline-run.json
+```
+
+Start by reading `PIPELINE_RUN.md`. It summarizes the target, budgets, step results, skipped work, and next actions.
+
 For asset localization, opt in explicitly:
 
 ```bash
 corepack pnpm cli pipeline https://example.com --pages 5 --assets 6
 ```
+
+For large websites, keep the first run small:
+
+```bash
+corepack pnpm cli pipeline https://www.kleinerperkins.com --pages 5
+```
+
+Then inspect `outputs/sessions/<session-id>/target-research/PAGE_DISCOVERY.md` and rerun with a larger `--pages` budget only when the page scope is clear.
 
 Create or reuse a CloneSession:
 
@@ -174,6 +191,16 @@ Create a minimal runnable formal clone scaffold:
 corepack pnpm cli formal-scaffold example-com-0f115db062
 ```
 
+If captured multi-page materials exist, `formal-scaffold` also creates basic Next.js routes for non-home pages, for example:
+
+```text
+outputs/sessions/<session-id>/formal-clone/app/about/page.tsx
+outputs/sessions/<session-id>/formal-clone/app/people/page.tsx
+outputs/sessions/<session-id>/formal-clone/data/formal-routes.json
+```
+
+These generated pages are route placeholders. They point future agents to the captured HTML and screenshots for each public route.
+
 Create upstream integration task files:
 
 ```bash
@@ -207,6 +234,8 @@ Important files:
 
 ```text
 clone-session.json
+PIPELINE_RUN.md
+pipeline-run.json
 RUNBOOK.md
 target-research/raw-html.html
 target-research/desktop.png
@@ -380,6 +409,8 @@ Each target website gets a CloneSession:
 ```text
 outputs/sessions/<session-id>/
   clone-session.json
+  PIPELINE_RUN.md
+  pipeline-run.json
   target-research/
     raw-html.html
     desktop.png

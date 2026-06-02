@@ -96,6 +96,13 @@ Use this format for future Codex/Cursor changes:
 ## 2026-06-02 - Codex
 
 - Summary: Ran the new default Planarian pipeline against the existing example.com session.
-- Files changed: `target-research/site-map.json`, `target-research/PAGE_DISCOVERY.md`, `target-research/pages/capture-manifest.json`, `references/*`, `formal-clone/docs/research/*`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Files changed: `PIPELINE_RUN.md`, `pipeline-run.json`, `target-research/site-map.json`, `target-research/PAGE_DISCOVERY.md`, `target-research/pages/capture-manifest.json`, `references/*`, `formal-clone/docs/research/*`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold`
 - Notes: Pipeline completed successfully with 1 discovered page, 1 captured page, asset planning, formal research, and validation. Asset localization was skipped because no `--assets` value was provided.
+
+## 2026-06-02 - Codex
+
+- Summary: Verified persistent pipeline reports for this session.
+- Files changed: `PIPELINE_RUN.md`, `pipeline-run.json`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm cli pipeline https://example.com --pages 2 --skip-scaffold`, `corepack pnpm check`
+- Notes: `PIPELINE_RUN.md` is now the first file to inspect after running the default pipeline. It records budgets, skipped steps, step results, and next actions for future agents. Full project check passed with 24 test files and 86 tests.

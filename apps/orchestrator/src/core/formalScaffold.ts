@@ -1,6 +1,7 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { CloneSession } from "@planarian/shared";
+import { extractVisibleText } from "./htmlText.js";
 import { getSessionRoot, readCloneSession } from "./sessionRepository.js";
 
 export interface FormalScaffoldOptions {
@@ -19,14 +20,24 @@ interface ScaffoldFile {
   content: string;
 }
 
+interface ScaffoldRoute {
+  url: string;
+  routePath: string;
+  appPath: string;
+  title: string;
+  sourceDir: string;
+}
+
 export async function createFormalCloneScaffold(
   projectRoot: string,
   sessionId: string,
   options: FormalScaffoldOptions = {}
 ): Promise<FormalScaffoldResult> {
   const session = await readCloneSession(projectRoot, sessionId);
-  const formalCloneRoot = path.join(getSessionRoot(projectRoot, sessionId), "formal-clone");
-  const files = renderFormalCloneScaffold(session);
+  const sessionRoot = getSessionRoot(projectRoot, sessionId);
+  const formalCloneRoot = path.join(sessionRoot, "formal-clone");
+  const routes = await readCapturedScaffoldRoutes(sessionRoot);
+  const files = renderFormalCloneScaffoldFiles(session, routes);
   const writtenFiles: string[] = [];
   const skippedFiles: string[] = [];
 
@@ -58,10 +69,14 @@ export async function createFormalCloneScaffold(
 }
 
 export function renderFormalCloneScaffold(session: CloneSession): ScaffoldFile[] {
+  return renderFormalCloneScaffoldFiles(session, []);
+}
+
+export function renderFormalCloneScaffoldFiles(session: CloneSession, routes: ScaffoldRoute[]): ScaffoldFile[] {
   const appName = `planarian-formal-clone-${session.sessionId}`;
   const title = session.target.title ?? session.target.hostname;
 
-  return [
+  const files: ScaffoldFile[] = [
     {
       path: "package.json",
       content: `${JSON.stringify(
@@ -101,7 +116,7 @@ export function renderFormalCloneScaffold(session: CloneSession): ScaffoldFile[]
     },
     {
       path: "next.config.mjs",
-      content: `/** @type {import("next").NextConfig} */\nconst nextConfig = {};\n\nexport default nextConfig;\n`
+      content: `/** @type {import("next").NextConfig} */\nconst nextConfig = {\n  outputFileTracingRoot: process.cwd()\n};\n\nexport default nextConfig;\n`
     },
     {
       path: "tsconfig.json",
@@ -167,6 +182,23 @@ export function renderFormalCloneScaffold(session: CloneSession): ScaffoldFile[]
       )}\n`
     }
   ];
+
+  const nonHomeRoutes = routes.filter((route) => route.routePath !== "/");
+  if (nonHomeRoutes.length > 0) {
+    files.push({
+      path: "data/formal-routes.json",
+      content: `${JSON.stringify(nonHomeRoutes, null, 2)}\n`
+    });
+
+    for (const route of nonHomeRoutes) {
+      files.push({
+        path: route.appPath,
+        content: renderRoutePage(route, session)
+      });
+    }
+  }
+
+  return files;
 }
 
 function renderScaffoldReadme(session: CloneSession): string {
@@ -199,3 +231,139 @@ pnpm build
 `;
 }
 
+async function readCapturedScaffoldRoutes(sessionRoot: string): Promise<ScaffoldRoute[]> {
+  const manifestPath = path.join(sessionRoot, "target-research", "pages", "capture-manifest.json");
+  let manifest: { pages?: Array<{ url: string; outputDir: string }> };
+
+  try {
+    manifest = JSON.parse(await readFile(manifestPath, "utf8")) as { pages?: Array<{ url: string; outputDir: string }> };
+  } catch {
+    return [];
+  }
+
+  const routes: ScaffoldRoute[] = [];
+  for (const page of manifest.pages ?? []) {
+    const route = await routeFromCapturedPage(sessionRoot, page);
+    if (!route || routes.some((existing) => existing.routePath === route.routePath)) {
+      continue;
+    }
+    routes.push(route);
+  }
+
+  return routes.sort((a, b) => a.routePath.localeCompare(b.routePath));
+}
+
+async function routeFromCapturedPage(
+  sessionRoot: string,
+  page: { url: string; outputDir: string }
+): Promise<ScaffoldRoute | undefined> {
+  let parsedUrl: URL;
+  try {
+    parsedUrl = new URL(page.url);
+  } catch {
+    return undefined;
+  }
+
+  const routePath = normalizeRoutePath(parsedUrl.pathname);
+  const htmlPath = path.join(sessionRoot, page.outputDir, "raw-html.html");
+  const title = (await readTitleFromHtml(htmlPath)) ?? titleFromRoutePath(routePath);
+  const appPath = appPathForRoute(routePath);
+
+  return {
+    url: page.url,
+    routePath,
+    appPath,
+    title,
+    sourceDir: page.outputDir
+  };
+}
+
+async function readTitleFromHtml(htmlPath: string): Promise<string | undefined> {
+  try {
+    const rawHtml = await readFile(htmlPath, "utf8");
+    const h1 = firstMatchText(rawHtml, /<h1[^>]*>([\s\S]*?)<\/h1>/i);
+    const title = firstMatchText(rawHtml, /<title[^>]*>([\s\S]*?)<\/title>/i);
+    return h1 || title;
+  } catch {
+    return undefined;
+  }
+}
+
+function normalizeRoutePath(pathname: string): string {
+  const withoutTrailingSlash = pathname.replace(/\/+$/g, "");
+  return withoutTrailingSlash === "" ? "/" : withoutTrailingSlash;
+}
+
+function appPathForRoute(routePath: string): string {
+  if (routePath === "/") {
+    return "app/page.tsx";
+  }
+
+  const segments = routePath
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => segment.replace(/[^a-zA-Z0-9._-]+/g, "-"));
+
+  return path.posix.join("app", ...segments, "page.tsx");
+}
+
+function titleFromRoutePath(routePath: string): string {
+  if (routePath === "/") {
+    return "Home";
+  }
+
+  return routePath
+    .split("/")
+    .filter(Boolean)
+    .map((segment) =>
+      segment
+        .split(/[-_]/g)
+        .filter(Boolean)
+        .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+        .join(" ")
+    )
+    .join(" / ");
+}
+
+function firstMatchText(rawHtml: string, pattern: RegExp): string | undefined {
+  const match = pattern.exec(rawHtml);
+  return match ? extractVisibleText(match[1] ?? "") : undefined;
+}
+
+function renderRoutePage(route: ScaffoldRoute, session: CloneSession): string {
+  return `const route = ${JSON.stringify(
+    {
+      title: route.title,
+      url: route.url,
+      routePath: route.routePath,
+      sourceDir: route.sourceDir,
+      target: session.target.normalizedUrl
+    },
+    null,
+    2
+  )};
+
+export default function CapturedRoutePage() {
+  return (
+    <main className="page-shell">
+      <section className="hero">
+        <p className="eyebrow">Captured route scaffold</p>
+        <h1>{route.title}</h1>
+        <p className="summary">
+          Rebuild this public route from the captured source materials for {route.routePath}.
+        </p>
+      </section>
+
+      <section className="panel" aria-labelledby="route-materials">
+        <h2 id="route-materials">Route source materials</h2>
+        <ul>
+          <li>Original URL: <a href={route.url}>{route.url}</a></li>
+          <li>Captured HTML: <code>{route.sourceDir}/raw-html.html</code></li>
+          <li>Captured screenshot: <code>{route.sourceDir}/desktop.png</code></li>
+        </ul>
+      </section>
+    </main>
+  );
+}
+`;
+}

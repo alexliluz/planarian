@@ -1,11 +1,11 @@
 {
   "sessionId": "example-com-0f115db062",
-  "capturedAt": "2026-06-01T18:44:54.241Z",
+  "capturedAt": "2026-06-01T19:57:48.315Z",
   "pages": [
     {
       "url": "https://example.com/",
       "outputDir": "target-research/pages/home",
-      "skipped": false
+      "skipped": true
     }
   ]
 }

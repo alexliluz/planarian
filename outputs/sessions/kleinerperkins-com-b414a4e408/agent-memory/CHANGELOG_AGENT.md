@@ -71,3 +71,10 @@ Use this format for future Codex/Cursor changes:
 - Files changed: `formal-clone/public/assets/ASSET_MANIFEST.json`, `formal-clone/public/assets/images/*`, `formal-clone/app/globals.css`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
 - Tests run: `corepack pnpm check`, `corepack pnpm cli asset-localize kleinerperkins-com-b414a4e408 --dry-run --limit 4`, `corepack pnpm cli asset-localize kleinerperkins-com-b414a4e408 --limit 4`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`
 - Notes: Downloaded the first 4 high-priority public assets and switched the hero background to `/assets/images/alkira-x-lumen-home-takeover-opt-04-1.jpg`. The workflow should stay staged: discover pages, capture a small priority set, localize a small asset batch, then repair visually.
+
+## 2026-06-02 - Codex
+
+- Summary: Generated route-aware formal clone placeholders from captured multi-page research.
+- Files changed: `formal-clone/app/about/page.tsx`, `formal-clone/app/people/page.tsx`, `formal-clone/app/perspectives/page.tsx`, `formal-clone/data/formal-routes.json`, `formal-clone/VALIDATION.md`, `agent-memory/CHANGELOG_AGENT.md`
+- Tests run: `corepack pnpm cli formal-scaffold kleinerperkins-com-b414a4e408`, `corepack pnpm cli formal-validate kleinerperkins-com-b414a4e408 --run-build`, `corepack pnpm check`
+- Notes: Existing homepage implementation was preserved. New route placeholders point future agents to each route's captured HTML and screenshot. Build validation passed after adding `/about`, `/people`, and `/perspectives`. Full project check passed with 24 test files and 87 tests.
